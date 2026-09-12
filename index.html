@@ -23,14 +23,24 @@
 <meta name="twitter:title" content="Akash Raj · UX Designer">
 <meta name="twitter:description" content="I design interfaces that make complex AI trustworthy. Agentic builders, process orchestration, and the design system that unifies them, at enterprise scale.">
 <meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Literata:opsz,wght@7..72,400;7..72,500&family=Sora:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=4">
 <script>document.documentElement.className+=" js";</script>
 </head>
 <body id="top">
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <pattern id="tp-scatter" patternUnits="userSpaceOnUse" width="22" height="16">
+    <rect width="22" height="16" fill="var(--tape)"/>
+    <path d="M4 11 l3.1-5 3.1 5 Z M15.5 5.4 l2.4-3.9 2.4 3.9 Z" fill="var(--paper)" opacity=".85"/>
+    <circle cx="17.4" cy="11.6" r="1.35" fill="var(--paper)" opacity=".7"/>
+    <circle cx="8.8" cy="3" r="1" fill="var(--paper)" opacity=".55"/>
+  </pattern>
+</defs></svg>
+
+
+<a class="skip" href="#main">Skip to content</a>
 <header class="nav">
   <div class="container nav__inner">
     <a class="nav__mark" href="#top">
@@ -44,17 +54,25 @@
       <a href="#contact">Contact</a>
       <a class="btn btn--sm" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">Résumé ↗</a>
     </nav>
+      <details class="nav__menu">
+        <summary aria-label="Menu"><span></span><span></span></summary>
+        <div class="nav__sheet">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </details>
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
   <div class="container">
     <div class="hero__grid">
       <div>
-        <p class="eyebrow reveal">UX Designer · Ascendion · Bengaluru</p>
         <h1 class="hero__title reveal" style="--d:80ms">
           I design interfaces that make complex AI <em>trustworthy.</em>
         </h1>
@@ -67,6 +85,7 @@
           <a class="btn" href="#contact">Get in touch</a>
         </div>
         <ul class="hero__meta reveal" style="--d:320ms">
+          <li><b>UX Designer</b> Ascendion, Bengaluru</li>
           <li><b>2+</b> yrs in product design</li>
           <li><b>1,000+</b> users reached</li>
           <li><b>Champion of Excellence</b> 2025</li>
@@ -116,10 +135,13 @@
           <div class="shot" aria-hidden="true"><img src="img/akash-hero.jpg" width="520" height="693" alt="" loading="eager" decoding="async"></div>
         </div>
         <div class="plane" data-px="8" data-py="6" data-s="-30">
-          <span class="tape" aria-hidden="true"></span>
+          <span class="tape tape--scatter" aria-hidden="true"><svg viewBox="0 0 128 30" preserveAspectRatio="none"><path class="tape__body" fill="url(#tp-scatter)" d="M6 5.2 C 34 3.6 62 6.4 90 4.6 L 120 5.4 l -2.6 3.2 2.9 2.5 -3.3 3 2.7 2.6 -3.1 3 3.2 2.3 -2.8 3 L 90 25.6 C 62 27.2 34 24.4 8 26.2 l 2.7 -3.1 -3 -2.5 3.2 -2.9 -2.5 -2.6 2.9 -3.1 -3.1 -2.5 Z"/></svg></span>
         </div>
         <div class="plane" data-px="18" data-py="14" data-s="-70" data-rot="1.2">
-          <span class="note" aria-hidden="true">day<br>zero</span>
+          <span class="note" aria-hidden="true"><svg viewBox="0 0 108 108">
+<path class="note__body" d="M3.5 4.2 L 104.5 2.8 L 103.6 83 C 99 94 90 102.6 79 103.4 L 4.6 105.2 Z"/>
+<path class="note__curl" d="M103.6 83 C 97.5 85.4 89.5 91.5 79 103.4 C 90 102.6 99 94 103.6 83 Z"/>
+</svg><b>day<br>zero</b></span>
         </div>
         <div class="plane" data-px="22" data-py="17" data-s="-86">
           <div class="scribble">
@@ -172,10 +194,9 @@
     </div>
 
     <article class="card card--feature reveal">
-      <span class="tape" aria-hidden="true"></span>
-      <div class="card__media card__media--bare"><img width="1600" height="957" style="--ar:1600/957" src="img/console-macbook.png" alt="Enterprise Console after the redesign." loading="lazy" decoding="async"></div>
+      <div class="card__media card__media--bare"><img width="1600" height="957" style="--ar:1600/957" src="img/console-macbook.png" alt="Enterprise Console after the redesign." loading="lazy" decoding="async" srcset="img/console-macbook-700.png 700w, img/console-macbook-1100.png 1100w, img/console-macbook.png 1600w" sizes="(min-width:900px) 560px, 92vw"></div>
       <div class="card__body">
-        <div class="card__top"><span class="idx">01</span><span class="chip">Featured</span></div>
+        <div class="card__top"><span class="chip">Featured</span></div>
         <h3 class="card__title">Enterprise Console</h3>
         <p class="card__sub">An enterprise platform for building AI agents and composing them into workflows, with the governance none of its competitors had.</p>
         <ul class="chips">
@@ -191,9 +212,8 @@
 
     <div class="grid grid--2">
       <article class="card reveal">
-        <div class="card__media"><img width="1600" height="1089" style="--ar:1600/1089" src="img/console-pipeline.png" alt="The pipeline canvas with the agent library." loading="lazy" decoding="async"></div>
+        <div class="card__media"><img width="1600" height="1089" style="--ar:1600/1089" src="img/console-pipeline.png" alt="The pipeline canvas with the agent library." loading="lazy" decoding="async" srcset="img/console-pipeline-700.png 700w, img/console-pipeline-1100.png 1100w, img/console-pipeline.png 1600w" sizes="(min-width:900px) 560px, 92vw"></div>
         <div class="card__body">
-          <div class="card__top"><span class="idx">02</span></div>
           <h3 class="card__title">APB: Agentic Process Builder</h3>
           <p class="card__sub">Process orchestration built on Console's agents and pipelines. Setup that took hours cut to minutes.</p>
           <ul class="chips">
@@ -208,7 +228,6 @@
 
       <article class="card reveal" style="--d:100ms">
         <div class="card__body">
-          <div class="card__top"><span class="idx">03</span></div>
           <h3 class="card__title">Product Studio</h3>
           <p class="card__sub">Raw ideas into structured strategy: personas, SWOT, features, roadmaps, with every AI output editable and explainable.</p>
           <ul class="chips">
@@ -224,29 +243,22 @@
 
     <article class="card card--wide reveal">
       <div class="card__body">
-        <div class="card__top"><span class="idx">04</span><span class="chip">System</span></div>
+        <div class="card__top"><span class="chip">System</span></div>
         <h3 class="card__title">Design System</h3>
         <p class="card__sub">One centralised Figma system adopted across four to six products, including how AI features get surfaced enterprise-wide.</p>
         <p class="card__rel">Built and scaled across teams</p>
         <p class="link link--soon"><span>Write-up in progress</span> <small>Happy to walk through it</small></p>
       </div>
-      <div class="card__media card__media--strip">
-        <div class="ph ph--sm"><span class="ph__label">Tokens</span></div>
-        <div class="ph ph--sm"><span class="ph__label">Components</span></div>
-        <div class="ph ph--sm"><span class="ph__label">AI patterns</span></div>
-        <div class="ph ph--sm"><span class="ph__label">Docs</span></div>
+      <div class="card__media card__media--index">
+        <ul>
+          <li>Tokens</li>
+          <li>Components</li>
+          <li>AI patterns</li>
+          <li>Documentation</li>
+        </ul>
       </div>
     </article>
 
-    <div class="slots reveal">
-      <p class="slots__label">More work, in progress</p>
-      <div class="grid grid--4">
-        <article class="card card--slot"><div class="card__media ph ph--1x1"><span class="ph__label">05</span></div><div class="card__body"><h3 class="card__title card__title--sm">Project 05</h3></div></article>
-        <article class="card card--slot"><div class="card__media ph ph--1x1"><span class="ph__label">06</span></div><div class="card__body"><h3 class="card__title card__title--sm">Project 06</h3></div></article>
-        <article class="card card--slot"><div class="card__media ph ph--1x1"><span class="ph__label">07</span></div><div class="card__body"><h3 class="card__title card__title--sm">Project 07</h3></div></article>
-        <article class="card card--slot"><div class="card__media ph ph--1x1"><span class="ph__label">08</span></div><div class="card__body"><h3 class="card__title card__title--sm">Project 08</h3></div></article>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -262,7 +274,10 @@
     <div class="about__grid">
       <div class="about__media reveal">
         <img class="portrait" width="900" height="1200" style="--ar:3/4" src="img/akash-portrait.jpg" alt="Akash Raj." loading="lazy" decoding="async">
-        <span class="note" aria-hidden="true">13 &rarr; 5</span>
+        <span class="note" aria-hidden="true"><svg viewBox="0 0 108 108">
+<path class="note__body" d="M3.5 4.2 L 104.5 2.8 L 103.6 83 C 99 94 90 102.6 79 103.4 L 4.6 105.2 Z"/>
+<path class="note__curl" d="M103.6 83 C 97.5 85.4 89.5 91.5 79 103.4 C 90 102.6 99 94 103.6 83 Z"/>
+</svg><b>13 &rarr; 5</b></span>
       </div>
 
       <div class="about__body reveal" style="--d:100ms">
@@ -277,10 +292,10 @@
 
         <h3 class="sub sub--spaced">How I work</h3>
         <ol class="steps">
-          <li><span class="idx">01</span><div><b>Break it to the root</b><p>The audit for Console named four problems. Two of them turned out to be the same problem, which changed the fix from visual cleanup to consolidation.</p></div></li>
-          <li><span class="idx">02</span><div><b>Structure before surface</b><p>Most interface problems are structure problems wearing a visual disguise. Thirteen flat navigation items became five intentions.</p></div></li>
-          <li><span class="idx">03</span><div><b>Prototype, then argue</b><p>Build it, test it, change it. Disagreements settle faster against something real than against a description.</p></div></li>
-          <li><span class="idx">04</span><div><b>Systemise and ship on time</b><p>Solve it once, in a way four other teams can reuse, and land it when it was promised.</p></div></li>
+          <li><div><b>Break it to the root</b><p>The audit for Console named four problems. Two of them turned out to be the same problem, which changed the fix from visual cleanup to consolidation.</p></div></li>
+          <li><div><b>Structure before surface</b><p>Most interface problems are structure problems wearing a visual disguise. Thirteen flat navigation items became five intentions.</p></div></li>
+          <li><div><b>Prototype, then argue</b><p>Build it, test it, change it. Disagreements settle faster against something real than against a description.</p></div></li>
+          <li><div><b>Systemise and ship on time</b><p>Solve it once, in a way four other teams can reuse, and land it when it was promised.</p></div></li>
         </ol>
       </div>
     </div>
@@ -361,7 +376,6 @@
 <!-- ===================== CONTACT ===================== -->
 <section class="section contact" id="contact">
   <div class="container">
-    <span class="tag">Contact</span>
     <h2 class="contact__title reveal">Tell me what you're building. <span class="muted">I'll tell you where the trust breaks.</span></h2>
     <p class="contact__lede reveal" style="--d:80ms">Currently open to product design roles.</p>
     <div class="btn-row reveal" style="--d:160ms">
@@ -382,6 +396,6 @@
   </div>
 </footer>
 
-<script src="motion.js"></script>
+<script src="motion.js?v=3"></script>
 </body>
 </html>

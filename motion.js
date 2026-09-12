@@ -1,7 +1,10 @@
 /* Shared motion. Transform/opacity only, one rAF loop, reduced-motion aware. */
 (function(){
   'use strict';
-  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rmq = matchMedia('(prefers-reduced-motion: reduce)');
+  var reduced = rmq.matches;
+  /* Toggling Reduce Motion mid-session used to do nothing until a reload. */
+  if (rmq.addEventListener) rmq.addEventListener('change', function(){ location.reload(); });
 
   /* ---- entrance + scroll reveals ---- */
   document.documentElement.classList.add('js');
@@ -37,17 +40,43 @@
     }, { passive: true });
 
     var hero = document.querySelector('.hero') || document.body;
-    (function tick(){
+
+    /* offsetHeight forces layout, so read it once and on resize, never per frame */
+    var heroH = hero.offsetHeight || 1;
+    addEventListener('resize', function(){ heroH = hero.offsetHeight || 1; }, { passive: true });
+
+    var raf = 0, live = false;
+
+    function tick(){
       cx += (tx - cx) * 0.08;                       // the lag is what gives them mass
       cy += (ty - cy) * 0.08;
-      var sp = Math.max(0, Math.min(1, scrollY / (hero.offsetHeight || 1)));
+      var sp = Math.max(0, Math.min(1, scrollY / heroH));
       planes.forEach(function(p){
         var x = cx * p.px, y = cy * p.py + sp * p.s;
         var rot = p.rot ? ' rotate(' + (cx * p.rot).toFixed(2) + 'deg)' : '';
         p.el.style.transform = 'translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px,0)' + p.base + rot;
       });
-      requestAnimationFrame(tick);
-    })();
+      raf = requestAnimationFrame(tick);
+    }
+
+    /* The loop used to run for the life of the page, writing transforms to five
+       promoted layers while the hero was thousands of pixels off screen. */
+    function start(){ if (live) return; live = true;
+      planes.forEach(function(p){ p.el.style.willChange = 'transform'; });
+      raf = requestAnimationFrame(tick); }
+    function stop(){ if (!live) return; live = false;
+      cancelAnimationFrame(raf);
+      planes.forEach(function(p){ p.el.style.willChange = 'auto'; }); }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){
+        es[0].isIntersecting ? start() : stop();
+      }, { threshold: 0 }).observe(stack);
+    } else { start(); }
+
+    document.addEventListener('visibilitychange', function(){
+      document.hidden ? stop() : (stack.getBoundingClientRect().bottom > 0 && start());
+    });
   }
 
   /* ---- scroll cue: draws once, retires once you've scrolled ---- */
@@ -63,19 +92,25 @@
     }, { passive: true });
   }
 
-  /* ---- pipeline: status cycles, a collaborator drifts through ---- */
+  /* ---- pipeline: status cycles, a collaborator drifts through ----
+     Both used to run on uncleared intervals for the life of the page, inside a
+     hero that is decorative and usually off screen. They now stop when it is. */
+  var graph = document.querySelector('.p-graph');
   var statusText = document.getElementById('statusText');
-  if (statusText && !reduced) {
+  var mp = document.getElementById('mp'), ring = document.getElementById('selRing');
+
+  if (graph && !reduced && (statusText || (mp && ring))) {
     var states = ['Queued', 'Running', 'Needs review'], si = 0;
-    setInterval(function(){
+    var statusTimer = 0, driftTimer = 0, swapTimer = 0, ticking = false;
+
+    function cycleStatus(){
       si = (si + 1) % states.length;
       statusText.style.transition = 'opacity .2s'; statusText.style.opacity = 0;
-      setTimeout(function(){ statusText.textContent = states[si]; statusText.style.opacity = 1; }, 200);
-    }, 2800);
-  }
-  var mp = document.getElementById('mp'), ring = document.getElementById('selRing');
-  if (mp && ring && !reduced) {
-    var drift = function(){
+      swapTimer = setTimeout(function(){
+        statusText.textContent = states[si]; statusText.style.opacity = 1;
+      }, 200);
+    }
+    function drift(){
       mp.animate([
         {transform:'translate(8px,510px)',   opacity:0},
         {transform:'translate(72px,452px)',  opacity:1, offset:.14},
@@ -86,9 +121,26 @@
       ], { duration: 5200, easing: 'ease-in-out' });
       ring.animate([{opacity:0},{opacity:0,offset:.44},{opacity:1,offset:.5},
                     {opacity:1,offset:.62},{opacity:0,offset:.7},{opacity:0}], { duration: 5200 });
-    };
-    setTimeout(drift, 3200);
-    setInterval(drift, 11000);
+    }
+    function runGraph(){
+      graph.classList.remove('is-idle');
+      if (ticking) return; ticking = true;
+      if (statusText) statusTimer = setInterval(cycleStatus, 2800);
+      if (mp && ring) { driftTimer = setInterval(drift, 11000); drift(); }
+    }
+    function haltGraph(){
+      if (!ticking) return; ticking = false;
+      clearInterval(statusTimer); clearInterval(driftTimer); clearTimeout(swapTimer);
+      graph.classList.add('is-idle');   /* pauses the CSS connector loop */
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(es){
+        es[0].isIntersecting ? runGraph() : haltGraph();
+      }, { threshold: 0 }).observe(graph);
+    } else { runGraph(); }
+    document.addEventListener('visibilitychange', function(){
+      document.hidden ? haltGraph() : (graph.getBoundingClientRect().bottom > 0 && runGraph());
+    });
   }
 
   /* ---- sketch diagrams: draw themselves in when their section arrives ---- */
@@ -122,9 +174,78 @@
       entries.forEach(function(e){
         if (!e.isIntersecting) return;
         var i = secs.indexOf(e.target);
-        links.forEach(function(l, k){ l.classList.toggle('is-here', k === i); });
+        links.forEach(function(l, k){
+          l.classList.toggle('is-here', k === i);
+          /* the tick said "you are here" to sighted users only */
+          if (k === i) l.setAttribute('aria-current', 'true');
+          else l.removeAttribute('aria-current');
+        });
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
     secs.forEach(function(s){ if (s) io.observe(s); });
   }
+
+  /* ---- s15 prompt demo: the process assembles while you read ----
+     Explanatory loop. Runs only while on screen, never when the visitor
+     asks for reduced motion, and tears itself down when it leaves.     */
+  var pd = document.querySelector('.pd');
+  if (pd) {
+    var SENTENCE = 'an agent that reviews pull requests';
+    var typeEl = pd.querySelector('.pd-type');
+    var caret  = pd.querySelector('.pd-caret');
+    var nodes  = [].slice.call(pd.querySelectorAll('.pd-node'));
+    var lines  = [].slice.call(pd.querySelectorAll('.pd-link, .pd-stem, .pd-rail, .pd-feed'));
+
+    lines.forEach(function(l){ l.style.setProperty('--len', Math.ceil(l.getTotalLength())); });
+
+    if (reduced) {
+      typeEl.textContent = SENTENCE;                  // static end state
+    } else {
+      var timers = [], running = false;
+
+      var at = function(ms, fn){ timers.push(setTimeout(fn, ms)); };
+      var clearAll = function(){ timers.forEach(clearTimeout); timers = []; };
+
+      var reset = function(){
+        typeEl.textContent = '';
+        caret.setAttribute('x', 70);
+        pd.classList.remove('is-built');
+        nodes.forEach(function(n){ n.classList.remove('on'); });
+        lines.forEach(function(l){ l.classList.remove('on'); });
+      };
+
+      var cycle = function(){
+        if (!running) return;
+        reset();
+        pd.classList.add('is-typing');
+        for (var i = 1; i <= SENTENCE.length; i++) {
+          (function(i){
+            at(i * 34, function(){
+              typeEl.textContent = SENTENCE.slice(0, i);
+              caret.setAttribute('x', 70 + typeEl.getComputedTextLength() + 3);
+            });
+          })(i);
+        }
+        var t = SENTENCE.length * 34;
+        // the point of the demo: assembly starts before the sentence is finished
+        at(t * 0.55,        function(){ nodes[0].classList.add('on'); lines[2].classList.add('on'); });
+        at(t * 0.55 + 260,  function(){ lines[0].classList.add('on'); });
+        at(t * 0.55 + 420,  function(){ nodes[1].classList.add('on'); lines[3].classList.add('on'); });
+        at(t * 0.55 + 680,  function(){ lines[1].classList.add('on'); });
+        at(t * 0.55 + 840,  function(){ nodes[2].classList.add('on'); lines[4].classList.add('on'); });
+        at(t + 260,         function(){ lines[5].classList.add('on'); lines[6].classList.add('on'); });
+        at(t + 520,         function(){ pd.classList.remove('is-typing'); pd.classList.add('is-built'); });
+        at(t + 3000,        cycle);                   // hold, then run again
+      };
+
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting && !running) { running = true; cycle(); }
+          else if (!e.isIntersecting && running) { running = false; clearAll(); reset(); }
+        });
+      }, { threshold: 0.35 });
+      io.observe(pd);
+    }
+  }
+
 })();
