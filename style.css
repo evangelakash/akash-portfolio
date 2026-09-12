@@ -265,12 +265,21 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 }
 .plane{ position:absolute; inset:0; will-change:transform; }
 .stack .shot{
-  position:absolute; right:5%; top:9%; width:70%; aspect-ratio:3/2;
+  position:absolute; right:6%; top:7%; width:54%; aspect-ratio:3/4;
   border-radius:6px; background:var(--m-600); border:1px solid var(--m-400);
-  display:grid; place-items:center;
-  font-family:var(--mono); font-size:10px; color:var(--t-low); text-align:center;
+  overflow:hidden;
   box-shadow:0 14px 32px rgba(20,20,25,.13);
 }
+/* The photo sizes itself from its own ratio, not the parent's height, so a
+   stale or missing parent rule can never stretch it. cover only ever scales
+   and crops; the crop is already 3:4, so in practice it is pure scaling. */
+.stack .shot img{
+  width:100%; height:auto; aspect-ratio:3/4;
+  object-fit:cover; object-position:50% 22%; display:block;
+}
+/* Tape holds the photo's top-left corner. The photo starts at 40% (100 - 6
+   right - 54 wide), so the tape centres on that corner at any stack size. */
+.stack .tape{ top:7%; left:40%; margin:-13px 0 0 -63px; }
 .stack .note{ right:6%; bottom:7%; }
 .stack .scribble{ position:absolute; left:-7%; top:16%; width:130px; }
 .scribble b{ display:block; margin-top:4px; font-family:var(--mono); font-size:10px; font-weight:400; color:var(--ink); opacity:.72; }
@@ -408,7 +417,9 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .footer a:hover{ color:var(--t-hi); }
 
 /* ---- scroll reveal ---- */
-.reveal{ opacity:0; transform:translateY(22px); }
+.js .reveal{ opacity:0; transform:translateY(22px); }   /* .js gate: without
+   JavaScript nothing is hidden, so the page can never render blank. The class
+   is set by an inline script in <head>, before first paint. */
 .reveal.is-in{
   opacity:1; transform:none;
   transition:opacity .7s var(--ease) var(--d,0ms), transform .9s var(--ease) var(--d,0ms);
@@ -595,7 +606,7 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .sketch .t-big{ font-family:var(--sans); font-size:13px; font-weight:500; fill:var(--t-hi); }
 
 /* things that fade in behind the strokes */
-.sketch .fade{ opacity:0; transition:opacity .6s ease var(--d,300ms); }
+.js .sketch .fade{ opacity:0; transition:opacity .6s ease var(--d,300ms); }
 .sketch.is-drawn .fade{ opacity:1; }
 
 @media (prefers-reduced-motion: reduce){
@@ -614,7 +625,7 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
   margin-top:12px; font-family:var(--mono); font-size:11px; line-height:1.6;
   letter-spacing:.03em; color:var(--t-low);
 }
-.cs-shot--hero{ margin-top:44px; }
+.cs-shot--hero{ margin-top:36px; max-width:1000px; margin-inline:auto; }
 .cs-shot--hero img{ box-shadow:0 26px 60px rgba(20,20,25,.14); }
 .cs-body .cs-shot{ margin:30px 0; }
 .card__media img{ width:100%; height:auto; display:block; border-bottom:1px solid var(--m-500); }
@@ -740,3 +751,84 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
   padding:clamp(14px,2vw,26px) clamp(14px,2vw,26px) 0;
 }
 .card__media--bare img{ box-shadow:0 12px 30px rgba(20,20,25,.12); }
+
+/* ---- portrait ------------------------------------------------------
+   Sits in the About slot the .ph placeholder used to hold. Same 3:4 box,
+   same hairline and lift as the other raised surfaces.                  */
+.portrait{
+  width:100%; height:auto; aspect-ratio:var(--ar,3/4); object-fit:cover;
+  border:1px solid var(--m-500); border-radius:var(--r);
+  box-shadow:0 14px 32px rgba(20,20,25,.13);
+}
+
+/* ---- the summary layer: whole project inside three scrolls -----------
+   Outcome numbers then a map of what follows, both above the first
+   deep section, so a reader who stops here still has the argument.     */
+.cs-outcome{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:clamp(18px,2.4vw,34px);
+  margin:clamp(28px,4vw,46px) 0 0;
+  padding:clamp(24px,3vw,34px) 0 0; border-top:1px solid var(--m-500);
+}
+.cs-outcome b{
+  display:block; font-family:var(--sans); font-weight:500;
+  font-size:clamp(26px,3vw,38px); letter-spacing:-.03em; line-height:1;
+  color:var(--t-hi); margin-bottom:9px;
+}
+.cs-outcome span{ display:block; font-size:13.5px; line-height:1.5; color:var(--t-mid); max-width:24ch; }
+
+.cs-map{ margin:clamp(30px,4vw,48px) 0 0; }
+.cs-map__lead{
+  font-family:var(--sans); font-size:clamp(16px,1.7vw,19px); font-weight:500;
+  color:var(--t-hi); margin:0 0 20px; max-width:52ch;
+}
+.cs-map ol{ list-style:none; margin:0; padding:0; border-top:1px solid var(--m-500); }
+.cs-map li{ border-bottom:1px solid var(--m-500); }
+.cs-map a{
+  display:grid; grid-template-columns:minmax(0,15ch) minmax(0,1fr) auto;
+  gap:clamp(14px,2.5vw,32px); align-items:baseline;
+  padding:15px 4px; text-decoration:none;
+  transition:background .25s var(--ease), padding-left .25s var(--ease);
+}
+.cs-map a:hover{ background:var(--m-700); padding-left:12px; }
+.cs-map b{ font-family:var(--sans); font-weight:500; font-size:16px; color:var(--t-hi); }
+.cs-map span{ font-size:14.5px; line-height:1.55; color:var(--t-mid); }
+.cs-map i{ font-family:var(--mono); font-style:normal; font-size:11.5px; color:var(--t-low); white-space:nowrap; }
+@media (max-width:700px){
+  .cs-map a{ grid-template-columns:1fr auto; row-gap:5px; }
+  .cs-map span{ grid-column:1 / -1; }
+}
+
+/* ---- rail groups ----------------------------------------------------
+   Fifteen flat peers was the same mistake the case study argues against.
+   The ticks stay one per section; the labels now sit under five headings. */
+.cs-rail__grp{ padding:14px 0 5px; }
+.cs-rail__grp:first-child{ padding-top:0; }
+.cs-rail__grp .cs-rail__label{
+  font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--t-low); opacity:0; max-width:0;
+}
+.cs-rail:hover .cs-rail__grp .cs-rail__label,
+.cs-rail:focus-within .cs-rail__grp .cs-rail__label{ opacity:1; max-width:48ch; transform:none; }
+
+/* ---- honest state for work that isn't written up yet ----------------
+   Reads as a status, not a link. Nothing here should look clickable.   */
+.link--soon{
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  border-top:1px solid var(--m-500); margin:18px 0 0; padding-top:14px;
+  color:var(--t-low); cursor:default;
+}
+.link--soon span{ font-family:var(--sans); font-size:14px; font-weight:500; color:var(--t-mid); }
+.link--soon small{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--t-low); }
+
+/* ---- the end of a case study is a conversation, not a dead arrow ---- */
+.cs-end{
+  border-top:1px solid var(--m-500); background:var(--m-850);
+  padding-block:clamp(52px,7vw,88px);
+}
+.cs-end__l{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--t-low); margin:0 0 18px;
+}
+.cs-end__t{ font-size:clamp(26px,3.4vw,42px); line-height:1.1; margin:0 0 16px; max-width:20ch; }
+.cs-end__d{ font-size:17px; color:var(--t-mid); max-width:56ch; margin:0; }

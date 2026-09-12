@@ -3,12 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Day Zero — Enterprise Console · Akash Raj</title>
+<title>Day Zero · Enterprise Console · Akash Raj</title>
 <meta name="description" content="Every agent-building tool was either powerful but developer-only, or easy but unfit for enterprise. None had governance. Console had to be all three.">
+<link rel="canonical" href="https://evangelakash.github.io/akash-portfolio/case-study.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F6F6F4">
+<meta name="author" content="Akash Raj">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Akash Raj">
+<meta property="og:title" content="Day Zero · Enterprise Console">
+<meta property="og:description" content="The agent-building tools split into two camps: powerful but developer-only, or easy but unfit for enterprise. None of them had governance. Console had to be all three at once.">
+<meta property="og:url" content="https://evangelakash.github.io/akash-portfolio/case-study.html">
+<meta property="og:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Enterprise Console after the redesign, shown on a laptop.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Day Zero · Enterprise Console">
+<meta name="twitter:description" content="The agent-building tools split into two camps: powerful but developer-only, or easy but unfit for enterprise. None of them had governance. Console had to be all three at once.">
+<meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Literata:opsz,wght@7..72,400;7..72,500&family=Sora:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
+<script>document.documentElement.className+=" js";</script>
 </head>
 <body id="top">
 
@@ -31,27 +50,32 @@
       <a href="index.html#work">Work</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
-      <a class="btn btn--sm" href="#">R&eacute;sum&eacute; &#8599;</a>
+      <a class="btn btn--sm" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">R&eacute;sum&eacute; &#8599;</a>
     </nav>
   </div>
 </header>
 
 <nav class="cs-rail" aria-label="Sections">
   <ol>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">The problem</span></li>
       <li><a href="#s01" class="is-here"><span class="cs-rail__label">The situation</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s02"><span class="cs-rail__label">Who actually uses this</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s03"><span class="cs-rail__label">What was actually broken</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s04"><span class="cs-rail__label">What I didn't know going in</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s05"><span class="cs-rail__label">Day zero — and the thing nobody had</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">The bet</span></li>
+      <li><a href="#s05"><span class="cs-rail__label">Day zero: the thing nobody had</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s06"><span class="cs-rail__label">Who I actually had to convince</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s07"><span class="cs-rail__label">Decision — killing the stepper</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s08"><span class="cs-rail__label">Decision — one playground</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s09"><span class="cs-rail__label">Decision — the canvas gets the room</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s10"><span class="cs-rail__label">The structure — grouped by verb</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s11"><span class="cs-rail__label">Decision — the model belongs to the agent</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Five decisions</span></li>
+      <li><a href="#s07"><span class="cs-rail__label">Decision: killing the stepper</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s08"><span class="cs-rail__label">Decision: one playground</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s09"><span class="cs-rail__label">Decision: the canvas gets the room</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s10"><span class="cs-rail__label">The structure: grouped by verb</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s11"><span class="cs-rail__label">Decision: the model belongs to the agent</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">What happened</span></li>
       <li><a href="#s12"><span class="cs-rail__label">What happened</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s13"><span class="cs-rail__label">What didn't work</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s14"><span class="cs-rail__label">V2 — describe it instead of configuring it</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">What&rsquo;s next</span></li>
+      <li><a href="#s14"><span class="cs-rail__label">V2: describe it instead of configuring it</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s15"><span class="cs-rail__label">What I'd do differently</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
   </ol>
 </nav>
@@ -60,7 +84,6 @@
 
 <section class="cs-hero">
   <div class="container">
-    <span class="tag">Case study 01</span>
     <p class="eyebrow reveal">Enterprise Console &middot; Ascendion &middot; Mar 2025 &ndash; present</p>
     <h1 class="cs-hero__title reveal" style="--d:80ms">Day Zero</h1>
     <p class="cs-hero__dek reveal" style="--d:160ms">The agent-building tools split into two camps: powerful but developer-only, or easy but unfit for enterprise. None of them had governance. Console had to be all three at once.</p>
@@ -80,13 +103,31 @@
       <h2>The whole thing, in six lines</h2>
       <ol>
         <li><span class="n">01</span><p>Ascendion had shipped an agentic platform and <b>almost nobody was using it.</b> The rebuild was funded to fix that.</p></li>
-        <li><span class="n">02</span><p>The audit named four problems. <b>Two of them were the same problem</b> — one task split across two tabs.</p></li>
+        <li><span class="n">02</span><p>The audit named four problems. <b>Two of them were the same problem</b>, one task split across two tabs.</p></li>
         <li><span class="n">03</span><p>Every competitor was either powerful but developer-only, or easy but unfit for enterprise. <b>None had governance.</b></p></li>
         <li><span class="n">04</span><p>So Console took two bets that pull against each other: <b>freedom to build from nothing, and a gate on reuse.</b></p></li>
-        <li><span class="n">05</span><p>Thirteen flat navigation items became <b>five intentions</b>, grouped by verb — a structure that scales.</p></li>
+        <li><span class="n">05</span><p>Thirteen flat navigation items became <b>five intentions</b>, grouped by verb, a structure that scales.</p></li>
         <li><span class="n">06</span><p>Adoption rose <b>roughly 50%</b> over the previous version. Agent output quality is still the weak point.</p></li>
       </ol>
     </section>
+
+    <div class="cs-outcome reveal" style="--d:440ms">
+      <div><b>~50%</b><span>adoption increase over the year after launch</span></div>
+      <div><b>1,000+</b><span>users at the client I worked closest to</span></div>
+      <div><b>13 &rarr; 5</b><span>navigation items collapsed into intentions</span></div>
+      <div><b>6</b><span>object types under one Build surface</span></div>
+    </div>
+
+    <nav class="cs-map reveal" style="--d:480ms" aria-label="What the rest of this page covers">
+      <p class="cs-map__lead">That is the whole project. The rest is how each part was decided, and what it cost.</p>
+      <ol>
+        <li><a href="#s01"><b>The problem</b><span>Who actually uses Console, what the audit found, and what I didn&rsquo;t know going in</span><i>&sect;01&ndash;04</i></a></li>
+        <li><a href="#s05"><b>The bet</b><span>Day zero and governance, and the stakeholders I had to win first</span><i>&sect;05&ndash;06</i></a></li>
+        <li><a href="#s07"><b>Five decisions</b><span>The stepper, the playground, the canvas, the structure, the model</span><i>&sect;07&ndash;11</i></a></li>
+        <li><a href="#s12"><b>What happened</b><span>The outcome, where the number comes from, and the part that fell short</span><i>&sect;12&ndash;13</i></a></li>
+        <li><a href="#s14"><b>What&rsquo;s next</b><span>V2, and what I&rsquo;d do differently</span><i>&sect;14&ndash;15</i></a></li>
+      </ol>
+    </nav>
   </div>
 </section>
 
@@ -96,7 +137,7 @@
     <h2 class="cs-sec__title reveal">The situation</h2>
     <div class="cs-body cs-body--rev">
       <div class="reveal"><p class="lede">Ascendion had already built an agentic platform. Almost nobody was using it.</p><p>The first version of Console let enterprise teams create AI agents and chain them into workflows. It shipped, and it stalled. Two things were wrong at once: the agent technology underneath wasn't producing good enough output, and the interface didn't let people build the thing they actually came to build.</p>
-<p>That mattered commercially. Ascendion's clients were enterprises that wanted AI inside their workflows and had no idea how to implement it. The company's answer was to sell them a platform for building agents specific to their own processes — but a product with weak adoption can't be sold as an enterprise solution.</p>
+<p>That mattered commercially. Ascendion's clients were enterprises that wanted AI inside their workflows and had no idea how to implement it. The company's answer was to sell them a platform for building agents specific to their own processes. But a product with weak adoption can't be sold as an enterprise solution.</p>
 <p>So the rebuild was funded on two fronts: strengthen the agent technology, and redesign the experience so adoption followed. <strong>Design owned half of a commercial bet.</strong></p></div>
       <div class="cs-aside reveal" style="--d:100ms"><figure class="cs-shot cs-shot--bare">
   <img width="1600" height="858" style="--ar:1600/858" src="img/console-old-screen.png" alt="Old Console, before the redesign." loading="lazy" decoding="async">
@@ -110,13 +151,13 @@
     <span class="cs-sec__n">02</span>
     <h2 class="cs-sec__title reveal">Who actually uses this</h2>
     <div class="cs-body">
-      <div class="reveal"><p class="lede">Five roles, all building for themselves.</p><p>Developers, DevOps, QE engineers, engineering managers and product managers. A QE engineer builds an agent that writes user stories. A PM builds one that drafts PRDs. Developers build for the SDLC — but not as one thing.</p>
+      <div class="reveal"><p class="lede">Five roles, all building for themselves.</p><p>Developers, DevOps, QE engineers, engineering managers and product managers. A QE engineer builds an agent that writes user stories. A PM builds one that drafts PRDs. Developers build for the SDLC, but not as one thing.</p>
 <div class="cs-pull"><b>The observation that shaped the product</b>
-<p><strong>The full SDLC is too large to be a single pipeline.</strong> So developers don't build one. They chain small agents instead: take the design handed over by a classifier agent, arrange the work in VS Code, push to GitHub — each agent passing to the next in sequence.</p>
+<p><strong>The full SDLC is too large to be a single pipeline.</strong> So developers don't build one. They chain small agents instead: take the design handed over by a classifier agent, arrange the work in VS Code, push to GitHub, each agent passing to the next in sequence.</p>
 <p>That behaviour set the unit of the product. The thing a user builds isn't <em>a workflow</em>. It's <em>an agent that composes with other agents</em>.</p></div></div>
       <div class="cs-aside reveal" style="--d:100ms"><figure class="cs-shot cs-shot--bare">
   <img width="1532" height="1090" style="--ar:1532/1090" src="img/console-homepage.png" alt="MySpace, the landing surface every role shares." loading="lazy" decoding="async">
-  <figcaption>MySpace — where all five roles land.</figcaption>
+  <figcaption>MySpace, where all five roles land.</figcaption>
 </figure></div>
     </div>
   </div>
@@ -127,14 +168,14 @@
     <h2 class="cs-sec__title reveal">What was actually broken</h2>
         <figure class="cs-lead cs-lead--bare reveal">
   <img width="1600" height="930" style="--ar:1600/930" src="img/console-heuristic.png" alt="The heuristic evaluation: violations and recommendations marked directly on the screen." loading="lazy" decoding="async">
-  <figcaption>The audit, marked up on the interface itself — violations in orange, recommendations in green.</figcaption>
+  <figcaption>The audit, marked up on the interface itself: violations in orange, recommendations in green.</figcaption>
 </figure>
     <div class="cs-body cs-body--full">
       <div class="reveal"><p class="lede">The audit named four problems. Two of them were the same problem.</p><p>Old Console put thirteen items in one flat side panel: Prompts, Models, Collections, Tools, Agents, Workflows, Guardrails, Analytics, Security, Plugins, Settings, Playground, ChatBot Config.</p>
-<p>Almost every one is a <strong>type of object</strong> — thirteen equal choices, with nothing indicating which you needed, in what order, or which existed only to serve the others.</p>
+<p>Almost every one is a <strong>type of object</strong>: thirteen equal choices, with nothing indicating which you needed, in what order, or which existed only to serve the others.</p>
 <div class="cs-pull"><b>The clearest instance</b>
 <p><strong>Create a guardrail inside an agent and it lived in one tab. Attaching that guardrail to the same agent happened in another.</strong></p>
-<p>One conceptual task — make a rule, apply the rule — split across the interface. Users got lost inside a job they had already started.</p></div>
+<p>One conceptual task, make a rule and apply the rule, split across the interface. Users got lost inside a job they had already started.</p></div>
 
 <figure class="sketch">
   <svg viewBox="0 0 640 210" role="img" aria-label="Creating a guardrail happened in one tab; attaching it to the same agent happened in another.">
@@ -157,9 +198,9 @@
     <path class="ink" style="--d:1100ms" d="M332 62 L 308 86"/>
     <text class="t-key fade" style="--d:1300ms" x="268" y="132">one task, two places</text>
   </svg>
-  <figcaption>The clearest single instance of the fracture: one conceptual job — make a rule, apply the rule — split across two tabs, with nothing connecting them.</figcaption>
+  <figcaption>The clearest single instance of the fracture: one conceptual job, make a rule and apply the rule, split across two tabs, with nothing connecting them.</figcaption>
 </figure>
-<p>That single fracture accounts for both of the first two findings. "Inconsistent UI" and "difficult navigation" weren't separate problems; they were one structural failure described from two angles. Naming that mattered, because it meant the fix wasn't visual cleanup — it was consolidation.</p></div>
+<p>That single fracture accounts for both of the first two findings. "Inconsistent UI" and "difficult navigation" weren't separate problems; they were one structural failure described from two angles. Naming that mattered, because it meant the fix wasn't visual cleanup. It was consolidation.</p></div>
       
     </div>
   </div>
@@ -169,32 +210,27 @@
     <span class="cs-sec__n">04</span>
     <h2 class="cs-sec__title reveal">What I didn't know going in</h2>
     <div class="cs-body cs-body--full">
-      <div class="reveal"><p class="lede">Five personas, five native habitats, and no obvious principle to collapse them.</p><ul>
-<li><strong>Developers</strong> live in VS Code — resizable panes, several sections open at once, a layout they arrange themselves</li>
-<li><strong>Coders</strong> want something terminal-shaped, because that's the surface they trust</li>
+      <div class="reveal"><p class="lede">Three sharply different native habitats, and no obvious principle to collapse them.</p><ul>
+<li><strong>Developers</strong> live in VS Code, with resizable panes, several sections open at once, and a layout they arrange themselves</li>
+<li><strong>DevOps engineers</strong> want something terminal-shaped, because that is the surface they trust</li>
 <li><strong>Product managers</strong> want step by step, because their risk is losing the thread of a process</li>
-<li><strong>Designers</strong> want something different again</li>
 </ul>
-<p>Building four interfaces was never viable. But there was no obvious principle that collapsed them into one, and we went into the work without it.</p>
+<p>Console is configurable enough that almost anyone can build an agent for their own use, and people outside these roles do. But these were the habits we designed against, alongside engineering managers. Building a separate interface for each was never viable, and there was no obvious principle that collapsed them into one. We went into the work without it.</p>
 <div class="cs-pull"><b>Honest about the answer</b>
-<p>What we landed on — that every persona ultimately converges on text — was <strong>substantially a bet rather than a validated finding</strong>. It held up in adoption, but it wasn't proven before we committed to it.</p></div></div>
+<p>What we landed on, that every persona ultimately converges on text, was <strong>substantially a bet rather than a validated finding</strong>. It held up in adoption, but it wasn't proven before we committed to it.</p></div></div>
       <div class="cs-aside"></div>
     </div>
-    <figure class="cs-lead cs-lead--after cs-lead--bare reveal">
-  <img width="1532" height="1090" style="--ar:1532/1090" src="img/console-homepage.png" alt="One landing surface serving five different roles." loading="lazy" decoding="async">
-  <figcaption>One surface, five roles with very different habits.</figcaption>
-</figure>
   </div>
 </section>
 <section class="cs-sec" id="s05">
   <div class="container">
     <span class="cs-sec__n">05</span>
-    <h2 class="cs-sec__title reveal">Day zero — and the thing nobody had</h2>
+    <h2 class="cs-sec__title reveal">Day zero: the thing nobody had</h2>
     <div class="cs-body cs-body--full">
-      <div class="reveal"><p class="lede">Two camps, one tradeoff, and governance missing from all of it.</p><p>We assessed CrewAI, Metaflow, Flowise, Dify and LangGraph — and included two columns most competitive audits skip: <em>how we're better</em> and <em>how they're better</em>.</p>
+      <div class="reveal"><p class="lede">Two camps, one tradeoff, and governance missing from all of it.</p><p>We assessed CrewAI, Metaflow, Flowise, Dify and LangGraph, and included two columns most competitive audits skip: <em>how we're better</em> and <em>how they're better</em>.</p>
 <ul>
-<li><strong>Developer-first</strong> — CrewAI, LangGraph, Flowise. Real orchestration power. Also dev-heavy, a high learning curve, and in CrewAI's case no visual pipeline at all.</li>
-<li><strong>Simplicity-first</strong> — Dify, Metaflow. Very high ease of use. Also limited control, and limited enterprise scale.</li>
+<li><strong>Developer-first</strong>: CrewAI, LangGraph, Flowise. Real orchestration power. Also dev-heavy, a high learning curve, and in CrewAI's case no visual pipeline at all.</li>
+<li><strong>Simplicity-first</strong>: Dify, Metaflow. Very high ease of use. Also limited control, and limited enterprise scale.</li>
 </ul>
 <p>One axis, one tradeoff: <strong>power or accessibility, pick one.</strong> Nobody occupied the corner where both were true.</p>
 <div class="cs-pull"><b>The more useful finding was in the weakness column</b>
@@ -232,16 +268,16 @@
     <path class="ink ink--dim" style="--d:2300ms" d="M60 380 L596 380"/>
     <text class="t-lab fade" style="--d:2500ms" x="60" y="398">…and not one of them had governance</text>
   </svg>
-  <figcaption>Five platforms, one tradeoff. Developer-first tools had the power and excluded non-technical users; no-code tools were accessible and capped out below enterprise scale. The corner where both are true was empty — and governance was missing from every one of them.</figcaption>
+  <figcaption>Five platforms, one tradeoff. Developer-first tools had the power and excluded non-technical users; no-code tools were accessible and capped out below enterprise scale. The corner where both are true was empty, and governance was missing from every one of them.</figcaption>
 </figure>
-<p>The principle the team organised around was <strong>day zero</strong> — a user arriving with a process specific to their own organisation, needing to build for it from nothing — and <strong>governance</strong>, so that freedom is survivable at enterprise scale.</p>
+<p>The principle the team organised around was <strong>day zero</strong>, a user arriving with a process specific to their own organisation, needing to build for it from nothing, and <strong>governance</strong>, so that freedom is survivable at enterprise scale.</p>
 <blockquote class="cs-quote">At enterprise level you have to give users the freedom to build what they need. Not a version of what someone else needed.</blockquote>
-<p>Hand people primitives and total freedom, and you have also handed them the ability to build something unsafe, unreviewed and unrepeatable — inside a company that will be held responsible for it. That tension <em>is</em> the design problem.</p></div>
+<p>Hand people primitives and total freedom, and you have also handed them the ability to build something unsafe, unreviewed and unrepeatable, inside a company that will be held responsible for it. That tension <em>is</em> the design problem.</p></div>
       <div class="cs-aside"></div>
     </div>
     <figure class="cs-lead cs-lead--after cs-lead--bare reveal">
   <img width="1600" height="650" style="--ar:1600/650" src="img/console-competitors.png" alt="Competitor assessment across overview, USP, weakness, ease of use, and how each beats us." loading="lazy" decoding="async">
-  <figcaption>The competitive assessment — including a column for how each competitor beats us.</figcaption>
+  <figcaption>The competitive assessment, including a column for how each competitor beats us.</figcaption>
 </figure>
   </div>
 </section>
@@ -256,15 +292,15 @@
   <tbody>
     <tr><td>Business decision makers</td><td>High</td><td>High</td><td>Perceived slow workflow · UI inconsistency</td><td class="p0">P0</td></tr>
     <tr><td>Managers</td><td>Medium</td><td>Medium</td><td>Limited interactivity · usability</td><td class="p0">P1</td></tr>
-    <tr class="row-key"><td>Engineers <em>— the actual users</em></td><td>Medium</td><td>Low</td><td>Confusing flow · unintuitive UI · inconsistent experience</td><td class="p0">P2</td></tr>
+    <tr class="row-key"><td>Engineers <em>(the actual users)</em></td><td>Medium</td><td>Low</td><td>Confusing flow · unintuitive UI · inconsistent experience</td><td class="p0">P2</td></tr>
   </tbody>
 </table>
 </div>
 <div class="cs-pull"><b>Two things worth saying out loud</b>
 <p><strong>The most accurate diagnosis had the least power.</strong> Engineers named the actual failures and sit at low influence, P2.</p>
 <p><strong>The highest-priority concern was a perception.</strong> "<em>Perceived</em> slow workflow" is the honest phrasing, and it's the P0.</p>
-<p>And the two connect. <strong>"Engineers" here are the people who actually use Console</strong> — the developers, DevOps and QE engineers from §02 who build agents all day. So the group with the sharpest diagnosis and the least influence <em>was the user base.</em></p>
-<p>That describes the job precisely: carry the users' accurate diagnosis into language the people funding the work would act on. The heat map wasn't a deliverable — it was a map of where the argument had to be won.</p></div></div>
+<p>And the two connect. <strong>"Engineers" here are the people who actually use Console</strong>: the developers, DevOps and QE engineers from §02 who build agents all day. So the group with the sharpest diagnosis and the least influence <em>was the user base.</em></p>
+<p>That describes the job precisely: carry the users' accurate diagnosis into language the people funding the work would act on. The heat map wasn't a deliverable. It was a map of where the argument had to be won.</p></div></div>
       <div class="cs-aside"></div>
     </div>
     <figure class="cs-lead cs-lead--after cs-lead--bare reveal">
@@ -276,14 +312,14 @@
 <section class="cs-sec" id="s07">
   <div class="container">
     <span class="cs-sec__n">07</span>
-    <h2 class="cs-sec__title reveal">Decision — killing the stepper</h2>
+    <h2 class="cs-sec__title reveal">Decision: killing the stepper</h2>
     <figure class="cs-lead reveal">
   <img width="1600" height="1089" style="--ar:1600/1089" src="img/console-agent-creation.png" alt="Agent creation on one page: agent details, behaviour and model configuration side by side." loading="lazy" decoding="async">
-  <figcaption>Agent creation after the rebuild — everything the five wizard steps used to gate, on one page.</figcaption>
+  <figcaption>Agent creation after the rebuild: everything the five wizard steps used to gate, on one page.</figcaption>
 </figure>
     <div class="cs-body cs-body--full">
       <div class="reveal"><p class="lede">Agent creation used to be a five-step wizard. It is now one page.</p><p>The old flow moved through <strong>General Info → Prompt → Model → ICL → Guardrails</strong>, one screen at a time. That's the conventional answer to a complex configuration task, and on paper it's defensible.</p>
-<p>The audit found the opposite in practice: five gated steps meant a long time to create a single agent, no way to see the whole shape of what you were configuring, and — the finding that mattered most commercially — <strong>an experience hostile to non-technical users</strong>, the exact audience Console was being sold to reach.</p>
+<p>The audit found the opposite in practice: five gated steps meant a long time to create a single agent, no way to see the whole shape of what you were configuring, and, the finding that mattered most commercially, <strong>an experience hostile to non-technical users</strong>, the exact audience Console was being sold to reach.</p>
 
 <figure class="sketch">
   <svg viewBox="0 0 640 250" role="img" aria-label="A five-step wizard replaced by a single configuration page.">
@@ -316,10 +352,10 @@
       <text class="t-hi" x="490" y="218">Guardrails</text>
     </g>
   </svg>
-  <figcaption>Most case studies say "we considered a wizard." Console had one, and we removed it — trading a gentler arrival for a surface you can see whole.</figcaption>
+  <figcaption>Most case studies say "we considered a wizard." Console had one, and we removed it, trading a gentler arrival for a surface you can see whole.</figcaption>
 </figure>
 <div class="cs-pull"><b>The trade</b>
-<p>A single page is denser and less forgiving at first sight. A stepper is gentler on arrival and more punishing thereafter — it hides the whole from you, makes going back expensive, and turns one task into five commitments.</p>
+<p>A single page is denser and less forgiving at first sight. A stepper is gentler on arrival and more punishing thereafter. It hides the whole from you, makes going back expensive, and turns one task into five commitments.</p>
 <p>We took the density. On a builder people return to constantly, that cost is paid once; the cost of a wizard is paid every time.</p></div>
 <p>Most case studies say "we considered a wizard." <strong>Console had one, and we removed it.</strong></p></div>
       <div class="cs-aside reveal" style="--d:100ms"></div>
@@ -329,10 +365,10 @@
 <section class="cs-sec" id="s08">
   <div class="container">
     <span class="cs-sec__n">08</span>
-    <h2 class="cs-sec__title reveal">Decision — one playground</h2>
+    <h2 class="cs-sec__title reveal">Decision: one playground</h2>
     <div class="cs-body cs-body--rev">
       <div class="reveal"><p class="lede">Every persona converges on text or code. So differentiate at the edge.</p><p>The obvious move is a tailored experience per role. It's also the wrong one: it multiplies surface area and fragments the product into five half-maintained things.</p>
-<p>What the persona mapping surfaced: <strong>every persona converges on the same two output types.</strong> A developer wants code and links. A PM wants text — delivered as a PDF, a DOC, or an MD file.</p>
+<p>What the persona mapping surfaced: <strong>every persona converges on the same two output types.</strong> A developer wants code and links. A PM wants text, delivered as a PDF, a DOC, or an MD file.</p>
 <p>So the differentiation didn't belong in the playground. It belonged at the edge. <strong>One playground. One input model. Output rendered as text universally, with export format as the only thing that varies by role.</strong></p>
 <div class="cs-pull"><b>What it cost</b>
 <p>Everything that made each persona distinct was deliberately given up. <strong>Developers don't get the resizable multi-pane environment they're used to. PMs don't get the step-by-step scaffolding that protects them from losing the thread.</strong></p>
@@ -347,10 +383,10 @@
 <section class="cs-sec cs-sec--band" id="s09">
   <div class="container">
     <span class="cs-sec__n">09</span>
-    <h2 class="cs-sec__title reveal">Decision — the canvas gets the room</h2>
+    <h2 class="cs-sec__title reveal">Decision: the canvas gets the room</h2>
     <div class="cs-body">
       <div class="reveal"><p class="lede">Explicitness traded for calm.</p><p>The first pass at the builder came from another designer on the team, and it was boxy: every element fully enclosed in its own rectangle.</p>
-<p>My objection was about what the surface is <em>for</em>. A pipeline builder is an ideation surface — someone composing a workflow is generating ideas while they work. Containers that fence every element fight that.</p>
+<p>My objection was about what the surface is <em>for</em>. A pipeline builder is an ideation surface: someone composing a workflow is generating ideas while they work. Containers that fence every element fight that.</p>
 <ul>
 <li>Containers removed entirely; padding cut back</li>
 <li>Secondary icons reduced to minimum weight</li>
@@ -358,7 +394,7 @@
 <li>The agent library collapsible, so the canvas takes full width for large builds</li>
 </ul>
 <div class="cs-pull"><b>What it cost</b>
-<p>Boxes make an interface explicit — clear boundaries, obvious affordances. Removing them spends all of that. We weighed it before committing: containment was adding more cognitive load than it removed. The team agreed to reduce the builder to <strong>two things a user interacts with — the canvas and the agent library</strong> — and to accept the loss of explicitness.</p>
+<p>Boxes make an interface explicit: clear boundaries, obvious affordances. Removing them spends all of that. We weighed it before committing: containment was adding more cognitive load than it removed. The team agreed to reduce the builder to <strong>two things a user interacts with, the canvas and the agent library</strong>, and to accept the loss of explicitness.</p>
 <p>No difficulty was reported. Users singled out dragging agents from the library onto the canvas as what made building fast.</p></div></div>
       <div class="cs-aside reveal" style="--d:100ms"><figure class="cs-shot">
   <img width="1600" height="1089" style="--ar:1600/1089" src="img/console-pipeline.png" alt="Pipeline creation: agent library on the left, canvas taking the rest." loading="lazy" decoding="async">
@@ -370,15 +406,15 @@
 <section class="cs-sec" id="s10">
   <div class="container">
     <span class="cs-sec__n">10</span>
-    <h2 class="cs-sec__title reveal">The structure — grouped by verb</h2>
+    <h2 class="cs-sec__title reveal">The structure: grouped by verb</h2>
     <div class="cs-body cs-body--full">
       <div class="reveal"><p class="lede">Thirteen peers became five intentions.</p><ul>
-<li><strong>MySpace</strong> — where you land. Your own work.</li>
-<li><strong>Build</strong> — everything you make: agents, pipelines, APB, knowledge bases, tools, guardrails</li>
-<li><strong>Studios</strong> — separate applications the platform links out to. Entitlement-controlled: a client without the entitlement doesn't see the item at all, rather than seeing it locked.</li>
-<li><strong>Discover</strong> — the marketplace of what others published</li>
-<li><strong>Approvals</strong> — what's waiting on a decision</li>
-<li><strong>Manage</strong> — roles and access control. Admins only.</li>
+<li><strong>MySpace</strong>: where you land. Your own work.</li>
+<li><strong>Build</strong>: everything you make, agents, pipelines, APB, knowledge bases, tools, guardrails</li>
+<li><strong>Studios</strong>: separate applications the platform links out to. Entitlement-controlled: a client without the entitlement doesn't see the item at all, rather than seeing it locked.</li>
+<li><strong>Discover</strong>: the marketplace of what others published</li>
+<li><strong>Approvals</strong>: what's waiting on a decision</li>
+<li><strong>Manage</strong>: roles and access control. Admins only.</li>
 </ul>
 
 <figure class="sketch">
@@ -416,14 +452,14 @@
     <path class="ink ink--dim" style="--d:2100ms" d="M446 118 C 452 122, 450 128, 456 132"/>
     <text class="t-key fade" style="--d:2400ms" x="284" y="368">a seventh build type adds nothing to the navigation</text>
   </svg>
-  <figcaption>Grouped by the verb, not the object. The six buildable things nest under one intention rather than competing at the top level — which is also why the structure scales.</figcaption>
+  <figcaption>Grouped by the verb, not the object. The six buildable things nest under one intention rather than competing at the top level, which is also why the structure scales.</figcaption>
 </figure>
 <div class="cs-pull"><b>The principle</b>
-<p><strong>Group by the verb, not the object.</strong> The six things you can build don't compete at the top level — they nest under <em>Build</em>, because "I want to make something" is a single intention.</p>
+<p><strong>Group by the verb, not the object.</strong> The six things you can build don't compete at the top level. They nest under <em>Build</em>, because "I want to make something" is a single intention.</p>
 <p>That collapses thirteen peers into five intentions. It also scales: <strong>adding a seventh buildable object type adds nothing to the navigation.</strong></p></div>
 <div class="cs-pull"><b>The seam I couldn't design away</b>
-<p>Studios sit in the navigation but leave the product when clicked — a new tab, a separate application. A nav item that doesn't keep you inside the product breaks the containment the rest of the structure promises.</p>
-<p><strong>This was an engineering constraint, not a design choice.</strong> The dev team flagged that folding the studios into Console would make it a very heavy application, and that running them in their own environment was the better call. That reasoning is sound. It still leaves a seam in the navigation that I couldn't close from the design side — and I've written what I'd do about it in the last section.</p></div>
+<p>Studios sit in the navigation but leave the product when clicked: a new tab, a separate application. A nav item that doesn't keep you inside the product breaks the containment the rest of the structure promises.</p>
+<p><strong>This was an engineering constraint, not a design choice.</strong> The dev team flagged that folding the studios into Console would make it a very heavy application, and that running them in their own environment was the better call. That reasoning is sound. It still leaves a seam in the navigation that I couldn't close from the design side, and I've written what I'd do about it in the last section.</p></div>
 
 <h3>Two tiers, not six things</h3>
 <figure class="sketch">
@@ -463,13 +499,13 @@
     <path class="ink ink--key" style="--d:2200ms" d="M306 143 L 320 137"/>
     <path class="ink ink--key" style="--d:2200ms" d="M306 143 L 320 149"/>
   </svg>
-  <figcaption>Two tiers, with a governed gate between them. Freedom at the point of creation; review at the point of reuse — which is how both bets can be true at once.</figcaption>
+  <figcaption>Two tiers, with a governed gate between them. Freedom at the point of creation; review at the point of reuse, which is how both bets can be true at once.</figcaption>
 </figure>
 
-<p><strong>Guardrails, tools and knowledge bases are supporting components.</strong> Each has its own creation flow, and each exists to be attached to something else. <strong>Agents, pipelines and processes are what you compose from them.</strong> Build isn't a category — it's a workshop with a parts shelf.</p>
-<p>A component doesn't go straight into circulation: build it, run it in the playground, then <strong>send it for approval</strong>. Once approved it lands in your project database and can be attached to anything you build afterwards. That's why <em>Approvals</em> earns a top-level place — it's the gate every reusable part passes through.</p>
+<p><strong>Guardrails, tools and knowledge bases are supporting components.</strong> Each has its own creation flow, and each exists to be attached to something else. <strong>Agents, pipelines and processes are what you compose from them.</strong> Build isn't a category. It's a workshop with a parts shelf.</p>
+<p>A component doesn't go straight into circulation: build it, run it in the playground, then <strong>send it for approval</strong>. Once approved it lands in your project database and can be attached to anything you build afterwards. That's why <em>Approvals</em> earns a top-level place. It's the gate every reusable part passes through.</p>
 <div class="cs-pull"><b>Why this is the sharper version of the story</b>
-<p>The obvious fix for "this task spans two tabs" is to put everything on one screen. That's not what happened. Creation and attachment are <em>still</em> separate — deliberately. The old product split them <strong>by accident</strong>, leaving a task cut in half; the new one separates them <strong>by layer</strong>, with a governed library in between. One is fragmentation. The other is architecture.</p></div></div>
+<p>The obvious fix for "this task spans two tabs" is to put everything on one screen. That's not what happened. Creation and attachment are <em>still</em> separate, deliberately. The old product split them <strong>by accident</strong>, leaving a task cut in half; the new one separates them <strong>by layer</strong>, with a governed library in between. One is fragmentation. The other is architecture.</p></div></div>
       <div class="cs-aside reveal" style="--d:100ms"></div>
     </div>
   </div>
@@ -477,16 +513,12 @@
 <section class="cs-sec cs-sec--band" id="s11">
   <div class="container">
     <span class="cs-sec__n">11</span>
-    <h2 class="cs-sec__title reveal">Decision — the model belongs to the agent</h2>
+    <h2 class="cs-sec__title reveal">Decision: the model belongs to the agent</h2>
     <div class="cs-body cs-body--rev">
-      <div class="reveal"><p class="lede">A pipeline inherits its agents' models. It cannot override them.</p><p>Model configuration is available in agent creation, and nowhere else. The alternative would be to let a pipeline override its agents' model settings — convenient in the moment, and it would have made pipelines feel more powerful.</p>
+      <div class="reveal"><p class="lede">A pipeline inherits its agents' models. It cannot override them.</p><p>Model configuration is available in agent creation, and nowhere else. The alternative would be to let a pipeline override its agents' model settings, convenient in the moment, and it would have made pipelines feel more powerful.</p>
 <div class="cs-pull"><b>Why it's the right constraint</b>
-<p>Model choice is part of what an agent <em>is</em>. Allowing a pipeline to override it would mean the same agent behaves differently depending on where it's used — and the entire composition model rests on an agent being a known quantity you can drop anywhere.</p>
+<p>Model choice is part of what an agent <em>is</em>. Allowing a pipeline to override it would mean the same agent behaves differently depending on where it's used, and the entire composition model rests on an agent being a known quantity you can drop anywhere.</p>
 <p>Every tier owns its own properties and higher tiers inherit rather than override. That's what keeps a reusable part reusable.</p></div></div>
-      <div class="cs-aside reveal" style="--d:100ms"><figure class="cs-shot">
-  <img width="1600" height="1089" style="--ar:1600/1089" src="img/console-agent-creation.png" alt="Model configuration, scoped to the agent." loading="lazy" decoding="async">
-  <figcaption>Model settings live on the agent, and nowhere else.</figcaption>
-</figure></div>
     </div>
   </div>
 </section>
@@ -503,10 +535,10 @@
   <div><b>13 → 5</b><span>navigation items<br>collapsed into intentions</span></div>
 </div><p>Console is deployed across multiple enterprise clients; at the client I worked closest to, it reached <strong>1,000+ users</strong>.</p>
 <div class="cs-pull"><b>Where that number comes from</b>
-<p>Our senior director reported it, measured across the year following deployment. <strong>I don't have visibility into how it was calculated</strong> — which is worth saying rather than presenting it as my own measurement.</p></div>
+<p>Our senior director reported it, measured across the year following deployment. <strong>I don't have visibility into how it was calculated</strong>, which is worth saying rather than presenting it as my own measurement.</p></div>
 <p>What users named specifically:</p>
 <ul>
-<li>Ease of agent and pipeline creation — one screen for each, rather than a configuration journey</li>
+<li>Ease of agent and pipeline creation: one screen for each, rather than a configuration journey</li>
 <li>The build-and-test model: make it, run it in the playground, adjust</li>
 <li>Drag-and-drop composition from the library onto the canvas, which they described as what made building quick</li>
 </ul></div>
@@ -523,9 +555,9 @@
     <span class="cs-sec__n">13</span>
     <h2 class="cs-sec__title reveal">What didn't work</h2>
     <div class="cs-body cs-body--full">
-      <div class="reveal"><p class="lede">Agent output quality fell short — and part of that was a design problem.</p><p>Users had to supply considerably more context than expected before an agent returned something usable, and revise repeatedly to get there. The root cause sat in the model layer rather than the interface.</p>
+      <div class="reveal"><p class="lede">Agent output quality fell short, and part of that was a design problem.</p><p>Users had to supply considerably more context than expected before an agent returned something usable, and revise repeatedly to get there. The root cause sat in the model layer rather than the interface.</p>
 <div class="cs-pull"><b>But the design half is mine to own</b>
-<p>If users must supply more context to get good output, then <strong>the surface where they supply context is a design surface.</strong> Context scaffolding, worked examples, inline guidance on what a given agent needs — all of that is interface work that measurably changes output quality.</p>
+<p>If users must supply more context to get good output, then <strong>the surface where they supply context is a design surface.</strong> Context scaffolding, worked examples, inline guidance on what a given agent needs. All of that is interface work that measurably changes output quality.</p>
 <p>Attributing the whole thing to the model would be accurate but incomplete.</p></div></div>
       <div class="cs-aside reveal" style="--d:100ms"></div>
     </div>
@@ -534,19 +566,15 @@
 <section class="cs-sec" id="s14">
   <div class="container">
     <span class="cs-sec__n">14</span>
-    <h2 class="cs-sec__title reveal">V2 — describe it instead of configuring it</h2>
+    <h2 class="cs-sec__title reveal">V2: describe it instead of configuring it</h2>
     <div class="cs-body">
       <div class="reveal">
         <p class="lede">Version two added natural-language creation across every one of the six build types.</p>
-        <p>Rather than filling a configuration form, a user describes what they want — an agent, a pipeline, an APB process, a guardrail, a tool, a knowledge base — and it gets built. The form-based path stayed; the prompt became the faster route in.</p>
+        <p>Rather than filling a configuration form, a user describes what they want (an agent, a pipeline, an APB process, a guardrail, a tool, a knowledge base) and it gets built. The form-based path stayed; the prompt became the faster route in.</p>
         <div class="cs-pull"><b>Why this is the right answer to the previous section</b>
-        <p>The complaint in V1 was that agents needed far more context than users expected to give. A configuration form is a poor instrument for supplying context — it asks for values, not intent.</p>
+        <p>The complaint in V1 was that agents needed far more context than users expected to give. A configuration form is a poor instrument for supplying context. It asks for values, not intent.</p>
         <p><strong>A prompt is a context-shaped surface.</strong> Letting someone say what they are trying to achieve, in their own words, gathers the thing the model was starving for. The fix for a model problem turned out to be an interface.</p></div>
       </div>
-      <div class="cs-aside reveal" style="--d:100ms"><figure class="cs-shot cs-shot--bare">
-  <img width="1600" height="811" style="--ar:1600/811" src="img/console-components.png" alt="Natural-language creation across the six build types." loading="lazy" decoding="async">
-  <figcaption>V2: describe it instead of configuring it.</figcaption>
-</figure></div>
     </div>
   </div>
 </section>
@@ -557,33 +585,33 @@
     <h2 class="cs-sec__title reveal">What I'd do differently</h2>
     <div class="cs-body cs-body--full">
       <div class="reveal"><p class="lede">I'd make it as simple as ChatGPT.</p>
-<p>One prompt box. You describe what you want — an agent, a pipeline, a process, a guardrail, a tool, a knowledge base — and it gets built. The process assembles itself above the prompt box as it happens, so you watch the thing take shape rather than waiting for it. You pick your project, or drop into a particular studio, from the same place.</p>
+<p>One prompt box. You describe what you want (an agent, a pipeline, a process, a guardrail, a tool, a knowledge base) and it gets built. The process assembles itself above the prompt box as it happens, so you watch the thing take shape rather than waiting for it. You pick your project, or drop into a particular studio, from the same place.</p>
 <div class="cs-pull"><b>Which puts a question mark over my own best work</b>
 <p>If one prompt box can create any of the six build types, the verb-grouped navigation I'm proudest of matters less. You don't need a workshop with a parts shelf if you can simply ask for the part.</p>
 <p>Both things are true: that structure was right for the product as it existed, and a prompt-first product is a different product that wouldn't need as much of it. V2's natural-language layer was the first step in that direction, and it isn't finished.</p></div>
 
 <h3>The seam in the navigation</h3>
-<p>Studios still open in a new tab. I understand why — Console would be too heavy an application if the studios lived inside it, and the dev team was right to separate the environments. But the user doesn't experience an architecture decision; they experience a navigation item that ejects them from the product. If I had that one again I'd argue for signalling the jump explicitly rather than letting it look like every other destination in the panel.</p>
+<p>Studios still open in a new tab. I understand why. Console would be too heavy an application if the studios lived inside it, and the dev team was right to separate the environments. But the user doesn't experience an architecture decision; they experience a navigation item that ejects them from the product. If I had that one again I'd argue for signalling the jump explicitly rather than letting it look like every other destination in the panel.</p>
 
 <h3>And the part that's genuinely unfinished</h3>
 <p><strong>Accessibility is the weakest area, and I ranked it last.</strong> The reusable components in the design system still don't meet the standard.</p>
-<p>There's a structural reason it's hard, though it isn't an excuse. An agentic platform needs components the design system has no patterns for — streaming output, confidence and provenance, human-review states — and building them has meant breaking some of our own rules rather than extending the system to cover them properly. Fixing that means solving it at the system level, not the screen level, and that work hasn't happened yet.</p>
+<p>There's a structural reason it's hard, though it isn't an excuse. An agentic platform needs components the design system has no patterns for: streaming output, confidence and provenance, human-review states. Building them has meant breaking some of our own rules rather than extending the system to cover them properly. Fixing that means solving it at the system level, not the screen level, and that work hasn't happened yet.</p>
       </div>
       <div class="cs-aside reveal" style="--d:100ms"></div>
     </div>
   </div>
 </section>
 
-<section class="cs-next">
+<section class="cs-end">
   <div class="container">
-    <a href="#">
-      <span>
-        <span class="cs-next__l">Next case study</span><br>
-        <span class="cs-next__t">APB &mdash; Agentic Process Builder</span>
-      </span>
-      <span class="cs-next__t">&rarr;</span>
-    </a>
-    <p class="card__rel" style="margin-top:14px">Inside Enterprise Console &middot; designed end to end, solo</p>
+    <p class="cs-end__l">End of the case study</p>
+    <h2 class="cs-end__t reveal">Questions about any of these decisions?</h2>
+    <p class="cs-end__d reveal" style="--d:80ms">The parts I&rsquo;d most like to be pushed on are the day-zero bet and the output model. Both were judgement calls, and I can show the working.</p>
+    <div class="btn-row reveal" style="--d:160ms">
+      <a class="btn btn--key" href="mailto:akashrajs456@gmail.com">akashrajs456@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+      <a class="btn" href="index.html#work">&larr; All work</a>
+    </div>
   </div>
 </section>
 
