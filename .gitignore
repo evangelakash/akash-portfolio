@@ -1,3 +1,9 @@
 .DS_Store
 direction.html
 motion-sandbox.html
+
+# the retired flat-layer house (first plan); the 3D tour replaced it
+house.html
+house.css
+house.js
+img/house/

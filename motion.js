@@ -1,6 +1,19 @@
 /* Shared motion. Transform/opacity only, one rAF loop, reduced-motion aware. */
 (function(){
   'use strict';
+
+  /* ---- inside the house's case-study popup ----
+     The popup supplies the chrome, so the page drops its own nav; links back to
+     the homepage and Esc close the popup instead of navigating the frame. */
+  if (window.parent !== window && /(?:^|[?&])embed(?:[=&]|$)/.test(location.search)) {
+    document.documentElement.classList.add('embed');
+    var toParent = function(){ window.parent.postMessage({ type: 'close-case' }, location.origin); };
+    document.addEventListener('click', function(e){
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (a && /^(index|house)\.html(#.*)?$/.test(a.getAttribute('href'))) { e.preventDefault(); toParent(); }
+    });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') toParent(); });
+  }
   var rmq = matchMedia('(prefers-reduced-motion: reduce)');
   var reduced = rmq.matches;
   /* Toggling Reduce Motion mid-session used to do nothing until a reload. */
@@ -70,13 +83,58 @@
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function(es){
-        es[0].isIntersecting ? start() : stop();
+        es[es.length - 1].isIntersecting ? start() : stop();
       }, { threshold: 0 }).observe(stack);
     } else { start(); }
 
     document.addEventListener('visibilitychange', function(){
       document.hidden ? stop() : (stack.getBoundingClientRect().bottom > 0 && start());
     });
+  }
+
+  /* ---- hero scene: its loops pause whenever the hero is off screen ----
+     Observers batch entries, so a fast scroll away and back delivers both.
+     The last entry is the current state; the first one is stale. */
+  if (stack && !reduced && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){
+      stack.classList.toggle('is-idle', !es[es.length - 1].isIntersecting);
+    }, { threshold: 0 }).observe(stack);
+  }
+
+  /* ---- hero scene: the hover story ----
+     Hover plays it and staying keeps it looping; leaving winds it down. Touch
+     has no hover, so it plays once when the scene scrolls into view and again
+     on tap. Reduced motion skips straight to the finished workflow. */
+  if (stack && stack.hasAttribute('data-phase')) {
+    var STEPS = [['typing',0],['thinking',900],['confused',2300],['ideas',4300],
+                 ['idea',5700],['build',6700],['run',8300],['success',10300]];
+    var storyTimers = [];
+    function setPhase(p){ stack.setAttribute('data-phase', p); }
+    function clearStory(){ storyTimers.forEach(clearTimeout); storyTimers = []; }
+    function playStory(loop){
+      clearStory();
+      if (reduced) { setPhase('success'); return; }
+      STEPS.forEach(function(s){ storyTimers.push(setTimeout(function(){ setPhase(s[0]); }, s[1])); });
+      storyTimers.push(setTimeout(function(){
+        if (!loop) { setPhase('idle'); return; }
+        setPhase('typing');
+        storyTimers.push(setTimeout(function(){ playStory(true); }, 700));
+      }, 13600));
+    }
+    function stopStory(){ clearStory(); setPhase('idle'); }
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      stack.addEventListener('pointerenter', function(){ playStory(true); });
+      stack.addEventListener('pointerleave', stopStory);
+    } else {
+      var storySeen = false;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function(es){
+          var e = es[es.length - 1];
+          if (e.isIntersecting && !storySeen) { storySeen = true; playStory(false); }
+        }, { threshold: 0.6 }).observe(stack);
+      }
+      stack.addEventListener('click', function(){ playStory(false); });
+    }
   }
 
   /* ---- scroll cue: draws once, retires once you've scrolled ---- */
@@ -90,57 +148,6 @@
       if (done || scrollY < innerHeight * 0.14) return;
       cue.classList.add('is-done'); done = true;
     }, { passive: true });
-  }
-
-  /* ---- pipeline: status cycles, a collaborator drifts through ----
-     Both used to run on uncleared intervals for the life of the page, inside a
-     hero that is decorative and usually off screen. They now stop when it is. */
-  var graph = document.querySelector('.p-graph');
-  var statusText = document.getElementById('statusText');
-  var mp = document.getElementById('mp'), ring = document.getElementById('selRing');
-
-  if (graph && !reduced && (statusText || (mp && ring))) {
-    var states = ['Queued', 'Running', 'Needs review'], si = 0;
-    var statusTimer = 0, driftTimer = 0, swapTimer = 0, ticking = false;
-
-    function cycleStatus(){
-      si = (si + 1) % states.length;
-      statusText.style.transition = 'opacity .2s'; statusText.style.opacity = 0;
-      swapTimer = setTimeout(function(){
-        statusText.textContent = states[si]; statusText.style.opacity = 1;
-      }, 200);
-    }
-    function drift(){
-      mp.animate([
-        {transform:'translate(8px,510px)',   opacity:0},
-        {transform:'translate(72px,452px)',  opacity:1, offset:.14},
-        {transform:'translate(150px,392px)', opacity:1, offset:.44},
-        {transform:'translate(155px,396px)', opacity:1, offset:.62},
-        {transform:'translate(280px,356px)', opacity:1, offset:.88},
-        {transform:'translate(342px,326px)', opacity:0}
-      ], { duration: 5200, easing: 'ease-in-out' });
-      ring.animate([{opacity:0},{opacity:0,offset:.44},{opacity:1,offset:.5},
-                    {opacity:1,offset:.62},{opacity:0,offset:.7},{opacity:0}], { duration: 5200 });
-    }
-    function runGraph(){
-      graph.classList.remove('is-idle');
-      if (ticking) return; ticking = true;
-      if (statusText) statusTimer = setInterval(cycleStatus, 2800);
-      if (mp && ring) { driftTimer = setInterval(drift, 11000); drift(); }
-    }
-    function haltGraph(){
-      if (!ticking) return; ticking = false;
-      clearInterval(statusTimer); clearInterval(driftTimer); clearTimeout(swapTimer);
-      graph.classList.add('is-idle');   /* pauses the CSS connector loop */
-    }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function(es){
-        es[0].isIntersecting ? runGraph() : haltGraph();
-      }, { threshold: 0 }).observe(graph);
-    } else { runGraph(); }
-    document.addEventListener('visibilitychange', function(){
-      document.hidden ? haltGraph() : (graph.getBoundingClientRect().bottom > 0 && runGraph());
-    });
   }
 
   /* ---- sketch diagrams: draw themselves in when their section arrives ---- */

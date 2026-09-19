@@ -157,7 +157,6 @@
   /* the human layer */
   --paper:#EFE8D8;
   --tape:#D6C8A2;
-  --note:#F0E08C;
   --ink:#2A2A2E;
 
   --sans:"Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -176,7 +175,7 @@
   --r-xs:3px;      /* tags, tiny chips */
   --r-sm:6px;      /* buttons, small panels */
   --r-md:10px;     /* cards, media, images */
-  --r-lg:12px;     /* the hero plate */
+  --r-lg:12px;     /* the largest panels */
   --r-full:999px;  /* pills */
   --r:var(--r-md); /* legacy alias */
 
@@ -314,33 +313,6 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .ph--sm{ aspect-ratio:3/2; }
 .ph--sq{ width:26px; height:26px; border-radius:var(--r-sm); flex:none; }
 
-/* ---- hero plane 1: the pipeline behind the photo ---- */
-.p-graph > svg{ width:100%; height:100%; display:block; overflow:visible; }
-.node rect{ fill:var(--m-600); stroke:var(--m-400); stroke-width:1.5; }
-.node .nbar{ fill:var(--m-400); stroke:none; }
-.conn{
-  fill:none; stroke:var(--m-400); stroke-width:1.5;
-  stroke-dasharray:var(--len) var(--len);
-}
-.is-ready .conn{ animation:draw 6s cubic-bezier(.6,0,.3,1) infinite; }
-.is-ready .conn--b{ animation-delay:2s; }
-.is-ready .conn--c{ animation-delay:4s; }
-@keyframes draw{
-  0%{ stroke-dashoffset:var(--len); } 35%,100%{ stroke-dashoffset:0; }
-}
-.chip-box{ fill:var(--m-700); stroke:var(--m-400); stroke-width:1; }
-.chip-status{ font-family:var(--mono); font-size:9px; letter-spacing:.03em; fill:var(--t-mid); }
-.sel{ fill:none; stroke:var(--ink); stroke-width:1.5; opacity:0; }
-
-/* the collaborator cursor drifting through */
-.mp{ position:absolute; top:0; left:0; opacity:0; pointer-events:none; }
-.mp svg{ display:block; width:15px; height:auto; }
-.mp svg path{ fill:var(--ink); }
-.mp b{
-  display:block; margin:2px 0 0 var(--s-3); padding:2px var(--s-2);
-  background:var(--ink); color:#F7F7F6; border-radius:var(--r-xs);
-  font-family:var(--mono); font-size:var(--fs-1); font-weight:400; letter-spacing:.04em;
-}
 
 /* ---- the human layer: paper on metal ---- */
 /* ---- washi tape ----------------------------------------------------
@@ -360,23 +332,6 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .tape--scatter{ width:132px; }
 /* The card's strip is torn and applied at its own angle. Two identical pieces
    of tape would read as a component; real tape never lands twice the same. */
-/* ---- sticky note ---------------------------------------------------
-   The adhesive holds the top, so the paper lifts at the bottom-right.
-   The curl is a second path in a darker tone, and the drop-shadow follows
-   the silhouette rather than boxing it.                                 */
-.note{
-  position:absolute; z-index:3; width:108px; height:108px;
-  transform:rotate(4deg); display:grid; place-items:center;
-  filter:drop-shadow(0 9px 18px rgba(20,20,25,.17));
-}
-.note svg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-.note__body{ fill:var(--note); }
-.note__curl{ fill:#D9C766; }
-.note b{
-  position:relative; font-family:var(--mono); font-weight:400;
-  font-size:var(--fs-1); letter-spacing:.05em; line-height:1.5;
-  color:var(--ink); text-align:center; margin:-6px 8px 0 0;
-}
 .anno{
   display:inline-block; font-family:var(--mono); font-size:var(--fs-1);
   letter-spacing:.03em; color:var(--ink); opacity:.68;
@@ -441,39 +396,8 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 
 /* the layered plate */
 .stack{ position:relative; width:100%; max-width:min(420px, 42vh); aspect-ratio:3/4; margin-inline:auto; }
-.plate{
-  position:absolute; inset:0; border-radius:var(--r-lg);
-  background:linear-gradient(155deg,#FFFFFF,var(--m-850));
-  border:1px solid var(--m-500);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 24px 56px rgba(20,20,25,.10);
-}
 .plane{ position:absolute; inset:0; will-change:transform; }
-.stack .shot{
-  position:absolute; right:6%; top:7%; width:54%; aspect-ratio:3/4;
-  border-radius:var(--r-sm); background:var(--m-600); border:1px solid var(--m-400);
-  overflow:hidden;
-  box-shadow:0 6px 14px rgba(20,20,25,.12);
-}
-/* The photo sizes itself from its own ratio, not the parent's height, so a
-   stale or missing parent rule can never stretch it. cover only ever scales
-   and crops; the crop is already 3:4, so in practice it is pure scaling. */
-.stack .shot img{
-  width:100%; height:auto; aspect-ratio:3/4;
-  object-fit:cover; object-position:50% 22%; display:block;
-}
-/* Tape holds the photo's top-left corner. The photo starts at 40% (100 - 6
-   right - 54 wide), so the tape centres on that corner at any stack size. */
-/* Tape holds by spanning a corner: its centre sits exactly on the photo's
-   top-left corner at 45deg, so half lies on the board and half on the photo
-   and both edges are crossed. translate(-50%,-50%) keeps that true whatever
-   the strip's width. (The previous rule used -var(...), which is invalid CSS
-   and was dropped, leaving the strip floating on the top edge alone.) */
-.stack .tape{
-  top:7%; left:40%; margin:0;
-  transform:translate(-50%,-50%) rotate(-45deg);
-}
-.stack .note{ right:6%; bottom:7%; }
-.stack .scribble{ position:absolute; left:-7%; top:16%; width:130px; }
+.stack .scribble{ position:absolute; left:10%; top:22%; width:130px; }
 .scribble b{ display:block; margin-top:var(--s-1); font-family:var(--mono); font-size:var(--fs-1); font-weight:400; color:var(--ink); opacity:.72; }
 
 .hero__foot{
@@ -493,7 +417,7 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 
 /* ---- impact strip ---- */
 .strip{ background:var(--m-850); }
-.strip__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); list-style:none; margin:0; padding:0; }
+.strip__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); list-style:none; margin:0; padding:0; }
 .strip__grid li{ display:flex; flex-direction:column; gap:var(--s-2); padding-top:var(--s-6); border-top:2px solid var(--t-hi); }
 .strip__grid b{ font-family:var(--sans); font-size:clamp(var(--fs-7),2.6vw,var(--fs-10)); font-weight:500; letter-spacing:-.02em; }
 .strip__grid span{ font-family:var(--mono); font-size:var(--fs-2); color:var(--t-low); }
@@ -556,7 +480,6 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 /* ---- about ---- */
 .about__grid{ display:grid; grid-template-columns:.85fr 1.4fr; gap:clamp(var(--s-8),5vw,var(--s-15)); align-items:start; }
 .about__media{ position:relative; }
-.about__media .note{ right:-18px; bottom:-22px; }
 .about__lead{ font-size:clamp(var(--fs-6),2vw,var(--fs-8)); line-height:1.45; margin:0 0 var(--s-7); max-width:44ch; }
 .about__body p{ color:var(--t-mid); }
 
@@ -652,7 +575,7 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
   .hero{ min-height:0; display:block; padding-block:clamp(var(--s-10),8vw,var(--s-13)) clamp(var(--s-14),12vw,var(--s-17)); }
   .hero__grid{ grid-template-columns:1fr; }
   .stack{ max-width:330px; }
-  .strip__grid{ grid-template-columns:1fr 1fr; }
+  .strip__grid{ grid-template-columns:repeat(3,1fr); }
   .card--feature, .card--wide{ grid-template-columns:1fr; }
   .card--feature .card__media{ border-right:0; border-bottom:1px solid var(--m-500); aspect-ratio:16/9; border-radius:var(--r-md) var(--r-md) 0 0; }
   .card--wide .card__media--index{ border-left:0; border-top:1px solid var(--m-500); }
@@ -669,7 +592,6 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-  .is-ready .conn{ animation:none; stroke-dashoffset:0; }
   *,*::before,*::after{ animation:none !important; transition-duration:.01ms !important; }
   .reveal{ opacity:1; transform:none; }
   .cue path{ stroke-dashoffset:0; }
@@ -1278,6 +1200,155 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 }
 .cs-scroll:focus-visible{ outline:2px solid var(--t-hi); outline-offset:3px; }
 
-/* The connector draw is a 6s infinite loop inside a decorative hero. It keeps
-   running when nobody can see it unless it is paused explicitly. */
-.p-graph.is-idle .conn{ animation-play-state:paused; }
+/* ===================================================================
+   Hero scene: me in a beanbag, typing. Hover and a story plays in his
+   head: thinking, confusion, a pile of half-ideas, the idea, a workflow
+   that assembles and runs, then success. Leaving winds it down.
+   Tapered ink over offset flat colour. Every class is prefixed hs- so
+   the drawing can never pick up a site component such as .tape.
+   =================================================================== */
+.scene{ position:absolute; inset:0; width:100%; height:100%; display:block; overflow:visible; }
+.hs-bb{fill:#DCCFAC}.hs-bb-tex{fill:url(#hs-weave);opacity:.3}.hs-bb-sh{fill:#CDBD95}.hs-bb-hi{fill:#E6DCC0}
+.hs-hood{fill:#5B5B63}.hood-sh{fill:#4A4A51}.hs-hood-hi{fill:#6C6C74}.hs-string{fill:#D9D6CE}
+.hs-skin{fill:#D9A882}.hs-skin-sh{fill:#C4906B}.skin-lt{fill:#E8C19F;opacity:.35}.hs-stubble{fill:#2A2A2E;opacity:.24}.hs-beard-sh{fill:#7A5A48;opacity:.3}
+.hs-hair{fill:#26262A}.hs-hair-hi{fill:#4E4E55}.hs-ink{fill:#2A2A2E}.hs-ink-soft{fill:#8A8A90}
+.hs-pants{fill:#8C857A}.hs-pants-sh{fill:#766F65}.hs-shoe{fill:#F7F3EA}.hs-shoe-sh{fill:#E4DDCD}.hs-sole{fill:#D6C8A2}
+.hs-lap-lid{fill:#D2D2CD}.hs-lap-base{fill:#E3E3DE}.hs-logo{fill:#F4F0E6}.hs-screen{fill:#F3E7B5}
+.hs-rug{fill:#EFE8D8}.hs-shadow{fill:#2A2A2E;opacity:.09}.hs-mug{fill:#F7F3EA}
+.hs-note{fill:#F0E08C}.hs-paper{fill:#FBF8F0}
+.hs-eyes-open,.hs-eyes-happy,.hs-mouth-o,.hs-mouth-smile{opacity:0}
+/* ---- character rig ---- */
+.hs-lean{transform-box:view-box;transform-origin:230px 396px;transition:transform .7s cubic-bezier(.34,1.3,.64,1)}
+.hs-breathe{transform-box:view-box;transform-origin:230px 396px;animation:hs-breathe 4.8s ease-in-out infinite}
+.hs-head-tilt{transform-box:view-box;transform-origin:238px 292px;transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
+.hs-head{transform-box:view-box;transform-origin:238px 292px}
+.hs-brow{transform-box:fill-box;transform-origin:50% 50%;transition:transform .3s ease}
+.hs-eyes-open,.hs-eyes-happy,.hs-mouth-o,.hs-mouth-smile{opacity:0}
+.hs-eyes-down,.hs-eyes-open,.hs-eyes-happy,.hs-mouth-flat,.hs-mouth-o,.hs-mouth-smile{transition:opacity .12s linear}
+.hs-hand-near,.hs-hand-far{transform-box:fill-box;transform-origin:100% 100%}
+.hs-screen-glow{transition:opacity .3s ease}
+.hs-steam path{transform-box:fill-box;transform-origin:50% 100%;animation:hs-steam 3.6s ease-out infinite both}
+.hs-steam path+path{animation-delay:1.8s}
+@keyframes hs-breathe{0%,100%{transform:none}50%{transform:translateY(-.9px) rotate(.35deg)}}
+@keyframes hs-steam{0%{opacity:0;transform:translateY(4px)}35%{opacity:.85}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes hs-tap{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2.2px) rotate(-5deg)}}
+@keyframes hs-wobble{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.stack[data-phase="typing"] .hs-hand-near,.stack[data-phase="run"] .hs-hand-near{animation:hs-tap .26s linear infinite}
+.stack[data-phase="typing"] .hs-hand-far,.stack[data-phase="run"] .hs-hand-far{animation:hs-tap .26s linear -.13s infinite}
+.stack[data-phase="build"] .hs-hand-near{animation:hs-tap .5s linear infinite}
+.stack[data-phase="build"] .hs-hand-far{animation:hs-tap .5s linear -.25s infinite}
+.stack[data-phase="typing"] .hs-lean,.stack[data-phase="build"] .hs-lean,.stack[data-phase="run"] .hs-lean{transform:rotate(-2deg)}
+.stack[data-phase="thinking"] .hs-head-tilt,.stack[data-phase="ideas"] .hs-head-tilt{transform:rotate(7deg)}
+.stack[data-phase="confused"] .hs-head-tilt{transform:rotate(4deg)}
+.stack[data-phase="confused"] .hs-head{animation:hs-wobble .9s ease-in-out infinite}
+.stack[data-phase="idea"] .hs-head-tilt{transform:rotate(9deg)}
+.stack[data-phase="success"] .hs-lean{transform:rotate(3.5deg)}
+.stack[data-phase="success"] .hs-head-tilt{transform:rotate(5deg)}
+.stack[data-phase="run"] .hs-screen-glow{animation:hs-glow .5s ease-in-out infinite}
+@keyframes hs-glow{0%,100%{opacity:1}50%{opacity:.35}}
+
+.stack[data-phase="thinking"] .hs-eyes-down,.stack[data-phase="confused"] .hs-eyes-down,.stack[data-phase="ideas"] .hs-eyes-down,.stack[data-phase="idea"] .hs-eyes-down,.stack[data-phase="success"] .hs-eyes-down{opacity:0}
+.stack[data-phase="thinking"] .hs-eyes-open,.stack[data-phase="confused"] .hs-eyes-open,.stack[data-phase="ideas"] .hs-eyes-open,.stack[data-phase="idea"] .hs-eyes-open{opacity:1}
+.stack[data-phase="success"] .hs-eyes-happy{opacity:1}
+.stack[data-phase="confused"] .hs-mouth-flat,.stack[data-phase="idea"] .hs-mouth-flat,.stack[data-phase="success"] .hs-mouth-flat{opacity:0}
+.stack[data-phase="confused"] .hs-mouth-o{opacity:1}
+.stack[data-phase="idea"] .hs-mouth-smile,.stack[data-phase="success"] .hs-mouth-smile{opacity:1}
+.stack[data-phase="thinking"] .hs-brow,.stack[data-phase="idea"] .hs-brow{transform:translateY(-2px)}
+.stack[data-phase="confused"] .hs-brow{transform:translateY(-2.5px) rotate(-8deg)}
+/* ---- the mind ---- */
+.hs-m{opacity:0;transform:scale(.4);transform-box:fill-box;transform-origin:center;transition:opacity .16s ease,transform .16s ease}
+.hs-mo{opacity:0;transition:opacity .16s ease}
+.hs-pulse{transform:translate(71px,89px)}
+.hs-cloud{transform-origin:88% 96%}.hs-bulb{transform-origin:50% 100%}.hs-arrow{transform-origin:0% 50%}
+.hs-d,.hs-spin,.hs-wig,.hs-jit,.hs-rays,.hs-burst,.hs-tw,.hs-star{transform-box:fill-box;transform-origin:center}
+
+.stack[data-phase="thinking"] .hs-t1,.stack[data-phase="confused"] .hs-t1,.stack[data-phase="ideas"] .hs-t1,.stack[data-phase="idea"] .hs-t1,.stack[data-phase="build"] .hs-t1,.stack[data-phase="run"] .hs-t1,.stack[data-phase="success"] .hs-t1{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
+.stack[data-phase="thinking"] .hs-t2,.stack[data-phase="confused"] .hs-t2,.stack[data-phase="ideas"] .hs-t2,.stack[data-phase="idea"] .hs-t2,.stack[data-phase="build"] .hs-t2,.stack[data-phase="run"] .hs-t2,.stack[data-phase="success"] .hs-t2{opacity:1;transform:none;transition:opacity .22s ease 120ms,transform .5s cubic-bezier(.34,1.56,.64,1) 120ms}
+.stack[data-phase="thinking"] .hs-t3,.stack[data-phase="confused"] .hs-t3,.stack[data-phase="ideas"] .hs-t3,.stack[data-phase="idea"] .hs-t3,.stack[data-phase="build"] .hs-t3,.stack[data-phase="run"] .hs-t3,.stack[data-phase="success"] .hs-t3{opacity:1;transform:none;transition:opacity .22s ease 240ms,transform .5s cubic-bezier(.34,1.56,.64,1) 240ms}
+.stack[data-phase="thinking"] .hs-cloud,.stack[data-phase="confused"] .hs-cloud,.stack[data-phase="ideas"] .hs-cloud,.stack[data-phase="idea"] .hs-cloud,.stack[data-phase="build"] .hs-cloud,.stack[data-phase="run"] .hs-cloud,.stack[data-phase="success"] .hs-cloud{opacity:1;transform:none;transition:opacity .22s ease 330ms,transform .5s cubic-bezier(.34,1.56,.64,1) 330ms}
+.stack[data-phase="thinking"] .hs-dots{opacity:1;transform:none;transition:opacity .22s ease 700ms,transform .5s cubic-bezier(.34,1.56,.64,1) 700ms}
+.stack[data-phase="confused"] .hs-spiral{opacity:1;transform:none;transition:opacity .22s ease 120ms,transform .5s cubic-bezier(.34,1.56,.64,1) 120ms}
+.stack[data-phase="confused"] .hs-qm1{opacity:1;transform:none;transition:opacity .22s ease 200ms,transform .5s cubic-bezier(.34,1.56,.64,1) 200ms}
+.stack[data-phase="confused"] .hs-qm2{opacity:1;transform:none;transition:opacity .22s ease 520ms,transform .5s cubic-bezier(.34,1.56,.64,1) 520ms}
+.stack[data-phase="ideas"] .hs-dd1{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
+.stack[data-phase="ideas"] .hs-dd2{opacity:1;transform:none;transition:opacity .22s ease 220ms,transform .5s cubic-bezier(.34,1.56,.64,1) 220ms}
+.stack[data-phase="ideas"] .hs-dd3{opacity:1;transform:none;transition:opacity .22s ease 440ms,transform .5s cubic-bezier(.34,1.56,.64,1) 440ms}
+.stack[data-phase="ideas"] .hs-dd4{opacity:1;transform:none;transition:opacity .22s ease 660ms,transform .5s cubic-bezier(.34,1.56,.64,1) 660ms}
+.stack[data-phase="idea"] .hs-bulb{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
+.stack[data-phase="build"] .hs-a1,.stack[data-phase="run"] .hs-a1,.stack[data-phase="success"] .hs-a1{opacity:1;transform:none;transition:opacity .22s ease 250ms,transform .5s cubic-bezier(.34,1.56,.64,1) 250ms}
+.stack[data-phase="build"] .hs-a2,.stack[data-phase="run"] .hs-a2,.stack[data-phase="success"] .hs-a2{opacity:1;transform:none;transition:opacity .22s ease 650ms,transform .5s cubic-bezier(.34,1.56,.64,1) 650ms}
+.stack[data-phase="build"] .hs-a3,.stack[data-phase="run"] .hs-a3,.stack[data-phase="success"] .hs-a3{opacity:1;transform:none;transition:opacity .22s ease 1050ms,transform .5s cubic-bezier(.34,1.56,.64,1) 1050ms}
+.stack[data-phase="build"] .hs-n1,.stack[data-phase="run"] .hs-n1,.stack[data-phase="success"] .hs-n1{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
+.stack[data-phase="build"] .hs-n2,.stack[data-phase="run"] .hs-n2,.stack[data-phase="success"] .hs-n2{opacity:1;transform:none;transition:opacity .22s ease 400ms,transform .5s cubic-bezier(.34,1.56,.64,1) 400ms}
+.stack[data-phase="build"] .hs-n3,.stack[data-phase="run"] .hs-n3,.stack[data-phase="success"] .hs-n3{opacity:1;transform:none;transition:opacity .22s ease 800ms,transform .5s cubic-bezier(.34,1.56,.64,1) 800ms}
+.stack[data-phase="build"] .hs-n4,.stack[data-phase="run"] .hs-n4,.stack[data-phase="success"] .hs-n4{opacity:1;transform:none;transition:opacity .22s ease 1200ms,transform .5s cubic-bezier(.34,1.56,.64,1) 1200ms}
+.stack[data-phase="success"] .hs-done{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
+.stack[data-phase="success"] .hs-spk1{opacity:1;transform:none;transition:opacity .22s ease 150ms,transform .5s cubic-bezier(.34,1.56,.64,1) 150ms}
+.stack[data-phase="success"] .hs-spk2{opacity:1;transform:none;transition:opacity .22s ease 300ms,transform .5s cubic-bezier(.34,1.56,.64,1) 300ms}
+.stack[data-phase="success"] .hs-spk3{opacity:1;transform:none;transition:opacity .22s ease 450ms,transform .5s cubic-bezier(.34,1.56,.64,1) 450ms}
+.stack[data-phase="success"] .hs-spk4{opacity:1;transform:none;transition:opacity .22s ease 600ms,transform .5s cubic-bezier(.34,1.56,.64,1) 600ms}
+.stack[data-phase="idea"] .hs-cloud{opacity:.3}
+.stack[data-phase="confused"] .hs-orbit{opacity:.7;transition:opacity .3s ease 100ms}
+.stack[data-phase="confused"] .hs-star{opacity:1;transition:opacity .25s ease 150ms}
+.stack[data-phase="run"] .hs-pulse{opacity:1;transition:opacity .15s ease}
+.stack[data-phase="run"] .hs-lit1{opacity:1;transition:opacity .2s ease 0ms}
+.stack[data-phase="run"] .hs-lit2{opacity:1;transition:opacity .2s ease 660ms}
+.stack[data-phase="run"] .hs-lit3{opacity:1;transition:opacity .2s ease 1320ms}
+.stack[data-phase="run"] .hs-lit4{opacity:1;transition:opacity .2s ease 1990ms}
+.stack[data-phase="success"] .hs-lit{opacity:1;transition:none}
+.stack[data-phase="thinking"] .hs-d{animation:hs-bob .9s ease-in-out infinite}
+.stack[data-phase="thinking"] .hs-d2{animation-delay:.15s}.stack[data-phase="thinking"] .hs-d3{animation-delay:.3s}
+.stack[data-phase="confused"] .hs-spin{animation:hs-spin 1.6s linear infinite}
+.stack[data-phase="confused"] .hs-wig{animation:hs-wig .7s ease-in-out infinite}.stack[data-phase="confused"] .hs-wig2{animation-delay:-.35s}
+.stack[data-phase="confused"] .hs-star{animation:hs-orbit 1.5s linear infinite}
+.stack[data-phase="confused"] .hs-s2{animation-delay:-.5s}.stack[data-phase="confused"] .hs-s3{animation-delay:-1s}
+.stack[data-phase="ideas"] .hs-jit{animation:hs-jit .5s steps(2) infinite}.stack[data-phase="ideas"] .hs-jit2{animation-delay:-.25s}
+.stack[data-phase="idea"] .hs-rays{animation:hs-rays .7s cubic-bezier(.34,1.56,.64,1) both}
+.stack[data-phase="run"] .hs-pulse{animation:hs-travel 2s cubic-bezier(.45,0,.55,1) forwards}
+.stack[data-phase="success"] .hs-burst{animation:hs-burst .8s ease-out both}
+.stack[data-phase="success"] .hs-tw{animation:hs-tw 1.2s ease-in-out infinite}
+@keyframes hs-bob{0%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}
+@keyframes hs-spin{to{transform:rotate(360deg)}}
+@keyframes hs-wig{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes hs-jit{0%{transform:translate(0,0)}50%{transform:translate(1px,-1px)}}
+@keyframes hs-rays{0%{transform:scale(.5) rotate(-25deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes hs-burst{0%{transform:scale(.4);opacity:0}60%{opacity:1}100%{transform:scale(1.12);opacity:.85}}
+@keyframes hs-tw{0%,100%{transform:scale(.8)}50%{transform:scale(1.15)}}
+@keyframes hs-orbit{0%{transform:translate(42px,0) scale(1);opacity:1}12.5%{transform:translate(29.7px,7.8px) scale(1.12)}25%{transform:translate(0,11px) scale(1.2)}37.5%{transform:translate(-29.7px,7.8px) scale(1.12)}50%{transform:translate(-42px,0) scale(1)}62.5%{transform:translate(-29.7px,-7.8px) scale(.85);opacity:.55}75%{transform:translate(0,-11px) scale(.72);opacity:.45}87.5%{transform:translate(29.7px,-7.8px) scale(.85);opacity:.55}100%{transform:translate(42px,0) scale(1);opacity:1}}
+
+@keyframes hs-travel{0%{transform:translate(71px,89px)}33%{transform:translate(113px,81px)}66%{transform:translate(155px,95px)}100%{transform:translate(197px,85px)}}
+@media (prefers-reduced-motion: reduce){
+  .stack *{animation:none !important}
+  .stack .hs-m{transform:none !important;transition:opacity .3s ease !important}
+  .hs-lean,.hs-head-tilt,.hs-brow{transition:none !important}
+}
+.stack.is-idle .scene *{ animation-play-state:paused !important; }
+
+/* the invitation: a hand-written note that bows out once the story starts */
+.stack .scribble{ left:auto; right:5%; top:22%; display:flex; flex-direction:column-reverse; align-items:flex-end; transition:opacity .3s ease; }
+.stack .scribble svg{ transform:scaleX(-1); }
+.stack .scribble b{ margin:0 0 var(--s-1); }
+.stack:not([data-phase="idle"]) .scribble{ opacity:0; }
+.hint-touch{ display:none !important; }
+@media (hover:none), (pointer:coarse){ .hint-hover{ display:none !important; } .hint-touch{ display:block !important; } }
+
+/* ---- a case study inside the house popup: the popup supplies the chrome ---- */
+.embed{ --nav-h:0px; }
+.embed .nav, .embed .footer, .embed .skip{ display:none !important; }
+
+/* ===================================================================
+   VIEW SWITCH: the 3D house or the text page, in the header of both
+   =================================================================== */
+.view-toggle{
+  display:flex; align-items:center; gap:2px; padding:3px; flex:none;
+  border:1px solid var(--m-500); border-radius:var(--r-full); background:var(--m-700);
+}
+.view-toggle a{
+  font:500 var(--fs-1)/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; text-decoration:none;
+  color:var(--t-mid); padding:8px 12px; border-radius:var(--r-full);
+  transition:color .2s var(--ease), background-color .2s var(--ease);
+}
+.view-toggle a:hover{ color:var(--t-hi); }
+.view-toggle a[aria-current="page"]{ background:var(--t-hi); color:var(--m-800); }
+.view-toggle a:focus-visible{ outline:2px solid var(--t-hi); outline-offset:2px; }
+@media (max-width:420px){ .view-toggle a{ padding:8px 9px; } }

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Process Builder &middot; Akash Raj</title>
+<meta name="description" content="Reviewing the output of an AI process is close to useless if the only thing you can say is no. APB lets the reviewer name the step that went wrong, re-steer it, and run it again.">
+<link rel="canonical" href="https://evangelakash.github.io/akash-portfolio/apb.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F6F6F4">
+<meta name="author" content="Akash Raj">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Akash Raj">
+<meta property="og:title" content="Agentic Process Builder">
+<meta property="og:description" content="A reviewer who can only reject is a rubber stamp with extra steps. APB lets them name the step that went wrong, re-steer it, and run it again.">
+<meta property="og:url" content="https://evangelakash.github.io/akash-portfolio/apb.html">
+<meta property="og:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Enterprise Console, the platform APB is built inside.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agentic Process Builder">
+<meta name="twitter:description" content="A reviewer who can only reject is a rubber stamp with extra steps. APB lets them name the step that went wrong, re-steer it, and run it again.">
+<meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
+<link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=11">
+<script>document.documentElement.className+=" js";</script>
+</head>
+<body id="top">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__mark" href="index.html">
+      <span class="ph ph--sq" aria-hidden="true"></span>
+      <span class="nav__name">Akash Raj</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="btn btn--sm" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">R&eacute;sum&eacute; &#8599;</a>
+    </nav>
+      <details class="nav__menu">
+        <summary aria-label="Menu"><span></span><span></span></summary>
+        <div class="nav__sheet">
+          <a href="index.html#work">Work</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="#top">Top of case study</a>
+        </div>
+      </details>
+  </div>
+</header>
+
+<nav class="cs-rail" aria-label="Sections">
+  <ol>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">The product</span></li>
+      <li><a href="#s01" class="is-here"><span class="cs-rail__label">Why a process builder</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s02"><span class="cs-rail__label">Two people, not one</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Four decisions</span></li>
+      <li><a href="#s03"><span class="cs-rail__label">Decision: one canvas</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s04"><span class="cs-rail__label">Decision: logic, plain controls</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s05"><span class="cs-rail__label">Decision: review as repair</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s06"><span class="cs-rail__label">Decision: merge or fail</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Running it</span></li>
+      <li><a href="#s07"><span class="cs-rail__label">Watching a run</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s08"><span class="cs-rail__label">The client came back</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s09"><span class="cs-rail__label">What isn&rsquo;t built yet</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+  </ol>
+</nav>
+
+<main id="main" tabindex="-1">
+
+<section class="cs-hero">
+  <div class="container">
+    <h1 class="cs-hero__title reveal" style="--d:80ms">Agentic Process Builder</h1>
+    <p class="cs-hero__dek reveal" style="--d:160ms">Reviewing the output of an AI process is close to useless if the only thing you can say is no. APB lets the reviewer name the step that went wrong, re-steer that step, and run it again. Three attempts, then it stops.</p>
+
+    <dl class="cs-meta reveal" style="--d:240ms">
+      <div><dt>Project</dt><dd>Inside Enterprise Console, Ascendion &middot; May 2026 &ndash; present</dd></div>
+      <div><dt>My role</dt><dd>Sole designer &middot; IA, canvas, logic, review model</dd></div>
+      <div><dt>Team</dt><dd>One business analyst, one dev architect, director reviewing</dd></div>
+      <div><dt>Scope</dt><dd>22 user stories &middot; 7 logic types &middot; one canvas</dd></div>
+      <div><dt>Status</dt><dd>Proof of concept shipped &middot; logic layer in development</dd></div>
+    </dl>
+
+    <!-- ASSET SLOT: hero screenshot (canvas with expanded sidebar) goes here -->
+
+    <section class="cs-tldr reveal" style="--d:400ms" aria-label="Summary">
+      <h2>The whole thing, in six lines</h2>
+      <ol>
+        <li><p>Console could build an agent. It could not build a <b>process</b>, and teams were asking to automate a whole module, not run one task at a time.</p></li>
+        <li><p>APB puts agents, workflows and logic on <b>one canvas</b>, so a process gets composed instead of coded.</p></li>
+        <li><p>The logic arrived as a <b>client requirement</b>: split, merge, conditional routing, parallel execution. Real rigour, configured with dropdowns.</p></li>
+        <li><p>Human review started as <b>the builder checking their own output</b>. That is a build step wearing review&rsquo;s clothes.</p></li>
+        <li><p>So the reviewer got the power to <b>name the agent that caused a bad output</b>, re-prompt it, and re-run. Three attempts, then the run fails.</p></li>
+        <li><p>A simple version shipped to a client. They came back asking for <b>exactly this logic layer</b>.</p></li>
+      </ol>
+    </section>
+
+    <nav class="cs-map reveal" style="--d:480ms" aria-label="What the rest of this page covers">
+      <p class="cs-map__lead">That is the whole project. The rest is how each part was decided, and what it cost.</p>
+      <ol>
+        <li><a href="#s01"><b>The product</b><span>Why Console needed a process layer, and the two roles it has to serve</span><i>2 sections</i></a></li>
+        <li><a href="#s03"><b>Four decisions</b><span>The canvas, the logic vocabulary, the review model, and the merge</span><i>4 sections</i></a></li>
+        <li><a href="#s07"><b>Running it</b><span>How a run is watched, where the work stands, and what isn&rsquo;t built</span><i>3 sections</i></a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="cs-sec" id="s01">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Why a process builder at all</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">Console could build an agent. It could not build a process.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Console let a team create agents and chain them into pipelines. That answers one question: run this task with AI. It does not answer the question teams actually arrived with, which was automate this whole module.</p>
+<p>A team automating procurement, or claims intake, or a support vertical is not asking for an agent. They are asking for a dozen steps with branches in them, work that runs in parallel and has to rejoin, and a person who signs off before anything leaves the building.</p>
+<p>APB is where that gets built. It sits under Build in Enterprise Console, alongside agents and pipelines, in Ascendion&rsquo;s AAVA platform.</p>
+<p>The part that separates it from the rest of Console: <strong>agents, workflows and logic compose on the same canvas.</strong> You are not choosing between building an agent and building a flow. You drop both and wire them together.</p></div>
+    </div>
+
+    <figure class="sketch csw" aria-labelledby="d1cap">
+      <svg viewBox="0 0 640 260" role="img" aria-label="A process on one canvas: start, a new agent, an existing agent, a split into four parallel agents and workflows, then a merge and an end.">
+        <rect class="box box--ghost fade" x="8" y="95" width="54" height="40" rx="6"/>
+        <text class="t-hi fade" x="20" y="120">start</text>
+
+        <rect class="box fade" style="--d:360ms" x="82" y="95" width="84" height="40" rx="6"/>
+        <text class="t-hi fade" style="--d:360ms" x="94" y="120">new agent</text>
+
+        <rect class="box fade" style="--d:420ms" x="186" y="95" width="84" height="40" rx="6"/>
+        <text class="t-hi fade" style="--d:420ms" x="198" y="120">saved agent</text>
+
+        <rect class="box box--key fade" style="--d:480ms" x="290" y="95" width="52" height="40" rx="6"/>
+        <text class="t-hi fade" style="--d:480ms" x="302" y="120">split</text>
+
+        <rect class="box fade" style="--d:560ms" x="382" y="23" width="96" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:560ms" x="394" y="44">agent</text>
+        <rect class="box fade" style="--d:600ms" x="382" y="73" width="96" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:600ms" x="394" y="94">workflow</text>
+        <rect class="box fade" style="--d:640ms" x="382" y="123" width="96" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:640ms" x="394" y="144">agent</text>
+        <rect class="box fade" style="--d:680ms" x="382" y="173" width="96" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:680ms" x="394" y="194">workflow</text>
+
+        <rect class="box box--key fade" style="--d:740ms" x="506" y="95" width="52" height="40" rx="6"/>
+        <text class="t-hi fade" style="--d:740ms" x="518" y="120">merge</text>
+
+        <rect class="box box--ghost fade" style="--d:800ms" x="578" y="95" width="48" height="40" rx="6"/>
+        <text class="t-hi fade" style="--d:800ms" x="590" y="120">end</text>
+
+        <path class="ink ink--dim" style="--d:60ms" d="M62 115 H82"/>
+        <path class="ink ink--dim" style="--d:120ms" d="M166 115 H186"/>
+        <path class="ink ink--dim" style="--d:180ms" d="M270 115 H290"/>
+        <path class="ink ink--key" style="--d:240ms" d="M342 115 H362 V40 H382"/>
+        <path class="ink ink--key" style="--d:270ms" d="M342 115 H362 V90 H382"/>
+        <path class="ink ink--key" style="--d:300ms" d="M342 115 H362 V140 H382"/>
+        <path class="ink ink--key" style="--d:330ms" d="M342 115 H362 V190 H382"/>
+        <path class="ink ink--key" style="--d:400ms" d="M478 40 H498 V115 H506"/>
+        <path class="ink ink--key" style="--d:430ms" d="M478 90 H498 V115 H506"/>
+        <path class="ink ink--key" style="--d:460ms" d="M478 140 H498 V115 H506"/>
+        <path class="ink ink--key" style="--d:490ms" d="M478 190 H498 V115 H506"/>
+        <path class="ink ink--dim" style="--d:540ms" d="M558 115 H578"/>
+
+        <rect class="box fade" style="--d:900ms" x="8" y="228" width="14" height="12" rx="3"/>
+        <text class="t-note fade" style="--d:900ms" x="28" y="238">agent or workflow</text>
+        <rect class="box box--key fade" style="--d:900ms" x="146" y="228" width="14" height="12" rx="3"/>
+        <text class="t-note fade" style="--d:900ms" x="166" y="238">logic</text>
+        <rect class="box box--ghost fade" style="--d:900ms" x="218" y="228" width="14" height="12" rx="3"/>
+        <text class="t-note fade" style="--d:900ms" x="238" y="238">start and end</text>
+      </svg>
+      <figcaption id="d1cap">One canvas. A saved agent, a newly generated one and two workflows sit in the same flow, fanned out by a split and brought back by a merge.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--band" id="s02">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Two people, not one</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">The person who builds a process is almost never the person qualified to judge what it produces.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Two roles matter here.</p>
+<p>The <strong>flow designer</strong> composes: drags agents and workflows onto the canvas, adds the logic that branches and rejoins them, and decides where a human has to sign off.</p>
+<p>The <strong>reviewer</strong> is a subject matter expert. On a financial process, someone who can actually tell whether a fraud assessment holds up. On a delivery process, the architect. They may never open the canvas, and they should not have to.</p>
+<p>That gap is the reason the review model needed rebuilding, and it is where most of this case study goes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cs-sec" id="s03">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: one canvas, extended</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">A process editor separate from the agent editor would have been two products pretending to be one.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Console already had a canvas for chaining agents into pipelines. The obvious path for a process builder is a new surface with its own vocabulary, on the reasoning that a process is a bigger thing than a pipeline.</p>
+<p>I extended the existing one instead.</p>
+<p>The left rail carries three groups: the artefact library of processes, workflows and agents you already own, then logic, then building blocks for start, end and human review. Everything is a drag. Editing an agent opens Console&rsquo;s existing agent screen in a panel and submits through Console&rsquo;s existing approval flow, rather than a second editor that would drift from the first inside a quarter.</p>
+<p><b>What it cost</b></p>
+<p>The rail got crowded. Seven logic types, three artefact types and three building blocks is a lot for one column, and grouping is doing heavy work to keep it readable. If the logic set grows much further, the rail is the first thing that breaks.</p>
+<p>What it bought is that someone who has built an agent in Console already knows how to build a process. One mental model, one editor, one approval path.</p></div>
+    </div>
+    <!-- ASSET SLOT: canvas with expanded sidebar screenshot -->
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--band" id="s04">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: real process logic, configured with dropdowns</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">The client asked for process logic. Process logic is not a beginner&rsquo;s tool.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Split, merge, if-else, multi-way switch, pattern matching, predicate routing, parallel execution. That set arrived as a client requirement, and it maps onto BPMN, the standard notation for modelling business processes.</p>
+<p>It is also a genuine tension. That grammar exists because processes are genuinely hard: branches that fan out, parallel work that has to rejoin, conditions that decide which path a run takes. The person APB was sold to does not write schemas and is never going to write a mapping expression.</p>
+<p>So the rigour stays underneath and the surface stays visual. Deciding how four parallel branches recombine is the hardest configuration in the product, and it is done with a strategy dropdown, radio buttons for failure behaviour, and a drag to pair outputs together. No schema knowledge, no scripting, at any point.</p>
+<p><b>What it cost</b></p>
+<p>Expressiveness. Four merge strategies exist: combine, prioritise, override, and a guided custom mapping. A user who needs something outside those four cannot express it, and the escape hatch is guided rather than open.</p></div>
+    </div>
+<div class="cs-pull"><b>The request that made this hard</b>
+<p><strong>The client did not ask for a simpler tool. They asked for a real one that a non-technical person could operate.</strong></p>
+<p>Those are different requests, and only the second one is difficult.</p></div>
+    <!-- ASSET SLOT: split configuration panel screenshot -->
+  </div>
+</section>
+
+<section class="cs-sec" id="s05">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: review is a repair, not a gate</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">In May, the human in the loop was the person who built the flow, checking their own output.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>That is not review. It is a build step wearing review&rsquo;s clothes, and it passed testing precisely because the builder already knew what the output was supposed to be. That knowledge is exactly what a real reviewer lacks, and that bias is exactly what a real reviewer exists to correct.</p>
+<p>I proposed three changes. All three became requirements.</p>
+
+<h3>Assign someone who can actually judge it</h3>
+<p>A checkpoint names a primary and a secondary assignee, with a reminder if it sits unattended. The reviewer is chosen for domain knowledge, not for proximity to the build.</p>
+
+<h3>Give them enough to judge with</h3>
+<p>A checkpoint carries supporting documents: what this step was meant to produce and what good looks like. Without that, a subject matter expert reviewing a step they did not design is guessing, and a guessing reviewer approves. Context is not a courtesy here, it is the thing that makes the checkpoint mean anything.</p>
+
+<h3>Let them fix the cause, not refuse the symptom</h3>
+<p>This is the one that mattered.</p>
+<p>A reviewer looking at a bad output can usually tell which upstream step produced it. The model that was there gave them nowhere to put that knowledge. So instead of approve or reject, the reviewer selects the agent or workflow that actually caused the problem, writes an additional prompt for that specific step, and re-runs from there.</p>
+
+<h3>Three attempts, and then a real ending</h3>
+<p>The reviewer gets three. Inside those three they have to land on one of two answers: approve it, or reject it. A third bad output is not a fourth try, it is a decision.</p>
+<p>If they reject at the end, the run enters a failed state. Recovering it is deliberately somebody else&rsquo;s job: the process creator or an administrator picks it up, changes what needs changing, and runs it again. An administrator can also act on a pending task directly, so one reviewer on leave never becomes a stalled process.</p>
+<p>One rule follows from all of this, and it is worth stating because it is the kind of thing that quietly goes wrong. A re-run does <strong>not</strong> re-open checkpoints that were already approved. The three attempts belong to the checkpoint under review, and passing back through settled ground does not ask anyone to sign the same thing twice.</p>
+<p><b>Why the cap</b></p>
+<p>An unbounded retry is a loop with a person inside it. Three is enough for a real correction, and few enough that a genuinely broken step reaches someone who can change the flow rather than being re-prompted forever by someone who cannot.</p></div>
+    </div>
+
+    <figure class="sketch csw" aria-labelledby="d2cap">
+      <svg viewBox="0 0 640 250" role="img" aria-label="The review loop: a checkpoint opens, the reviewer either approves and the run continues, or names the step at fault, re-prompts it and re-runs. After three attempts a rejection fails the run, which the creator or an administrator recovers.">
+        <rect class="box fade" x="8" y="22" width="120" height="36" rx="6"/>
+        <text class="t-hi fade" x="20" y="44">checkpoint opens</text>
+
+        <rect class="box box--key fade" style="--d:360ms" x="168" y="22" width="130" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:360ms" x="180" y="44">reviewer decides</text>
+
+        <rect class="box fade" style="--d:560ms" x="460" y="14" width="170" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:560ms" x="472" y="36">run continues</text>
+
+        <rect class="box fade" style="--d:620ms" x="460" y="86" width="170" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:620ms" x="472" y="108">run fails</text>
+
+        <rect class="box box--ghost fade" style="--d:680ms" x="460" y="158" width="170" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:680ms" x="472" y="180">creator or admin recovers</text>
+
+        <rect class="box fade" style="--d:420ms" x="143" y="112" width="180" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:420ms" x="155" y="134">name the step at fault</text>
+
+        <rect class="box fade" style="--d:480ms" x="143" y="184" width="180" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:480ms" x="155" y="206">re-prompt it and re-run</text>
+
+        <path class="ink ink--dim" style="--d:60ms" d="M128 40 H168"/>
+        <path class="ink ink--key" style="--d:140ms" d="M298 40 H390 V32 H460"/>
+        <path class="ink ink--dim" style="--d:200ms" d="M298 40 H390 V104 H460"/>
+        <path class="ink ink--dim" style="--d:260ms" d="M545 122 V158"/>
+        <path class="ink ink--key" style="--d:320ms" d="M233 58 V112"/>
+        <path class="ink ink--key" style="--d:380ms" d="M233 148 V184"/>
+        <path class="ink ink--key" style="--d:440ms" d="M323 202 H360 V70 H270 V58"/>
+
+        <text class="t-lab fade" style="--d:760ms" x="398" y="26">approve</text>
+        <text class="t-lab fade" style="--d:760ms" x="398" y="100">reject</text>
+        <text class="t-note fade" style="--d:820ms" x="143" y="238">each pass spends one of three attempts</text>
+      </svg>
+      <figcaption id="d2cap">Rejecting does not end the review. It sends the reviewer back to the step that caused the problem, with three attempts to get it right before the run fails and leaves their hands.</figcaption>
+    </figure>
+
+<div class="cs-pull"><b>The thing the old model got wrong</b>
+<p><strong>Reject tells the system the output was wrong. It does not tell it what was wrong, or where.</strong></p>
+<p>A reviewer who can only reject is a rubber stamp with extra steps.</p></div>
+
+    <!-- ASSET SLOT: review panel screenshot -->
+    <!-- ASSET SLOT: prototype video of the repair loop -->
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--band" id="s06">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: a merge either validates or it fails</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">Parallel branches that quietly drop a result are worse than parallel branches that stop.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>When a split fans work out to four agents and a merge brings it back, the merge is where trust is won or lost. So the rules there are deliberately strict.</p>
+<p>A merge waits for every required branch. Before anything aggregates, each output is checked for completeness and for schema validity, and anything corrupt is excluded with the reason shown to the user rather than swallowed. The same inputs produce the same aggregation every time.</p>
+<p>When a branch does fail, the designer has already chosen what happens: aggregate what arrived, retry and continue, or fail the whole aggregation. A run reports success, partial success, failed, or retry pending, and each of those words means the same thing every time it appears.</p>
+<p><b>What it cost</b></p>
+<p>There is no fast, best-effort merge. The gates apply even when a user would rather have a rough answer now and clean it up later.</p>
+<p>The product is sold on output a non-technical person can act on without checking the working. A merge that silently drops a branch would end that in a single incident.</p></div>
+    </div>
+
+    <figure class="sketch csw" aria-labelledby="d3cap">
+      <svg viewBox="0 0 640 260" role="img" aria-label="Four parallel agents feed a gate that waits for all of them, then validation, then aggregation by one of four strategies, then a single output. Failing branches follow one of three policies chosen in advance.">
+        <rect class="box fade" x="8" y="20" width="90" height="34" rx="6"/>
+        <text class="t-hi fade" x="20" y="41">agent a</text>
+        <rect class="box fade" style="--d:340ms" x="8" y="64" width="90" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:340ms" x="20" y="85">agent b</text>
+        <rect class="box fade" style="--d:380ms" x="8" y="108" width="90" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:380ms" x="20" y="129">agent c</text>
+        <rect class="box fade" style="--d:420ms" x="8" y="152" width="90" height="34" rx="6"/>
+        <text class="t-hi fade" style="--d:420ms" x="20" y="173">agent d</text>
+
+        <rect class="box box--key fade" style="--d:500ms" x="150" y="81" width="90" height="44" rx="6"/>
+        <text class="t-hi fade" style="--d:500ms" x="162" y="108">wait for all</text>
+
+        <rect class="box fade" style="--d:560ms" x="270" y="81" width="90" height="44" rx="6"/>
+        <text class="t-hi fade" style="--d:560ms" x="282" y="108">validate</text>
+
+        <rect class="box box--key fade" style="--d:620ms" x="390" y="81" width="100" height="44" rx="6"/>
+        <text class="t-hi fade" style="--d:620ms" x="402" y="108">aggregate</text>
+
+        <rect class="box fade" style="--d:680ms" x="520" y="81" width="90" height="44" rx="6"/>
+        <text class="t-hi fade" style="--d:680ms" x="532" y="108">one output</text>
+
+        <path class="ink ink--key" style="--d:60ms" d="M98 37 H124 V103 H150"/>
+        <path class="ink ink--key" style="--d:90ms" d="M98 81 H124 V103 H150"/>
+        <path class="ink ink--key" style="--d:120ms" d="M98 125 H124 V103 H150"/>
+        <path class="ink ink--key" style="--d:150ms" d="M98 169 H124 V103 H150"/>
+        <path class="ink ink--dim" style="--d:200ms" d="M240 103 H270"/>
+        <path class="ink ink--dim" style="--d:240ms" d="M360 103 H390"/>
+        <path class="ink ink--dim" style="--d:280ms" d="M490 103 H520"/>
+        <path class="ink ink--dim" style="--d:320ms" d="M195 125 V168"/>
+        <path class="ink ink--dim" style="--d:350ms" d="M440 125 V168"/>
+
+        <rect class="box box--ghost fade" style="--d:760ms" x="150" y="168" width="210" height="72" rx="6"/>
+        <text class="t-lab fade" style="--d:760ms" x="162" y="188">if a branch fails</text>
+        <text class="t-hi fade" style="--d:760ms" x="162" y="206">aggregate what arrived</text>
+        <text class="t-hi fade" style="--d:760ms" x="162" y="221">retry and continue</text>
+        <text class="t-hi fade" style="--d:760ms" x="162" y="236">or fail the merge</text>
+
+        <rect class="box box--ghost fade" style="--d:820ms" x="390" y="168" width="200" height="72" rx="6"/>
+        <text class="t-lab fade" style="--d:820ms" x="402" y="188">how it combines</text>
+        <text class="t-hi fade" style="--d:820ms" x="402" y="206">combine or prioritise</text>
+        <text class="t-hi fade" style="--d:820ms" x="402" y="221">override</text>
+        <text class="t-hi fade" style="--d:820ms" x="402" y="236">custom mapping</text>
+      </svg>
+      <figcaption id="d3cap">Nothing merges until every required branch has arrived and passed validation. What happens to a failed branch is a decision the designer makes before the run, not something the system improvises during it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="cs-sec" id="s07">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Watching a run</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">The output of a long run is an infinite scroll. Something has to be the way in.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>A running process is watched from an activity bar: every agent, workflow and dependent tool listed vertically, each carrying a live status badge. Running, not running, failed, needs input.</p>
+<p>Status is the obvious half of that. Navigation is the half that matters.</p>
+<p>A process of any real size produces output that keeps going, and scrolling a stream to find what one particular agent produced is not a task anyone should be handed. So the bar does double duty. Click any step in it and that step&rsquo;s output comes to the top centre of the page, ready to read.</p>
+<p>That makes it a table of contents for a stream. Where am I, what is happening, and show me that one, answered in the same column.</p></div>
+    </div>
+    <!-- ASSET SLOT: playground running view screenshot -->
+  </div>
+</section>
+
+<section class="cs-sec cs-sec--band" id="s08">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">The client came back</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">A simple version shipped. What came back was a request for the hard part.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The first release was a proof of concept: agentic process building without the logic layer. It went to a client.</p>
+<p>What returned was a list of what they wanted next, and it was the branching, the parallel execution and the routing. That request is the reason APB is being expanded rather than maintained.</p>
+<p>The design in this case study was built through August and September 2026 and sits in the development environment now, where the internal team runs it and audits it. Engineering is working through logic execution and the natural language prompt layer, both of which carry real technical constraints.</p>
+<p><strong>I have no adoption figure to give you.</strong> The version containing this design is not in front of users yet. What exists instead is a client who used the simple version and came back asking for precisely the layer being built now. That is the closest thing to validation available before a launch, and I would rather show it than a projection.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cs-sec" id="s09">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">What isn&rsquo;t built yet</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">The design is ahead of the build, and some of it has not been tested by anybody.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Three surfaces are specified and not yet prototyped: the fan-in result view, the approval history and audit screen, and the conditional routing observability page. Each has acceptance criteria written against it. None has been in front of a user.</p>
+<p>The logic execution layer and natural language prompt entry are both live engineering problems rather than settled ones. What a person can describe in a sentence and what the orchestration engine can reliably assemble from that sentence are not yet the same set, and closing that gap is the current work.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cs-end">
+  <div class="container">
+    <h2 class="cs-end__t reveal">Questions about any of these decisions?</h2>
+    <p class="cs-end__d reveal" style="--d:80ms">The part I&rsquo;d most like to be pushed on is the review model, and the three-attempt cap in particular. It was a judgement call, and I can show the working.</p>
+    <div class="btn-row reveal" style="--d:160ms">
+      <a class="btn btn--key" href="mailto:akashrajs456@gmail.com">akashrajs456@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+      <a class="btn" href="index.html#work">&larr; All work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>&copy; 2026 Akash Raj</span>
+    <span>Designed &amp; built by hand</span>
+    <a href="#top">Back to top &uarr;</a>
+  </div>
+</footer>
+
+<script src="motion.js?v=7"></script>
+</body>
+</html>
