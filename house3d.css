@@ -1,0 +1,178 @@
+/* ===================================================================
+   House (3D) — scroll-driven camera through a baked-light scene.
+   The canvas is sticky inside a tall track; copy sits on top of it.
+   =================================================================== */
+
+.h3-page { background: #0f1112; }
+.h3-page .nav { position: fixed; inset: 0 0 auto 0; z-index: 30; }
+
+.h3-track { position: relative; height: 520vh; }
+.h3-stage {
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  background: #cfd6da;
+}
+.h3-stage canvas { display: block; width: 100%; height: 100%; }
+/* soft lens vignette, part of the look rather than a decoration */
+.h3-stage::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, rgba(0, 0, 0, 0) 60%, rgba(10, 12, 14, .22) 100%);
+}
+
+.h3-poster {
+  position: absolute; inset: 0; background-size: cover; background-position: center;
+  transition: opacity 900ms var(--ease);
+}
+.h3-ready .h3-poster { opacity: 0; pointer-events: none; }
+
+.h3-load {
+  position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
+  font: 500 var(--fs-1)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--t-hi); background: rgba(246, 246, 244, .86); padding: 8px 12px; border-radius: var(--r-full);
+  transition: opacity 400ms var(--ease);
+}
+.h3-ready .h3-load { opacity: 0; }
+.h3-load i { display: inline-block; width: 64px; height: 2px; margin-left: 10px; vertical-align: middle;
+  background: linear-gradient(90deg, var(--t-hi) var(--p, 0%), rgba(0,0,0,.15) 0); }
+
+/* copy layers: positioned inside the stage, opacity driven from JS via --o */
+.h3-copy {
+  position: absolute; z-index: 5; opacity: var(--o, 0);
+  transform: translateY(calc((1 - var(--o, 0)) * 14px));
+  pointer-events: none;
+}
+.h3-copy.is-live { pointer-events: auto; }
+
+.h3-intro {
+  left: 50%; top: 22vh; width: min(760px, calc(100% - 2 * var(--pad)));
+  margin-left: calc(min(760px, calc(100% - 2 * var(--pad))) / -2);
+  text-align: center; color: #fff;
+  text-shadow: 0 1px 24px rgba(20, 30, 20, .35);
+}
+.h3-intro .h3-kicker { font: 500 var(--fs-3)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 14px; }
+.h3-intro h1 { font: 300 clamp(40px, 6.4vw, 88px)/1.02 var(--sans); letter-spacing: -.035em; margin: 0; text-wrap: balance; }
+.h3-intro .h3-cue { margin-top: 26px; font: 400 var(--fs-3)/1.4 var(--mono); opacity: .9; }
+
+/* a paper card, low on the left: his head, hands, laptop and the sunflower stay clear */
+.h3-studio {
+  left: var(--pad); bottom: 7vh; width: min(480px, 38vw);
+  color: var(--t-hi);
+  background: rgba(246, 246, 244, .9);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1); backdrop-filter: blur(10px) saturate(1.1);
+  padding: 26px 30px 28px; border-radius: var(--r-lg);
+  box-shadow: 0 18px 50px rgba(20, 20, 25, .16);
+}
+.h3-studio .h3-kicker { font: 500 var(--fs-2)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t-mid); margin: 0 0 12px; }
+.h3-studio h2 { font: 300 clamp(28px, 2.9vw, 42px)/1.08 var(--sans); letter-spacing: -.03em; margin: 0 0 14px; text-wrap: balance; }
+.h3-studio h2 em { font-style: normal; background: linear-gradient(transparent 62%, rgba(240, 224, 140, .9) 0); }
+.h3-studio p { font: 400 var(--fs-5)/1.55 var(--serif); color: var(--t-mid); margin: 0 0 20px; max-width: 42ch; }
+
+
+/* gallery: a quiet caption, and real buttons laid over the framed projects */
+.h3-gallery.is-live { pointer-events: none; }
+.h3-gallery.is-live .h3-frame { pointer-events: auto; }
+.h3-gallery { left: 0; top: 0; right: 0; bottom: 0; }
+.h3-frame { pointer-events: auto; }
+.h3-gallery { left: 0; top: 0; right: 0; bottom: 0; }
+.h3-gallery .h3-kicker, .h3-gallery .h3-hint {
+  position: absolute; left: 50%; transform: translateX(-50%); margin: 0; white-space: nowrap;
+  font: 500 var(--fs-2)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t-hi);
+}
+.h3-gallery .h3-kicker { top: calc(var(--nav-h) + 18px); }
+.h3-gallery .h3-hint { top: calc(var(--nav-h) + 40px); letter-spacing: .02em; text-transform: none; color: var(--t-mid); }
+.h3-frame {
+  position: absolute; left: 0; top: 0; width: var(--w, 0); height: var(--h, 0);
+  transform: translate(var(--x, -999px), var(--y, -999px));
+  background: transparent; border: 0; border-radius: 2px; cursor: pointer;
+  color: transparent; font: inherit;
+}
+.h3-frame span {
+  position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%); white-space: nowrap;
+  font: 500 var(--fs-2)/1 var(--mono); color: var(--t-hi); background: rgba(246, 246, 244, .9);
+  padding: 7px 10px; border-radius: var(--r-full); opacity: 0; transition: opacity 200ms var(--ease);
+}
+.h3-frame:hover span, .h3-frame:focus-visible span { opacity: 1; }
+.h3-frame:focus-visible { outline: 3px solid var(--t-hi); outline-offset: 6px; }
+
+.h3-skip { position: absolute; right: var(--pad); bottom: 24px; z-index: 6; }
+
+@media (max-width: 900px) {
+  .h3-studio { width: auto; right: var(--pad); bottom: 5vh; padding: 20px 22px 22px; }
+  .h3-studio p { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h3-copy { transform: none; }
+  .h3-poster { transition: none; }
+  /* a cut, not a flight: the canvas dips briefly through the paper colour */
+  .h3-stage::after { content: ""; position: absolute; inset: 0; background: var(--m-800); opacity: 0; pointer-events: none; }
+  .h3-stage.h3-cut::after { animation: h3-dip 420ms ease-out; }
+}
+@keyframes h3-dip { 0% { opacity: .85; } 100% { opacity: 0; } }
+
+/* case study popup (same as the first prototype) */
+.popup{ position:fixed; inset:0; z-index:60; display:grid; padding:max(12px, 3vmin); background:rgba(26,26,29,.32); }
+.popup[hidden]{ display:none !important; }
+.popup__frame{ display:grid; grid-template-rows:auto 1fr; min-height:0; background:var(--m-800);
+  border-radius:var(--r-lg); overflow:hidden; box-shadow:0 30px 80px rgba(20,20,25,.3); }
+.popup__bar{ display:flex; align-items:center; gap:var(--s-4); padding:var(--s-3) var(--s-4);
+  border-bottom:1px solid var(--m-500); background:var(--m-600); }
+.popup__title{ font-family:var(--sans); font-weight:500; color:var(--t-hi); flex:1; min-width:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.popup__hint{ font-family:var(--mono); font-size:var(--fs-1); color:var(--t-low); }
+.popup__doc{ width:100%; height:100%; border:0; display:block; background:var(--m-800); }
+.popup-open, .popup-open body{ overflow:hidden; }
+
+/* section headings in the house: a paper pill under the nav, so they read over any wall, ceiling or sky */
+.h3-roomlabel, .h3-pill {
+  position: absolute; left: 50%; top: calc(var(--nav-h) + 18px); margin: 0;
+  font: 500 var(--fs-2)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
+  color: var(--t-hi); background: rgba(246, 246, 244, .9); padding: 7px 14px; border-radius: var(--r-full);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(20, 20, 25, .12);
+}
+.h3-roomlabel { transform: translate(-50%, calc((1 - var(--o, 0)) * 10px)); }
+.h3-pill { transform: translateX(-50%); display: flex; align-items: baseline; gap: 12px; }
+.h3-pill b { font-weight: 500; }
+.h3-pill span {
+  font: 400 var(--fs-3)/1.4 var(--sans); letter-spacing: 0; text-transform: none; color: var(--t-mid);
+  padding-left: 12px; border-left: 1px solid rgba(26, 26, 29, .18);
+}
+@media (max-width: 600px) {
+  .h3-pill { flex-direction: column; align-items: center; gap: 2px; white-space: normal; text-align: center;
+    border-radius: 18px; width: max-content; max-width: calc(100% - 2 * var(--pad)); }
+  .h3-pill span { border-left: 0; padding-left: 0; }
+}
+
+/* closing card over the front of the house */
+.h3-contact {
+  left: var(--pad); bottom: 9vh; width: min(560px, calc(100% - 2 * var(--pad)));
+  background: rgba(246, 246, 244, .9); padding: 28px 30px; border-radius: var(--r-lg);
+}
+.h3-contact h2 { font: 300 clamp(26px, 3vw, 40px)/1.12 var(--sans); letter-spacing: -.02em; margin: 0 0 12px; text-wrap: balance; color: var(--t-hi); }
+.h3-contact h2 span { color: var(--t-mid); }
+.h3-contact p { font: 400 var(--fs-5)/1.5 var(--serif); color: var(--t-mid); margin: 0 0 18px; }
+
+/* About caption: phones only (the hologram carries it on larger screens) */
+.h3-about { display: none; }
+@media (max-width: 600px) {
+  .h3-about {
+    display: block; left: var(--pad); right: var(--pad); bottom: 5vh;
+    background: rgba(246, 246, 244, .9); padding: 16px 18px; border-radius: var(--r-lg);
+  }
+  .h3-about .h3-kicker { font: 500 var(--fs-1)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--t-mid); margin: 0 0 6px; }
+  .h3-about p { font: 400 var(--fs-4)/1.5 var(--serif); color: var(--t-hi); margin: 0; }
+  .h3-about blockquote { display: none; }
+}
+
+/* past the opening the skip link steps aside (the nav has the section links) */
+.h3-skip-off .h3-skip { opacity: 0; pointer-events: none; visibility: hidden; transition: opacity 300ms var(--ease), visibility 0s 300ms; }
+.h3-skip { transition: opacity 300ms var(--ease); }
+@media (max-width: 600px) {
+  .h3-contact { left: 12px; right: 12px; width: auto; bottom: 16px; padding: 18px 20px; }
+  .h3-contact h2 { font-size: 24px; }
+  .h3-contact p { font-size: var(--fs-4); margin-bottom: 12px; }
+}
+@media (max-height: 520px) {
+  .h3-contact h2 span { display: none; }
+  .h3-contact p { display: none; }
+}

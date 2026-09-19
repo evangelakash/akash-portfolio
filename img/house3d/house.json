@@ -1,0 +1,462 @@
+{
+ "version": 1,
+ "build": 1789793123,
+ "lm_range": 4.0,
+ "cb_range": 2.0,
+ "groups": {
+  "workshop_p": {
+   "mode": "vc"
+  },
+  "gallery_f": {
+   "mode": "lm",
+   "map": "lm_gallery_f.webp",
+   "size": 2048
+  },
+  "hall_f": {
+   "mode": "lm",
+   "map": "lm_hall_f.webp",
+   "size": 1024
+  },
+  "workshop_f": {
+   "mode": "lm",
+   "map": "lm_workshop_f.webp",
+   "size": 2048
+  },
+  "studio_h": {
+   "mode": "cb",
+   "map": "cb_studio_h.png",
+   "size": 2048
+  },
+  "studio_f": {
+   "mode": "lm",
+   "map": "lm_studio_f.webp",
+   "size": 2048
+  },
+  "ext": {
+   "mode": "lm",
+   "map": "lm_ext.webp",
+   "size": 2048
+  },
+  "stairs": {
+   "mode": "lm",
+   "map": "lm_stairs.webp",
+   "size": 1024
+  },
+  "hall": {
+   "mode": "lm",
+   "map": "lm_hall.webp",
+   "size": 1024
+  },
+  "studio": {
+   "mode": "lm",
+   "map": "lm_studio.webp",
+   "size": 2048
+  },
+  "living_f": {
+   "mode": "lm",
+   "map": "lm_living_f.webp",
+   "size": 2048
+  },
+  "gallery": {
+   "mode": "lm",
+   "map": "lm_gallery.webp",
+   "size": 2048
+  },
+  "ext_plants": {
+   "mode": "lm",
+   "map": "lm_ext_plants.webp",
+   "size": 1024
+  },
+  "ext_props": {
+   "mode": "lm",
+   "map": "lm_ext_props.webp",
+   "size": 1024
+  },
+  "lawn": {
+   "mode": "cb",
+   "map": "cb_lawn.png",
+   "size": 2048
+  },
+  "studio_plants": {
+   "mode": "lm",
+   "map": "lm_studio_plants.webp",
+   "size": 1024
+  },
+  "int_plants": {
+   "mode": "vc"
+  },
+  "stairs_f": {
+   "mode": "lm",
+   "map": "lm_stairs_f.webp",
+   "size": 2048
+  },
+  "roof": {
+   "mode": "lm",
+   "map": "lm_roof.webp",
+   "size": 1024
+  },
+  "workshop": {
+   "mode": "lm",
+   "map": "lm_workshop.webp",
+   "size": 2048
+  },
+  "akash.haircards": {
+   "mode": "lm",
+   "map": "lm_akash_haircards.webp",
+   "alpha": true
+  },
+  "akash.body": {
+   "mode": "cb",
+   "map": "ch_akash_body.png",
+   "size": 2048,
+   "alpha": false
+  },
+  "akash.eyebrow009": {
+   "mode": "cb",
+   "map": "ch_akash_eyebrow009.png",
+   "size": 512,
+   "alpha": true
+  },
+  "akash.eyelashes01": {
+   "mode": "cb",
+   "map": "ch_akash_eyelashes01.png",
+   "size": 256,
+   "alpha": true
+  },
+  "akash.high-poly": {
+   "mode": "cb",
+   "map": "ch_akash_high-poly.png",
+   "size": 256,
+   "alpha": true
+  },
+  "akash.male_casualsuit03": {
+   "mode": "cb",
+   "map": "ch_akash_male_casualsuit03.png",
+   "size": 2048,
+   "alpha": true
+  },
+  "akash.shoes05": {
+   "mode": "cb",
+   "map": "ch_akash_shoes05.png",
+   "size": 512,
+   "alpha": true
+  },
+  "akash.short02": {
+   "mode": "cb",
+   "map": "ch_akash_short02.png",
+   "size": 1024,
+   "alpha": true
+  }
+ },
+ "cameras": {
+  "CAM_aerial": {
+   "pos": [
+    49.6806,
+    40.3428,
+    34.5806
+   ],
+   "target": [
+    47.8814,
+    38.7536,
+    32.7814
+   ],
+   "lens": 90.0,
+   "sensor": 36.0
+  },
+  "CAM_books": {
+   "pos": [
+    5.2,
+    4.85,
+    -3.6
+   ],
+   "target": [
+    4.5496,
+    4.5248,
+    -6.5105
+   ],
+   "lens": 30.0,
+   "sensor": 36.0
+  },
+  "CAM_chalkboard": {
+   "pos": [
+    4.55,
+    4.85,
+    -4.1
+   ],
+   "target": [
+    1.55,
+    4.85,
+    -4.1
+   ],
+   "lens": 30.0,
+   "sensor": 36.0
+  },
+  "CAM_debug_corner": {
+   "pos": [
+    17.5,
+    2.2,
+    5.5
+   ],
+   "target": [
+    15.647,
+    2.1326,
+    3.1416
+   ],
+   "lens": 35.0,
+   "sensor": 36.0
+  },
+  "CAM_exit": {
+   "pos": [
+    5.35,
+    6.15,
+    -1.6
+   ],
+   "target": [
+    5.4576,
+    5.7411,
+    -4.5701
+   ],
+   "lens": 28.0,
+   "sensor": 36.0
+  },
+  "CAM_front": {
+   "pos": [
+    6.5,
+    2.6,
+    17.0
+   ],
+   "target": [
+    6.5,
+    2.6782,
+    14.001
+   ],
+   "lens": 32.0,
+   "sensor": 36.0
+  },
+  "CAM_front_end": {
+   "pos": [
+    6.5,
+    2.6,
+    17.5
+   ],
+   "target": [
+    6.5,
+    2.7148,
+    14.5022
+   ],
+   "lens": 30.0,
+   "sensor": 36.0
+  },
+  "CAM_gallery": {
+   "pos": [
+    7.8,
+    1.55,
+    -12.75
+   ],
+   "target": [
+    7.8,
+    1.5067,
+    -15.7497
+   ],
+   "lens": 23.0,
+   "sensor": 36.0
+  },
+  "CAM_hall": {
+   "pos": [
+    7.8,
+    1.6,
+    -4.35
+   ],
+   "target": [
+    7.8,
+    2.1214,
+    -7.3044
+   ],
+   "lens": 24.0,
+   "sensor": 36.0
+  },
+  "CAM_hall2": {
+   "pos": [
+    7.8,
+    1.6,
+    -7.05
+   ],
+   "target": [
+    7.8,
+    2.3171,
+    -9.963
+   ],
+   "lens": 24.0,
+   "sensor": 36.0
+  },
+  "CAM_hall3": {
+   "pos": [
+    7.8,
+    1.6,
+    -9.15
+   ],
+   "target": [
+    7.8,
+    2.3171,
+    -12.063
+   ],
+   "lens": 24.0,
+   "sensor": 36.0
+  },
+  "CAM_landing": {
+   "pos": [
+    6.35,
+    4.82,
+    -7.2
+   ],
+   "target": [
+    6.1009,
+    4.7488,
+    -4.2112
+   ],
+   "lens": 24.0,
+   "sensor": 36.0
+  },
+  "CAM_living": {
+   "pos": [
+    5.35,
+    1.42,
+    -14.9
+   ],
+   "target": [
+    2.3705,
+    1.07,
+    -14.9
+   ],
+   "lens": 26.0,
+   "sensor": 36.0
+  },
+  "CAM_stairs": {
+   "pos": [
+    6.35,
+    1.55,
+    -14.3
+   ],
+   "target": [
+    6.35,
+    1.5833,
+    -11.3002
+   ],
+   "lens": 24.0,
+   "sensor": 36.0
+  },
+  "CAM_stairs_mid": {
+   "pos": [
+    6.35,
+    2.27,
+    -11.1
+   ],
+   "target": [
+    6.35,
+    2.5315,
+    -8.1114
+   ],
+   "lens": 24.0,
+   "sensor": 36.0
+  },
+  "CAM_studio": {
+   "pos": [
+    10.98,
+    1.7,
+    -3.58
+   ],
+   "target": [
+    9.3853,
+    0.774,
+    -5.9463
+   ],
+   "lens": 32.0,
+   "sensor": 36.0
+  },
+  "CAM_studio_wide": {
+   "pos": [
+    12.5,
+    1.65,
+    -0.6
+   ],
+   "target": [
+    10.5233,
+    1.4096,
+    -2.8438
+   ],
+   "lens": 22.0,
+   "sensor": 36.0
+  },
+  "CAM_toolrail": {
+   "pos": [
+    5.75,
+    4.9,
+    -3.85
+   ],
+   "target": [
+    5.75,
+    4.6259,
+    -0.8625
+   ],
+   "lens": 30.0,
+   "sensor": 36.0
+  },
+  "CAM_whiteboard": {
+   "pos": [
+    6.95,
+    4.85,
+    -4.1
+   ],
+   "target": [
+    9.95,
+    4.85,
+    -4.1
+   ],
+   "lens": 30.0,
+   "sensor": 36.0
+  }
+ },
+ "sun": [
+  0.8818,
+  0.3746,
+  0.2865
+ ],
+ "trees": [
+  {
+   "sprite": "tree_island_tree_01.webp",
+   "pos": [
+    -4.6,
+    2.164,
+    4.2
+   ],
+   "size": 6.892
+  },
+  {
+   "sprite": "tree_island_tree_01.webp",
+   "pos": [
+    17.0,
+    1.75,
+    -19.5
+   ],
+   "size": 5.758
+  },
+  {
+   "sprite": "tree_tree_small_02.webp",
+   "pos": [
+    17.6,
+    1.928,
+    -1.5
+   ],
+   "size": 5.635
+  },
+  {
+   "sprite": "tree_tree_small_02.webp",
+   "pos": [
+    -5.5,
+    2.05,
+    -16.0
+   ],
+   "size": 6.106
+  }
+ ]
+}
