@@ -14,11 +14,43 @@ const stage = document.querySelector('.h3-stage');
 const canvas = document.getElementById('h3-canvas');
 const track = document.querySelector('.h3-track');
 const loadBar = document.querySelector('.h3-load');
+const loadMsg = document.querySelector('.h3-load__msg');
+const loadPct = document.querySelector('.h3-load__pct');
+const altLink = document.querySelector('.h3-alt');
 const copies = [...document.querySelectorAll('.h3-copy')];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ------------------------------------------------------------------ when it cannot load
+   The page says so and offers the text version, instead of waiting on "Loading the house" forever. */
+let failed = false;
+function fail(err, msg = 'The 3D house couldn\u2019t load') {
+  if (failed) return;
+  failed = true;
+  console.error(err);
+  doc.classList.add('h3-failed');
+  if (loadMsg) loadMsg.textContent = msg;
+  if (altLink) altLink.hidden = false;
+}
+// a slow connection: after 20 s, offer the text version while the house keeps loading
+setTimeout(() => {
+  if (failed || doc.classList.contains('h3-ready')) return;
+  if (loadMsg) loadMsg.textContent = 'Still loading the house';
+  if (altLink) altLink.hidden = false;
+}, 20000);
+
 /* ------------------------------------------------------------------ renderer */
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+} catch (err) {
+  fail(err, 'This browser can\u2019t show the 3D house');
+  throw err;
+}
+// the graphics memory ran out (phones, mostly): nothing more will draw, so say so
+canvas.addEventListener('webglcontextlost', (e) => {
+  e.preventDefault();
+  fail(new Error('WebGL context lost'), 'The 3D house needs more memory');
+});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.AgXToneMapping;
@@ -47,18 +79,47 @@ const camera = new THREE.PerspectiveCamera(40, 1, 0.03, 600);
   scene.add(new THREE.Mesh(g, m));
 }
 
-/* ------------------------------------------------------------------ loading */
+/* ------------------------------------------------------------------ loading
+   The house file is most of the download, so it counts in bytes; every other file counts once. */
+let glbPart = 0, filePart = 0, shown = 0;
+function showProgress() {
+  const p = Math.min(99, Math.round(100 * (0.85 * glbPart + 0.15 * filePart)));
+  if (p <= shown) return;
+  shown = p;
+  if (loadBar) loadBar.style.setProperty('--p', `${p}%`);
+  if (loadPct) loadPct.textContent = `${p}%`;
+}
 const manager = new THREE.LoadingManager();
-manager.onProgress = (_u, done, total) => loadBar && loadBar.style.setProperty('--p', `${Math.round(100 * done / total)}%`);
+let busy = false;
+manager.onStart = () => { busy = true; };
+manager.onProgress = (_u, done, total) => { busy = done < total; filePart = done / total; showProgress(); };
+// resolves once every file asked for so far has arrived (at once if they already have)
+const allLoaded = () => new Promise((res) => { if (!busy) res(); else manager.onLoad = res; });
 const draco = new DRACOLoader(manager).setDecoderPath('vendor/three/examples/jsm/libs/draco/gltf/');
 const gltfLoader = new GLTFLoader(manager).setDRACOLoader(draco);
 const texLoader = new THREE.TextureLoader(manager);
 const maxAniso = renderer.capabilities.getMaxAnisotropy();
 
+// phones and small screens: the big textures are halved as they arrive, so the house fits in their
+// graphics memory (it needs about 750 MB at full size)
+const SMALL = matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 700;
+function shrink(tex, max) {
+  const img = tex && tex.image;
+  if (!img || !img.width) return;
+  const k = max / Math.max(img.width, img.height);
+  if (k >= 1) return;
+  const c = document.createElement('canvas');
+  c.width = Math.max(1, Math.round(img.width * k));
+  c.height = Math.max(1, Math.round(img.height * k));
+  c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+  tex.image = c;
+  tex.needsUpdate = true;
+}
+
 // every file the scene loads carries the bake's build id, so a new bake never meets a cached old lightmap
 let V = '';
 function lightmap(name) {
-  const t = texLoader.load(BASE + name + V, () => requestRender());
+  const t = texLoader.load(BASE + name + V, (tex) => { if (SMALL) shrink(tex, 1024); requestRender(); });
   t.flipY = false;
   t.colorSpace = THREE.SRGBColorSpace;
   t.channel = 1;
@@ -79,6 +140,7 @@ function convert(mesh, man) {
   const lm = lmName ? (lmCache[lmName] ||= lightmap(lmName)) : null;
   const one = (src) => {
     if (src.map) src.map.anisotropy = maxAniso;
+    if (SMALL) { shrink(src.map, mode === 'cb' ? 1024 : 512); shrink(src.emissiveMap, 512); }
     const base = {
       map: src.map || null,
       color: src.color ? src.color.clone() : new THREE.Color(1, 1, 1),
@@ -401,6 +463,7 @@ function beats(u) {
 /* ------------------------------------------------------------------ nav: fly to a room
    Links carry data-stop (and an href to the same section of the text page, for no-JS). */
 function stopScrollY(id) {
+  if (failed) return null;                 // no house: the links go to the text page instead
   const g = journey && journey.segs.find((q) => q.type === 'hold' && q.stop.id === id);
   if (!g) return null;
   const total = track.offsetHeight - innerHeight;
@@ -560,7 +623,13 @@ addEventListener('scroll', requestRender, { passive: true });
   V = man.build ? `?v=${man.build}` : '';
   buildJourney(man);
   lastMix = portraitMix();
-  const [gltf] = await Promise.all([gltfLoader.loadAsync(BASE + 'house.glb' + V), fontsReady()]);
+  const glb = new Promise((res, rej) => gltfLoader.load(BASE + 'house.glb' + V, res, (e) => {
+    if (e.total) { glbPart = e.loaded / e.total; showProgress(); }
+  }, rej));
+  const [gltf] = await Promise.all([glb, fontsReady()]);
+  glbPart = 1;
+  showProgress();
+  if (loadMsg) loadMsg.textContent = 'Setting up the rooms';
   gltf.scene.traverse((o) => { if (o.isMesh) convert(o, man); });
   registerFrames(gltf.scene);
   scene.add(gltf.scene);
@@ -592,8 +661,13 @@ addEventListener('scroll', requestRender, { passive: true });
     s.scale.set(t.size, t.size, 1);
     scene.add(s);
   }
-  await Promise.all([new Promise((res) => (manager.onLoad = res, setTimeout(res, 4000))), grass && grass.ready]);
+  // the lightmaps are small; if one is slow the house opens without waiting for it, and it pops in after
+  await Promise.all([Promise.race([allLoaded(), new Promise((res) => setTimeout(res, 8000))]), grass && grass.ready]);
+  // compile every shader before the first frame, off the main thread where the browser allows it
+  await Promise.race([renderer.compileAsync(scene, camera), new Promise((res) => setTimeout(res, 8000))]).catch(() => {});
+  if (failed) return;
   doc.classList.add('h3-ready');
+  if (altLink) altLink.hidden = true;
   const q = new URLSearchParams(location.search);
   if (q.has('p')) {                     // debug: jump to a point on the flight (0..1 of the track)
     const total = track.offsetHeight - innerHeight;
@@ -634,7 +708,4 @@ addEventListener('scroll', requestRender, { passive: true });
     }, 'image/png');
   });
   window.__h3 = { renderer, scene, camera, progress, place, shot, journey: () => journey };
-})().catch((err) => {
-  console.error(err);
-  doc.classList.add('h3-failed');
-});
+})().catch((err) => fail(err));

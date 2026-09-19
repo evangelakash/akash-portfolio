@@ -29,9 +29,19 @@
   color: var(--t-hi); background: rgba(246, 246, 244, .86); padding: 8px 12px; border-radius: var(--r-full);
   transition: opacity 400ms var(--ease);
 }
-.h3-ready .h3-load { opacity: 0; }
+.h3-ready .h3-load { opacity: 0; pointer-events: none; }
+.h3-load b { font-weight: 500; margin-left: 8px; font-variant-numeric: tabular-nums; }
+.h3-load b:empty { display: none; }
 .h3-load i { display: inline-block; width: 64px; height: 2px; margin-left: 10px; vertical-align: middle;
   background: linear-gradient(90deg, var(--t-hi) var(--p, 0%), rgba(0,0,0,.15) 0); }
+/* the way out: shown when loading is slow or fails */
+.h3-alt { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); z-index: 6; white-space: nowrap; }
+.h3-alt[hidden] { display: none; }
+/* it could not load: keep the poster and the message up, drop the progress */
+.h3-failed .h3-load { opacity: 1; max-width: calc(100% - 32px); line-height: 1.4; text-align: center; border-radius: 12px; }
+.h3-failed .h3-cue { display: none; }
+.h3-failed .h3-load b, .h3-failed .h3-load i { display: none; }
+.h3-failed .h3-poster { opacity: 1; }
 
 /* copy layers: positioned inside the stage, opacity driven from JS via --o */
 .h3-copy {

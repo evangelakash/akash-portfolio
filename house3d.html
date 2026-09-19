@@ -10,7 +10,7 @@
 <link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css?v=12">
-<link rel="stylesheet" href="house3d.css?v=13">
+<link rel="stylesheet" href="house3d.css?v=15">
 <script>document.documentElement.className+=" js";</script>
 <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
 </head>
@@ -51,7 +51,8 @@
   <div class="h3-stage">
     <canvas id="h3-canvas" aria-label="A 3D walk through Akash's house: his studio, a hallway of results, the project gallery, the living room, a staircase of career milestones, the workshop, and back out to the front." role="img"></canvas>
     <div class="h3-poster" style="background-image:url(img/house3d/poster_aerial.webp)" aria-hidden="true"></div>
-    <p class="h3-load" aria-live="polite">Loading the house<i></i></p>
+    <p class="h3-load"><span class="h3-load__msg" role="status">Loading the house</span><b class="h3-load__pct" aria-hidden="true"></b><i aria-hidden="true"></i></p>
+    <a class="btn btn--sm h3-alt" href="index.html" hidden>Read the text version</a>
     <header class="h3-copy h3-intro" style="--o:1">
       <p class="h3-kicker">UX Designer &middot; Ascendion, Bengaluru</p>
       <h1>Hi, I&rsquo;m Akash Raj.</h1>
@@ -138,6 +139,6 @@
   </div>
 </div>
 
-<script type="module" src="house3d.js?v=51"></script>
+<script type="module" src="house3d.js?v=54"></script>
 </body>
 </html>
