@@ -3,7 +3,6 @@
    The canvas is sticky inside a tall track; copy sits on top of it.
    =================================================================== */
 
-.h3-page { background: #0f1112; }
 .h3-page .nav { position: fixed; inset: 0 0 auto 0; z-index: 30; }
 
 .h3-track { position: relative; height: 520vh; }

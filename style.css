@@ -1352,3 +1352,11 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .view-toggle a[aria-current="page"]{ background:var(--t-hi); color:var(--m-800); }
 .view-toggle a:focus-visible{ outline:2px solid var(--t-hi); outline-offset:2px; }
 @media (max-width:420px){ .view-toggle a{ padding:8px 9px; } }
+/* With the switch in the bar, a phone has no room for the résumé button as
+   well: it moves into the menu, and the name keeps to one line. */
+.nav__sheet a.nav__sheet-narrow{ display:none; }
+@media (max-width:560px){
+  .nav__name{ white-space:nowrap; }
+  .view-toggle ~ .nav__links .btn{ display:none; }
+  .nav__sheet a.nav__sheet-narrow{ display:flex; }
+}
