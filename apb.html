@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only light">
 <title>Agentic Process Builder &middot; Akash Raj</title>
 <meta name="description" content="Reviewing the output of an AI process is close to useless if the only thing you can say is no. APB lets the reviewer name the step that went wrong, re-steer it, and run it again.">
 <link rel="canonical" href="https://evangelakash.github.io/akash-portfolio/apb.html">
@@ -25,7 +26,7 @@
 <meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
 <link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=17">
 <script>document.documentElement.className+=" js";</script>
 </head>
 <body id="top">
@@ -43,7 +44,7 @@
 <header class="nav">
   <div class="container nav__inner">
     <a class="nav__mark" href="index.html">
-      <span class="ph ph--sq" aria-hidden="true"></span>
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="logo__tile" width="64" height="64" rx="15"/><path class="logo__ink" d="M12.5 47 L30 16 V47 M30 16 H36 A8.5 8.5 0 0 1 36 33 H21.6 M34 33 L43.4 45.2"/><circle class="logo__node" cx="45.6" cy="48" r="3.2"/></svg>
       <span class="nav__name">Akash Raj</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
@@ -96,7 +97,9 @@
       <div><dt>Status</dt><dd>Proof of concept shipped &middot; logic layer in development</dd></div>
     </dl>
 
-    <!-- ASSET SLOT: hero screenshot (canvas with expanded sidebar) goes here -->
+    <figure class="cs-shot cs-shot--hero cs-shot--bare reveal" style="--d:320ms">
+  <picture><source type="image/webp" srcset="img/covers/apb-macbook-700.webp 700w, img/covers/apb-macbook-1100.webp 1100w, img/covers/apb-macbook-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="957" style="--ar:1600/957" src="img/covers/apb-macbook.png" alt="A process on the APB canvas: a start node, a generated agent, an existing agent, a split into four agents, a merge and a human review step." loading="lazy" decoding="async"></picture>
+</figure>
 
     <section class="cs-tldr reveal" style="--d:400ms" aria-label="Summary">
       <h2>The whole thing, in six lines</h2>
@@ -211,7 +214,14 @@
 <p>The rail got crowded. Seven logic types, three artefact types and three building blocks is a lot for one column, and grouping is doing heavy work to keep it readable. If the logic set grows much further, the rail is the first thing that breaks.</p>
 <p>What it bought is that someone who has built an agent in Console already knows how to build a process. One mental model, one editor, one approval path.</p></div>
     </div>
-    <!-- ASSET SLOT: canvas with expanded sidebar screenshot -->
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-canvas-library-700.webp 700w, img/apb/apb-canvas-library-1100.webp 1100w, img/apb/apb-canvas-library-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-canvas-library.png" alt="The APB canvas inside Console, with the library open: artefacts you own, logic, and building blocks for start, end and human review." loading="lazy" decoding="async"></picture>
+  <figcaption>The canvas with its library open, inside Console&rsquo;s Build section: artefacts you already own, then logic, then building blocks.</figcaption>
+</figure>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-agent-draft-700.webp 700w, img/apb/apb-agent-draft-1100.webp 1100w, img/apb/apb-agent-draft-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-agent-draft.png" alt="An agent generated on the canvas, open in a side panel as a draft, with Edit and Run." loading="lazy" decoding="async"></picture><figcaption>An agent generated on the canvas opens as a draft: edit it, run it.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-agent-approved-700.webp 700w, img/apb/apb-agent-approved-1100.webp 1100w, img/apb/apb-agent-approved-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-agent-approved.png" alt="An approved agent in the same side panel, with Clone and Run instead of Edit." loading="lazy" decoding="async"></picture><figcaption>Once it has passed Console&rsquo;s approval, the same panel offers Clone instead of Edit.</figcaption></figure>
+</div>
   </div>
 </section>
 
@@ -229,7 +239,10 @@
 <div class="cs-pull"><b>The request that made this hard</b>
 <p><strong>The client did not ask for a simpler tool. They asked for a real one that a non-technical person could operate.</strong></p>
 <p>Those are different requests, and only the second one is difficult.</p></div>
-    <!-- ASSET SLOT: split configuration panel screenshot -->
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-split-config-700.webp 700w, img/apb/apb-split-config-1100.webp 1100w, img/apb/apb-split-config-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-split-config.png" alt="A split being configured: the agents it feeds, a distribution strategy, failure behaviour, files, and a plain-language logic field." loading="lazy" decoding="async"></picture><figcaption>A split, configured: the agents it feeds, how work is distributed, what happens on failure, and the logic written as a sentence.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-split-running-700.webp 700w, img/apb/apb-split-running-1100.webp 1100w, img/apb/apb-split-running-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-split-running.png" alt="The same split while running, with a status for each branch and the details of the ones that failed." loading="lazy" decoding="async"></picture><figcaption>The same split while it runs: every branch reports on its own, so a failure has an address.</figcaption></figure>
+</div>
   </div>
 </section>
 
@@ -301,8 +314,16 @@
 <p><strong>Reject tells the system the output was wrong. It does not tell it what was wrong, or where.</strong></p>
 <p>A reviewer who can only reject is a rubber stamp with extra steps.</p></div>
 
-    <!-- ASSET SLOT: review panel screenshot -->
-    <!-- ASSET SLOT: prototype video of the repair loop -->
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-hitl-config-700.webp 700w, img/apb/apb-hitl-config-1100.webp 1100w, img/apb/apb-hitl-config-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-hitl-config.png" alt="Configuring a human-in-the-loop checkpoint: name, description, supporting files, a primary and a secondary assignee, a retry count of three, and a reminder after three days." loading="lazy" decoding="async"></picture>
+  <figcaption>A checkpoint, configured: a named reviewer and a backup, the documents they judge against, three attempts, and a reminder if it sits unattended.</figcaption>
+</figure>
+<ol class="cs-seq reveal" aria-label="The repair loop, step by step">
+  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-edit-700.webp 700w, img/apb/apb-review-edit-1100.webp 1100w, img/apb/apb-review-edit-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-edit.png" alt="The reviewer reading the output with its supporting documents, editing it in place, with Retry, Reject and Approve below." loading="lazy" decoding="async"></picture><figcaption>The reviewer reads the output next to its supporting documents, and can correct it in place.</figcaption></figure></li>
+  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-retry-700.webp 700w, img/apb/apb-review-retry-1100.webp 1100w, img/apb/apb-review-retry-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-retry.png" alt="Retry from a step: the reviewer chooses the agent or workflow that caused the problem and adds context for it." loading="lazy" decoding="async"></picture><figcaption>Or they retry: pick the step that caused the problem and tell it what was wrong.</figcaption></figure></li>
+  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-retried-700.webp 700w, img/apb/apb-review-retried-1100.webp 1100w, img/apb/apb-review-retried-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-retried.png" alt="The retried step has run again and its new output is back with the reviewer." loading="lazy" decoding="async"></picture><figcaption>That step runs again, and its new output comes back to the same reviewer.</figcaption></figure></li>
+  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-approved-700.webp 700w, img/apb/apb-review-approved-1100.webp 1100w, img/apb/apb-review-approved-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-approved.png" alt="The reviewed output approved, and the run carrying on past the checkpoint." loading="lazy" decoding="async"></picture><figcaption>Approved, and the run carries on from the checkpoint.</figcaption></figure></li>
+</ol>
   </div>
 </section>
 
@@ -366,6 +387,10 @@
       </svg>
       <figcaption id="d3cap">Nothing merges until every required branch has arrived and passed validation. What happens to a failed branch is a decision the designer makes before the run, not something the system improvises during it.</figcaption>
     </figure>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-merge-config-700.webp 700w, img/apb/apb-merge-config-1100.webp 1100w, img/apb/apb-merge-config-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-merge-config.png" alt="A merge being configured: its parent branches, the aggregation between them, failure behaviour and a logic field." loading="lazy" decoding="async"></picture><figcaption>A merge, configured: the branches it waits for, how their outputs combine, and what a failure does.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-merge-running-700.webp 700w, img/apb/apb-merge-running-1100.webp 1100w, img/apb/apb-merge-running-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-merge-running.png" alt="The same merge running: a failed aggregation shown with the failing branch and its reason." loading="lazy" decoding="async"></picture><figcaption>Running: a branch that fails shows up with its reason instead of vanishing into the aggregate.</figcaption></figure>
+</div>
   </div>
 </section>
 
@@ -379,7 +404,14 @@
 <p>A process of any real size produces output that keeps going, and scrolling a stream to find what one particular agent produced is not a task anyone should be handed. So the bar does double duty. Click any step in it and that step&rsquo;s output comes to the top centre of the page, ready to read.</p>
 <p>That makes it a table of contents for a stream. Where am I, what is happening, and show me that one, answered in the same column.</p></div>
     </div>
-    <!-- ASSET SLOT: playground running view screenshot -->
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-run-output-700.webp 700w, img/apb/apb-run-output-1100.webp 1100w, img/apb/apb-run-output-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-run-output.png" alt="The playground output view: an activity bar listing each agent, workflow and logic step with its status, the execution output in the middle, and process logs on the right." loading="lazy" decoding="async"></picture>
+  <figcaption>The activity bar down the left: every step with its live status. Click one and its output comes to the top of the page.</figcaption>
+</figure>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-run-monitor-700.webp 700w, img/apb/apb-run-monitor-1100.webp 1100w, img/apb/apb-run-monitor-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-run-monitor.png" alt="The monitor tab: nodes with status, tokens, cost and duration, and run totals." loading="lazy" decoding="async"></picture><figcaption>Monitor: status, tokens, cost and duration per node. The figures here are demo values.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/apb/apb-run-input-700.webp 700w, img/apb/apb-run-input-1100.webp 1100w, img/apb/apb-run-input-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-run-input.png" alt="The input tab before a run: a blueprint of the process and inputs for each node, with optional files." loading="lazy" decoding="async"></picture><figcaption>Before a run: inputs set node by node, against a blueprint of the process.</figcaption></figure>
+</div>
   </div>
 </section>
 
@@ -429,6 +461,6 @@
   </div>
 </footer>
 
-<script src="motion.js?v=7"></script>
+<script src="motion.js?v=8"></script>
 </body>
 </html>

@@ -139,6 +139,9 @@
    =================================================================== */
 
 :root{
+  /* The palette is light by design. "only light" keeps phones that darken pages on their own
+     (Chrome's auto-dark, Samsung Internet) from repainting it. */
+  color-scheme:only light;
   /* the metal — brushed aluminium, soft white */
   --m-950:#EAEAE7;
   --m-900:#EFEFEC;
@@ -220,15 +223,29 @@ a{ color:inherit; }
 body::before{
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
   background-image:
-    repeating-linear-gradient(90deg,
-      rgba(0,0,0,.011)       0 1px,
-      rgba(255,255,255,.55)  1px 2px,
-      transparent           2px 3px),
     linear-gradient(148deg,
       rgba(255,255,255,.75) 0%,
       rgba(255,255,255,.22) 28%,
       transparent           56%,
       rgba(0,0,0,.055)      100%);
+}
+/* The 1px brush grain only where it lands on whole device pixels: a mouse-driven screen at exactly 1x or
+   2x. At fractional ratios (most Android phones, 125% desktop scaling, browser zoom) the 3px pattern beats
+   against the pixel grid into visible stripes, and a phone that darkens pages turns it into black and white
+   bars, so everywhere else keeps the sheen alone. */
+@media (pointer:fine) and (resolution:1dppx), (pointer:fine) and (resolution:2dppx){
+  body::before{
+    background-image:
+      repeating-linear-gradient(90deg,
+        rgba(0,0,0,.011)       0 1px,
+        rgba(255,255,255,.55)  1px 2px,
+        transparent           2px 3px),
+      linear-gradient(148deg,
+        rgba(255,255,255,.75) 0%,
+        rgba(255,255,255,.22) 28%,
+        transparent           56%,
+        rgba(0,0,0,.055)      100%);
+  }
 }
 body::after{
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -365,6 +382,17 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 }
 .nav__inner{ display:flex; align-items:center; justify-content:space-between; gap:var(--s-6); height:66px; }
 .nav__mark{ display:flex; align-items:center; gap:var(--s-3); text-decoration:none; }
+/* The mark: A and R share a stroke. The A's right side is the R's stem, one horizontal is both the A's
+   crossbar and the foot of the R's bowl, and the R's leg ends on a node, the way a connector lands on a
+   step in a process canvas. */
+.logo{ width:28px; height:28px; flex:none; display:block; overflow:visible; }
+.logo__tile{ fill:var(--t-hi); }
+.logo__ink{ fill:none; stroke:var(--m-800); stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+.logo__node{ fill:var(--m-800); transform-box:fill-box; transform-origin:center;
+  transition:transform .22s var(--ease); }
+@media (hover:hover) and (pointer:fine){
+  .nav__mark:hover .logo__node{ transform:scale(1.35); }
+}
 .nav__name{ font-family:var(--sans); font-weight:500; font-size:var(--fs-4); letter-spacing:-.01em; }
 .nav__links{ display:flex; align-items:center; gap:var(--s-7); }
 .nav__links a{
@@ -1359,4 +1387,185 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
   .nav__name{ white-space:nowrap; }
   .view-toggle ~ .nav__links .btn{ display:none; }
   .nav__sheet a.nav__sheet-narrow{ display:flex; }
+}
+
+/* ===================================================================
+   SELECTED WORK: four equal cards, each case study's own cover on top.
+   No featured card and no tags: cover, title, one line, who did what,
+   the link. The link sits on the card's floor so the pair reads level
+   whatever the text length.
+   =================================================================== */
+.work-grid{ grid-template-columns:repeat(2,1fr); align-items:stretch; }
+.card__media--cover{
+  display:block; position:relative; overflow:hidden; aspect-ratio:16/9;
+  background:var(--m-850); border-bottom:1px solid var(--m-500); border-radius:0; padding:0;
+}
+.card__media--cover img,
+.card__media--cover video{
+  display:block; width:100%; height:100%; aspect-ratio:auto; object-fit:cover;
+  border:0; border-radius:0; box-shadow:none; background:none;
+  transition:transform .8s var(--ease);
+}
+.card--cover .card__body{ flex:1; padding:var(--s-7) var(--s-7) var(--s-6); }
+.card--cover .card__title{ font-size:clamp(var(--fs-6),1.7vw,var(--fs-8)); margin-bottom:var(--s-2); }
+.card--cover .card__sub{ font-size:var(--fs-4); }
+.card--cover .card__rel{ margin:var(--s-4) 0 var(--s-5); font-size:var(--fs-2); color:var(--t-low); }
+.card--cover .link{ align-self:flex-start; margin-top:auto; }
+@media (hover:hover) and (pointer:fine){
+  .card--cover:hover .card__media--cover img,
+  .card--cover:hover .card__media--cover video{ transform:scale(1.015); }
+}
+@media (max-width:900px){
+  .work-grid{ grid-template-columns:1fr; }
+  .card--cover .card__body{ padding:var(--s-6); }
+}
+@media (prefers-reduced-motion: reduce){
+  .card__media--cover img, .card__media--cover video{ transition:none; }
+}
+
+
+/* ---- a sequence of screens, numbered because the order is the point ---- */
+.cs-seq{
+  list-style:none; margin:clamp(var(--s-8),4vw,var(--s-11)) 0 0; padding:0;
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--s-8) var(--s-5); counter-reset:seq;
+}
+.cs-seq li{ counter-increment:seq; }
+.cs-seq figure{ margin:0; }
+.cs-seq img{
+  display:block; width:100%; height:auto; aspect-ratio:var(--ar);
+  border-radius:var(--r-md); border:1px solid var(--m-500); background:var(--m-700);
+  box-shadow:0 12px 28px rgba(20,20,25,.10);
+}
+.cs-seq figcaption{
+  display:flex; gap:var(--s-3); margin-top:var(--s-3);
+  font-family:var(--mono); font-size:var(--fs-3); line-height:1.6; letter-spacing:.01em; color:var(--t-mid);
+}
+.cs-seq figcaption::before{ content:counter(seq, decimal-leading-zero); flex:none; color:var(--t-hi); font-weight:500; }
+@media (max-width:900px){ .cs-seq{ grid-template-columns:1fr; } }
+
+/* ===================================================================
+   CASE STUDY ADDITIONS: Product Studio and the design system
+   =================================================================== */
+/* a photograph or a video as the hero: no device chrome to strip, so a soft corner and a lift */
+.cs-shot--photo img{ border:0; border-radius:var(--r-lg); background:var(--m-850); box-shadow:0 18px 44px rgba(20,20,25,.14); }
+.cs-shot--video video{
+  display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover;
+  border-radius:var(--r-lg); background:var(--m-850); box-shadow:0 18px 44px rgba(20,20,25,.12);
+}
+
+/* a ranked list: the order is the content, so it carries numbers */
+.cs-body .cs-rank,
+.cs-rank{
+  list-style:none; counter-reset:rank; margin:var(--s-6) 0; padding:0;
+  display:block; border-top:1px solid var(--m-500);
+}
+.cs-rank li{
+  counter-increment:rank; display:grid; grid-template-columns:2.2em 1fr auto; gap:var(--s-3);
+  align-items:baseline; padding:var(--s-3) 0; border-bottom:1px solid var(--m-500);
+}
+.cs-rank li::before{ content:counter(rank, decimal-leading-zero); font-family:var(--mono); font-size:var(--fs-2); color:var(--t-low); }
+.cs-rank span{ color:var(--t-mid); }
+.cs-rank span b{ color:var(--t-hi); font-weight:500; }
+.cs-rank > li > b{ font-family:var(--mono); font-size:var(--fs-2); font-weight:400; color:var(--t-low); }
+.cs-rank > li > b.p0{ color:var(--t-hi); font-weight:500; }
+.cs-rank > li > b.p1{ color:var(--t-mid); }
+.cs-rank--steps li{ grid-template-columns:2.2em 1fr; padding:var(--s-4) 0; }
+
+/* an odd last screen in a sequence sits centred rather than stranded on the left */
+.cs-seq li:last-child:nth-child(odd){ grid-column:1 / -1; width:calc(50% - var(--s-5) / 2); justify-self:center; }
+@media (max-width:900px){ .cs-seq li:last-child:nth-child(odd){ width:auto; justify-self:stretch; } }
+
+/* ---- the theming demo: one button, one token name, four products, two modes ---- */
+.ds-demo{
+  margin:clamp(var(--s-8),4vw,var(--s-11)) 0; overflow:hidden;
+  border:1px solid var(--m-500); border-radius:var(--r-lg); background:var(--m-700);
+  box-shadow:0 14px 34px rgba(20,20,25,.08);
+}
+.ds-demo__bar{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--s-4) var(--s-7);
+  padding:var(--s-5) var(--s-6); border-bottom:1px solid var(--m-500); background:var(--m-600);
+}
+.ds-seg{ border:0; margin:0; padding:0; min-width:0; display:flex; flex-wrap:wrap; align-items:center; gap:var(--s-2); }
+.ds-seg legend{
+  float:left; margin-right:var(--s-3); padding:0;
+  font-family:var(--mono); font-size:var(--fs-1); letter-spacing:.12em; text-transform:uppercase; color:var(--t-low);
+}
+.ds-seg label{ position:relative; display:inline-flex; }
+.ds-seg input{ position:absolute; inset:0; margin:0; opacity:0; cursor:pointer; }
+.ds-seg span{
+  display:inline-block; padding:7px 13px; border-radius:var(--r-full); border:1px solid var(--m-500);
+  font-family:var(--sans); font-size:var(--fs-3); line-height:1.2; color:var(--t-mid); background:var(--m-700);
+  transition:background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.ds-seg input:checked + span{ background:var(--t-hi); border-color:var(--t-hi); color:var(--m-800); }
+.ds-seg input:focus-visible + span{ outline:2px solid var(--t-hi); outline-offset:2px; }
+@media (hover:hover) and (pointer:fine){ .ds-seg input:not(:checked):hover + span{ color:var(--t-hi); border-color:var(--m-400); } }
+
+.ds-demo__stage{
+  --bp:#E91E63; --ground:#FFFFFF; --ink:#1A1A1D; --dis:#BABDC4; --dis-ink:#FFFFFF;
+  background:var(--ground); padding:clamp(var(--s-9),5vw,var(--s-12)) var(--s-6) var(--s-7);
+  transition:background-color .3s var(--ease);
+}
+.ds-demo__stage[data-product="console"]{ --bp:#0084FF; }
+.ds-demo__stage[data-product="studio"]{ --bp:#673AB7; }
+.ds-demo__stage[data-product="experience"]{ --bp:#F9709A; }
+.ds-demo__stage[data-mode="dark"]{ --ground:#141417; --ink:#F6F6F4; --dis:#4B505B; --dis-ink:#8C919B; }
+.ds-demo__stage[data-mode="dark"][data-product="default"]{ --bp:#ED4B82; }
+.ds-demo__stage[data-mode="dark"][data-product="console"]{ --bp:#339CFF; }
+.ds-demo__stage[data-mode="dark"][data-product="studio"]{ --bp:#8560C4; }
+.ds-demo__stage[data-mode="dark"][data-product="experience"]{ --bp:#FB8CAE; }
+.ds-demo__row{ display:flex; flex-wrap:wrap; justify-content:center; gap:var(--s-4); }
+.dsb{
+  display:inline-flex; align-items:center; gap:8px; height:40px; padding:8px 16px; border-radius:12px;
+  border:1px solid transparent; font:500 15px/1 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition:background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+.dsb svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.dsb--primary{ background:var(--bp); color:#FFFFFF; }
+.dsb--secondary{ border-color:var(--bp); color:var(--bp); }
+.dsb--tertiary{ color:var(--bp); }
+.dsb--disabled{ background:var(--dis); color:var(--dis-ink); }
+.ds-demo__read{
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:var(--s-2);
+  margin:var(--s-8) 0 0; font-family:var(--mono); font-size:var(--fs-2); color:var(--ink);
+  transition:color .3s var(--ease);
+}
+.ds-demo__read code{ font-family:var(--mono); }
+.ds-demo__sw{ display:inline-block; width:14px; height:14px; border-radius:4px; background:var(--bp); transition:background-color .25s var(--ease); }
+.ds-demo figcaption{
+  padding:var(--s-4) var(--s-6) var(--s-5); border-top:1px solid var(--m-500);
+  font-family:var(--mono); font-size:var(--fs-3); line-height:1.6; letter-spacing:.01em; color:var(--t-mid);
+}
+
+/* ---- token spec cards: the system's own values, drawn at their real proportions ---- */
+.ds-spec{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s-5); margin:clamp(var(--s-8),4vw,var(--s-11)) 0; }
+.ds-spec__card{ padding:var(--s-6); border:1px solid var(--m-500); border-radius:var(--r-md); background:var(--m-700); }
+.ds-spec__card h3{
+  margin:0 0 var(--s-4); font-family:var(--mono); font-size:var(--fs-1); font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--t-low);
+}
+.ds-spec__card * + h3{ margin-top:var(--s-7); }
+.ds-bars{ list-style:none; margin:0; padding:0; display:grid; gap:7px; }
+.ds-bars li{
+  display:grid; grid-template-columns:5.6em 1fr 2em; align-items:center; gap:var(--s-3);
+  font-family:var(--mono); font-size:var(--fs-1); color:var(--t-mid);
+}
+.ds-bars i{ display:block; height:8px; width:calc(var(--v) * 3px); max-width:100%; border-radius:2px; background:var(--t-hi); }
+.ds-bars span{ text-align:right; color:var(--t-low); }
+.ds-radii{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,1fr); gap:var(--s-2); }
+.ds-radii li{ display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; font-family:var(--mono); font-size:10px; color:var(--t-mid); }
+.ds-radii i{ display:block; width:44px; height:44px; border:1.5px solid var(--t-hi); border-radius:var(--rad); background:var(--m-850); }
+.ds-radii span{ color:var(--t-low); }
+.ds-mini{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:var(--fs-2); }
+.ds-mini th, .ds-mini td{ text-align:left; padding:6px 8px 6px 0; border-bottom:1px solid var(--m-500); color:var(--t-mid); font-weight:400; }
+.ds-mini thead th{ font-size:var(--fs-1); letter-spacing:.1em; text-transform:uppercase; color:var(--t-low); }
+.ds-mini tbody th{ color:var(--t-hi); font-weight:500; }
+.ds-type{ margin:0; display:grid; gap:var(--s-3); }
+.ds-type div{ display:grid; gap:2px; }
+.ds-type dt{ font-family:var(--sans); font-size:var(--fs-4); font-weight:500; color:var(--t-hi); }
+.ds-type dd{ margin:0; font-family:var(--mono); font-size:var(--fs-2); color:var(--t-mid); }
+@media (max-width:1000px){ .ds-spec{ grid-template-columns:1fr 1fr; } }
+@media (max-width:640px){ .ds-spec{ grid-template-columns:1fr; } .ds-demo__bar{ padding:var(--s-4); } }
+@media (prefers-reduced-motion: reduce){
+  .dsb, .ds-demo__stage, .ds-demo__read, .ds-demo__sw, .ds-seg span{ transition:none; }
 }

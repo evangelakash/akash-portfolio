@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only light">
+<title>Play+ Design System &middot; Akash Raj</title>
+<meta name="description" content="Play+ is the design system under Enterprise Console, APB, Product Studio and the other AAVA studios: one component library every product themes as its own, in light and dark, without a product-specific variant.">
+<link rel="canonical" href="https://evangelakash.github.io/akash-portfolio/design-system.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F6F6F4">
+<meta name="author" content="Akash Raj">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Akash Raj">
+<meta property="og:title" content="Play+ Design System">
+<meta property="og:description" content="One component library, themed by every product as its own, in light and dark. The core move: components ask for roles, never colours.">
+<meta property="og:url" content="https://evangelakash.github.io/akash-portfolio/design-system.html">
+<meta property="og:image" content="https://evangelakash.github.io/akash-portfolio/img/covers/design-system-poster.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Play+ components: loader, toggle, stepper, glass surface and button tabs.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Play+ Design System">
+<meta name="twitter:description" content="One component library, themed by every product as its own, in light and dark. The core move: components ask for roles, never colours.">
+<meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/img/covers/design-system-poster.jpg">
+<link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=17">
+<script>document.documentElement.className+=" js";</script>
+</head>
+<body id="top">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="rough" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__mark" href="index.html">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="logo__tile" width="64" height="64" rx="15"/><path class="logo__ink" d="M12.5 47 L30 16 V47 M30 16 H36 A8.5 8.5 0 0 1 36 33 H21.6 M34 33 L43.4 45.2"/><circle class="logo__node" cx="45.6" cy="48" r="3.2"/></svg>
+      <span class="nav__name">Akash Raj</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="btn btn--sm" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">R&eacute;sum&eacute; &#8599;</a>
+    </nav>
+      <details class="nav__menu">
+        <summary aria-label="Menu"><span></span><span></span></summary>
+        <div class="nav__sheet">
+          <a href="index.html#work">Work</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="#top">Top of case study</a>
+        </div>
+      </details>
+  </div>
+</header>
+<nav class="cs-rail" aria-label="Sections">
+  <ol>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">The problem</span></li>
+      <li><a href="#s01" class="is-here"><span class="cs-rail__label">Why one system</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s02"><span class="cs-rail__label">A principle before a component</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Four decisions</span></li>
+      <li><a href="#s03"><span class="cs-rail__label">Decision: roles, not colours</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s04"><span class="cs-rail__label">Decision: dark mode is a mapping</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s05"><span class="cs-rail__label">Decision: one button for every case</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s06"><span class="cs-rail__label">The foundations, as tokens</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Keeping it one system</span></li>
+      <li><a href="#s07"><span class="cs-rail__label">Glass, with rules</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s08"><span class="cs-rail__label">The library</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s09"><span class="cs-rail__label">Governance</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s10"><span class="cs-rail__label">Where it stands</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+  </ol>
+</nav>
+<main id="main" tabindex="-1">
+
+<section class="cs-hero">
+  <div class="container">
+    <h1 class="cs-hero__title reveal" style="--d:80ms">Play+ Design System</h1>
+    <p class="cs-hero__dek reveal" style="--d:160ms">Play+ is the design system under Enterprise Console, APB, Product Studio and the other AAVA studios: one component library that every product themes as its own, in light and dark, without a single product-specific variant.</p>
+
+    <dl class="cs-meta reveal" style="--d:240ms">
+      <div><dt>Project</dt><dd>Play+, Ascendion &middot; Jan 2025 &ndash; present</dd></div>
+      <div><dt>My role</dt><dd>Core team &middot; architecture, components and tokens, motion, documentation</dd></div>
+      <div><dt>Team</dt><dd>Core design team, with developers and product managers</dd></div>
+      <div><dt>Scope</dt><dd>12 brand palettes &middot; light and dark &middot; four to six products</dd></div>
+      <div><dt>Status</dt><dd>Version 2 developed &middot; in use across the studios</dd></div>
+    </dl>
+
+    <figure class="cs-shot cs-shot--hero cs-shot--video reveal" style="--d:320ms">
+      <video class="cover-video" muted loop playsinline preload="none" data-autoplay poster="img/covers/design-system-poster-1600.webp" width="1920" height="1080" aria-label="Play+ components in motion: a liquid loader, a toggle, a stepper, a spinner, a glass surface, button tabs and a dropdown.">
+        <source src="img/covers/design-system-1080.mp4" type='video/mp4; codecs="hvc1"'>
+        <source src="img/covers/design-system-720.mp4" type="video/mp4">
+      </video>
+    </figure>
+
+    <section class="cs-tldr reveal" style="--d:400ms" aria-label="Summary">
+      <h2>The whole thing, in six lines</h2>
+      <ol>
+        <li><p>As AAVA grew, each product team designed on its own: <b>different patterns, duplicated components</b>, drifting spacing and type, slower handoff.</p></li>
+        <li><p>Play+ started from a principle, not a component: <b>Design That Breathes</b>. Adaptive, intuitive, inclusive, distinct, engaging.</p></li>
+        <li><p>The core move was <b>semantic tokens</b>. A component never names a colour, only a role, and each product maps the role to its own palette.</p></li>
+        <li><p>So <b>one button serves four products in two modes</b>: pink by default, Pulse blue in Console, violet in Product Studio, rose in Experience Studio.</p></li>
+        <li><p>Everything else is tokens too: <b>spacing, radius, elevation, layout, icon sizes</b>, and the glass surfaces Play+ is known for.</p></li>
+        <li><p><b>Governance</b> keeps it one system: a new component is checked against what exists first, and only the lead designer can approve it.</p></li>
+      </ol>
+    </section>
+
+    <nav class="cs-map reveal" style="--d:480ms" aria-label="What the rest of this page covers">
+      <p class="cs-map__lead">That is the whole system. The rest is how each part was decided, and what it cost.</p>
+      <ol>
+        <li><a href="#s01"><b>The problem</b><span>Why the platform needed one system, and the principle it started from</span><i>2 sections</i></a></li>
+        <li><a href="#s03"><b>Four decisions</b><span>Roles not colours, modes as mappings, one button for every case, foundations as tokens</span><i>4 sections</i></a></li>
+        <li><a href="#s07"><b>Keeping it one system</b><span>Glass with rules, the library, governance, and what I can claim</span><i>4 sections</i></a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="cs-sec" id="s01">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Why one system</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">Every product team was right about its own screens. Together they made products that did not match.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>AAVA grew into a family of products: Enterprise Console, where agents are built, and the studios for product and experience work alongside it. Each team designed for itself, and each did reasonable work.</p>
+<p>Together it did not hold. The same pattern looked different from product to product. The same component was designed twice. Spacing, type and interaction details drifted. Handoff to development took longer than it should have, accessibility depended on which team you asked, and a new designer or developer had to learn every product separately.</p>
+<p>I was part of the core team that built Play+ from January 2025: the system&rsquo;s architecture, its components and tokens, motion and interaction, the documentation and usage guidelines, and the working relationship with the developers who build it.</p></div>
+    </div>
+
+  </div>
+</section>
+<section class="cs-sec cs-sec--band" id="s02">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">A principle before a component</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">We named what the system should feel like before deciding what it should contain.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The vision was a single design language that lets every product team design, build and ship consistently, without giving up flexibility. The work ran in four steps, in this order:</p>
+<ol class="cs-rank cs-rank--steps">
+  <li><span><b>Define the philosophy.</b> Design That Breathes: interfaces that feel adaptive, intuitive, inclusive, distinct and engaging.</span></li>
+  <li><span><b>Set the pillars.</b> Those five words became the test for every design and development decision.</span></li>
+  <li><span><b>Turn pillars into styles.</b> Each pillar expressed visually and in motion: glass, liquid, the Play+ look and feel.</span></li>
+  <li><span><b>Build and systemise.</b> In sprints with the AAVA studio teams, into tokens, components and patterns.</span></li>
+</ol>
+<p>The foundations that came out of it are colour, typography, spacing, radius, elevation, grid, motion, icons and theming. Each one exists as tokens, not as values typed into a design file.</p></div>
+    </div>
+
+  </div>
+</section>
+<section class="cs-sec" id="s03">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: components ask for roles, not colours</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">A button in Play+ does not know it is pink.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The palette is twelve primary colours, each a full scale from 50 to 900, plus neutrals, black, white, and the feedback colours for success, warning, error and information. Every product or studio is assigned one of the twelve as its brand colour.</p>
+<p>The decision that made the system work was a layer between those palettes and the components. Components reference <strong>semantic tokens</strong>, roles like Brand/Primary/500, and never a palette directly. Each product maps the roles to its own palette: pink by default, Pulse blue for Console, violet for Product Studio, rose for Experience Studio.</p>
+<p>That is why no component has a product-specific variant. There is one button. It asks for Brand/Primary, and the product decides what Brand/Primary is.</p>
+<p><b>What it cost</b></p>
+<p>An extra layer to learn. A designer new to the system has to understand that the colour on screen is not the colour the component asks for, and a token named for a role is harder to reason about than a hex value. The payoff is that a new product is a mapping, not a fork.</p></div>
+    </div>
+<figure class="ds-demo reveal" aria-labelledby="dsdemo-cap">
+  <div class="ds-demo__bar">
+    <fieldset class="ds-seg">
+      <legend>Product</legend>
+      <label><input type="radio" name="ds-product" value="default" checked><span>Default</span></label>
+      <label><input type="radio" name="ds-product" value="console"><span>Console</span></label>
+      <label><input type="radio" name="ds-product" value="studio"><span>Product Studio</span></label>
+      <label><input type="radio" name="ds-product" value="experience"><span>Experience Studio</span></label>
+    </fieldset>
+    <fieldset class="ds-seg">
+      <legend>Mode</legend>
+      <label><input type="radio" name="ds-mode" value="light" checked><span>Light</span></label>
+      <label><input type="radio" name="ds-mode" value="dark"><span>Dark</span></label>
+    </fieldset>
+  </div>
+  <div class="ds-demo__stage" data-product="default" data-mode="light">
+    <div class="ds-demo__row" aria-hidden="true">
+      <span class="dsb dsb--primary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>Label</span>
+      <span class="dsb dsb--secondary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>Label</span>
+      <span class="dsb dsb--tertiary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>Label</span>
+      <span class="dsb dsb--disabled"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>Label</span>
+    </div>
+    <p class="ds-demo__read" aria-live="polite"><code>Brand/Primary/500</code> <span aria-hidden="true">&rarr;</span> <code data-ds="map">Pink 500, light scale</code> <i class="ds-demo__sw" aria-hidden="true"></i> <code data-ds="hex">#E91E63</code></p>
+  </div>
+  <figcaption id="dsdemo-cap">One button and one token name. The product decides which palette the name resolves to, and the mode decides which end of that palette&rsquo;s scale. Primary, secondary, tertiary and disabled, with colours taken from the system&rsquo;s own tables.</figcaption>
+</figure>
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/ds/ds-semantic-700.webp 700w, img/ds/ds-semantic-1100.webp 1100w, img/ds/ds-semantic-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="814" style="--ar:1600/814" src="img/ds/ds-semantic.jpg" alt="The semantic token table: Brand Primary 50 to 900, mapped to Global Pink, Console Pulse blue, Product Violet and Experience Rose." loading="lazy" decoding="async"></picture>
+  <figcaption>The semantic layer: one role, four palettes.</figcaption>
+</figure>
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/ds/ds-colours-700.webp 700w, img/ds/ds-colours-1100.webp 1100w, img/ds/ds-colours-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="1185" style="--ar:1600/1185" src="img/ds/ds-colours.jpg" alt="Four of the twelve colour palettes, Purple, Pink, Violet and Deep purple, each from 50 to 900 with hex values." loading="lazy" decoding="async"></picture>
+  <figcaption>Four of the twelve palettes, each a full scale from 50 to 900.</figcaption>
+</figure>
+  </div>
+</section>
+<section class="cs-sec cs-sec--band" id="s04">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: dark mode is a mapping, not a second library</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">Light and dark share every component. Only the mapping underneath changes.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Each palette runs as a synchronised pair of scales. The dark scale is the light one in reverse: Pink 50 in light mode is the value Pink 900 takes in dark, and every step between follows. Because components already point at semantic tokens, switching mode swaps the mapping under them and nothing else.</p>
+<p>The test was a real screen. Console&rsquo;s agent creation page, one of the densest in the platform, runs in both modes from the same components, with no dark variant of anything.</p></div>
+    </div>
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/ds/ds-agent-modes-700.webp 700w, img/ds/ds-agent-modes-1100.webp 1100w, img/ds/ds-agent-modes-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="569" style="--ar:1600/569" src="img/ds/ds-agent-modes.jpg" alt="Console&rsquo;s agent creation page in light mode and in dark mode, side by side." loading="lazy" decoding="async"></picture>
+  <figcaption>Console&rsquo;s agent creation page, light and dark, from one component library.</figcaption>
+</figure>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-modes-700.webp 700w, img/ds/ds-modes-1100.webp 1100w, img/ds/ds-modes-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1351" style="--ar:1600/1351" src="img/ds/ds-modes.jpg" alt="The Pink scale in light and dark: P-50 to P-900, where the dark column is the light column reversed." loading="lazy" decoding="async"></picture><figcaption>Pink in both modes: the dark scale is the light one, reversed.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-button-themes-700.webp 700w, img/ds/ds-button-themes-1100.webp 1100w" sizes="(min-width:900px) 544px, 92vw"><img width="1520" height="1340" style="--ar:1520/1340" src="img/ds/ds-button-themes.jpg" alt="The primary, secondary, tertiary and disabled button in the default theme and three products, in light mode and dark mode." loading="lazy" decoding="async"></picture><figcaption>The button across four products and both modes.</figcaption></figure>
+</div>
+  </div>
+</section>
+<section class="cs-sec" id="s05">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: one button for every case</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">The most-used component is where a system either holds or splinters.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The button carries four types (primary, secondary, gradient and tertiary), nine states (default, hover, active, disabled, warning, danger, underline, success and information), a pill or square shape, five sizes from extra small to extra large, and four icon placements: none, left, right, or icon only. The label and the icon are properties, not variants.</p>
+<p>Multiplied out, that is <strong>1,440 combinations behind one component</strong>. A designer sees a handful of dropdowns.</p>
+<p>Its dimensions are tokens as well. Vertical padding is space-3, horizontal padding is space-7, the corner is radius-md, and the height tokens run 32, 40 and 48 pixels for small, medium and large. When a spacing token changes, every button changes with it.</p>
+<p><b>What it cost</b></p>
+<p>A component this large is slow to change. Adding a state means checking it against every type, size, product and mode, which is exactly the kind of change the review process exists to catch.</p></div>
+    </div>
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/ds/ds-button-props-700.webp 700w, img/ds/ds-button-props-1100.webp 1100w, img/ds/ds-button-props-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="770" style="--ar:1600/770" src="img/ds/ds-button-props.jpg" alt="The button&rsquo;s token table (padding, typography, radius, heights) next to its Figma properties panel: type, state, pill, size, icon, label." loading="lazy" decoding="async"></picture>
+  <figcaption>The button&rsquo;s properties, and the tokens its dimensions come from.</figcaption>
+</figure>
+  </div>
+</section>
+<section class="cs-sec cs-sec--band" id="s06">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">The foundations, as tokens</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">A value that gets typed will drift. So nothing is typed.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Every foundation is a named scale, and the scales are small on purpose. Spacing runs from 0 to 64 in twelve tokens. Five radii. Four elevation levels, each an offset, a blur, a spread and a neutral colour. Five breakpoints, with gutters and margins taken from the spacing scale rather than set per layout. Four icon sizes.</p>
+<p>Typography has three families with three jobs: PP Neue Machina for display, Mulish for headings, Inter for body text and captions. The values below are the system&rsquo;s own, drawn here at their real proportions.</p></div>
+    </div>
+<div class="ds-spec reveal">
+  <section class="ds-spec__card">
+    <h3>Spacing</h3>
+    <ul class="ds-bars">
+      <li><code>space-1</code><i style="--v:4"></i><span>4</span></li>
+      <li><code>space-2</code><i style="--v:6"></i><span>6</span></li>
+      <li><code>space-3</code><i style="--v:8"></i><span>8</span></li>
+      <li><code>space-4</code><i style="--v:10"></i><span>10</span></li>
+      <li><code>space-5</code><i style="--v:12"></i><span>12</span></li>
+      <li><code>space-6</code><i style="--v:14"></i><span>14</span></li>
+      <li><code>space-7</code><i style="--v:16"></i><span>16</span></li>
+      <li><code>space-8</code><i style="--v:24"></i><span>24</span></li>
+      <li><code>space-9</code><i style="--v:32"></i><span>32</span></li>
+      <li><code>space-10</code><i style="--v:48"></i><span>48</span></li>
+      <li><code>space-11</code><i style="--v:64"></i><span>64</span></li>
+    </ul>
+  </section>
+  <section class="ds-spec__card">
+    <h3>Radius</h3>
+    <ul class="ds-radii">
+      <li><i style="--rad:8px"></i><code>radius-sm</code><span>8</span></li>
+      <li><i style="--rad:12px"></i><code>radius-md</code><span>12</span></li>
+      <li><i style="--rad:24px"></i><code>radius-lg</code><span>24</span></li>
+      <li><i style="--rad:9999px"></i><code>radius-pill</code><span>9999</span></li>
+      <li><i style="--rad:50%"></i><code>circle</code><span>50%</span></li>
+    </ul>
+    <h3>Elevation</h3>
+    <table class="ds-mini"><caption class="vh">Shadow tokens: y offset, blur and spread in pixels, x is always 0</caption>
+      <thead><tr><th scope="col">Level</th><th scope="col">Y</th><th scope="col">Blur</th><th scope="col">Spread</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1</th><td>2</td><td>4</td><td>0</td></tr>
+        <tr><th scope="row">2</th><td>4</td><td>12</td><td>0</td></tr>
+        <tr><th scope="row">3</th><td>8</td><td>12</td><td>3</td></tr>
+        <tr><th scope="row">4</th><td>20</td><td>15</td><td>&minus;3</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="ds-spec__card">
+    <h3>Type</h3>
+    <dl class="ds-type">
+      <div><dt>PP Neue Machina</dt><dd>Display &middot; 64/76, 48/56, 36/40</dd></div>
+      <div><dt>Mulish</dt><dd>Headings &middot; H1 36/40</dd></div>
+      <div><dt>Inter</dt><dd>Body 18 to 20 &middot; captions 14/20</dd></div>
+    </dl>
+    <h3>Layout</h3>
+    <dl class="ds-type">
+      <div><dt>Breakpoints</dt><dd>320 &middot; 767 &middot; 1280 &middot; 1440 &middot; 1920</dd></div>
+      <div><dt>Gutter, margins</dt><dd>space-7, and space-9 on desktop</dd></div>
+      <div><dt>Icons</dt><dd>Lucide at 16 &middot; 20 &middot; 24 &middot; 32</dd></div>
+    </dl>
+  </section>
+</div>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-type-700.webp 700w, img/ds/ds-type-1100.webp 1100w, img/ds/ds-type-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="997" style="--ar:1600/997" src="img/ds/ds-type.jpg" alt="The type specimen: PP Neue Machina display sizes, Mulish headings, and Inter body and caption styles with sizes and line heights." loading="lazy" decoding="async"></picture><figcaption>The type scale: display, headings, body and captions.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-layout-700.webp 700w, img/ds/ds-layout-1100.webp 1100w, img/ds/ds-layout-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="864" style="--ar:1600/864" src="img/ds/ds-layout.jpg" alt="Layout grids at desktop 1920, tablet 767, mobile 440 and desktop 1440, beside the Lucide icon set at five sizes." loading="lazy" decoding="async"></picture><figcaption>Grids at four widths, and the icon sizes.</figcaption></figure>
+</div>
+  </div>
+</section>
+<section class="cs-sec" id="s07">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Glass, with rules</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">The glass look only works if every layer on a screen is the same glass.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Translucent surfaces are the most recognisable thing about Play+, and the easiest to get wrong. Two designers each picking an opacity produce two kinds of glass on one screen, and the depth stops reading as depth.</p>
+<p>So surfaces are tokens too: a ladder of translucent fills for each mode, Surface Dark 1 to 10 and Surface White 1 to 10, stepping in tens of opacity from 10%. Depth and layering come from picking a rung, not from mixing a colour, and because the ladder is semantic, the frosted look moves between themes and products without being redrawn.</p></div>
+    </div>
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/ds/ds-glass-700.webp 700w, img/ds/ds-glass-1100.webp 1100w, img/ds/ds-glass-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="570" style="--ar:1600/570" src="img/ds/ds-glass.jpg" alt="Console&rsquo;s home built on glass surfaces, beside two studies of frosted glass panels over light and dark backgrounds." loading="lazy" decoding="async"></picture>
+  <figcaption>Glass in use on Console&rsquo;s home, and the surface studies behind it.</figcaption>
+</figure>
+<figure class="csw csw--lead cs-lead cs-lead--after reveal">
+  <picture><source type="image/webp" srcset="img/ds/ds-surface-700.webp 700w, img/ds/ds-surface-1100.webp 1100w, img/ds/ds-surface-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="860" style="--ar:1600/860" src="img/ds/ds-surface.jpg" alt="The surface token tables: Surface Dark and Surface White, 1 to 10, with their fill and opacity." loading="lazy" decoding="async"></picture>
+  <figcaption>The surface ladder, dark and light.</figcaption>
+</figure>
+  </div>
+</section>
+<section class="cs-sec cs-sec--band" id="s08">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">The library</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">Built from the same tokens, the components look like one family without trying.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Beyond the button: alerts in four feedback colours and three sizes, sliders, radio groups, toggles, badges, accordions, hyperlinks, spinners, text fields in every state, and tooltips. Each is themed by the same semantic tokens and documented with its usage, so a component that looks right in Console looks right in every studio without anyone touching it.</p></div>
+    </div>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-buttons-alerts-700.webp 700w, img/ds/ds-buttons-alerts-1100.webp 1100w, img/ds/ds-buttons-alerts-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="835" style="--ar:1600/835" src="img/ds/ds-buttons-alerts.jpg" alt="The button matrix across types, states and sizes, and alerts in success, warning, error and information at three sizes." loading="lazy" decoding="async"></picture><figcaption>Buttons and alerts.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-controls-700.webp 700w, img/ds/ds-controls-1100.webp 1100w, img/ds/ds-controls-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="777" style="--ar:1600/777" src="img/ds/ds-controls.jpg" alt="Sliders at several values, radio groups, toggles and badges." loading="lazy" decoding="async"></picture><figcaption>Sliders, radio groups, toggles and badges.</figcaption></figure>
+</div>
+<div class="cs-duo reveal">
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-accordion-700.webp 700w, img/ds/ds-accordion-1100.webp 1100w, img/ds/ds-accordion-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="888" style="--ar:1600/888" src="img/ds/ds-accordion.jpg" alt="Accordions open and closed at three sizes, hyperlinks, and spinners." loading="lazy" decoding="async"></picture><figcaption>Accordions, links and spinners.</figcaption></figure>
+  <figure><picture><source type="image/webp" srcset="img/ds/ds-textfield-700.webp 700w, img/ds/ds-textfield-1100.webp 1100w, img/ds/ds-textfield-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="856" style="--ar:1600/856" src="img/ds/ds-textfield.jpg" alt="Text fields in every state and size, and tooltips." loading="lazy" decoding="async"></picture><figcaption>Text fields and tooltips.</figcaption></figure>
+</div>
+  </div>
+</section>
+<section class="cs-sec" id="s09">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Governance</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">A shared library stays shared only if adding to it takes more than a whim.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>New components come through one route. First the request is checked against the library: if something similar already exists, the need becomes a variant of it. If not, it is audited against the system&rsquo;s tokens, theming and foundations before it can become a component.</p>
+<p>Changes are made on a versioned duplicate, V.01 onward, never on the original. The lead UX designer approves, and only after that is the component documented and published to the library.</p>
+<p><b>What it cost</b></p>
+<p>Speed, deliberately. A team that needs a component this sprint could build it faster on its own. The route exists because that is exactly how the drift in the first section happened.</p></div>
+    </div>
+<figure class="sketch csw" aria-labelledby="dgcap">
+      <svg viewBox="0 0 640 250" role="img" aria-label="How a component joins Play+: a new request is checked against the library. If something similar exists it becomes a variant. If not, it goes through a UX audit, a versioned copy, the lead's approval, documentation, and then it is published.">
+        <rect class="box fade" x="8" y="20" width="118" height="36" rx="6"/>
+        <text class="t-hi fade" x="20" y="42">new component</text>
+
+        <rect class="box box--key fade" style="--d:340ms" x="150" y="20" width="150" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:340ms" x="162" y="42">similar one exists?</text>
+
+        <rect class="box box--ghost fade" style="--d:420ms" x="390" y="20" width="186" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:420ms" x="402" y="42">becomes a variant of it</text>
+
+        <rect class="box fade" style="--d:480ms" x="112" y="104" width="178" height="46" rx="6"/>
+        <text class="t-hi fade" style="--d:480ms" x="124" y="124">UX audit</text>
+        <text class="t-note fade" style="--d:480ms" x="124" y="140">tokens, theming, foundations</text>
+
+        <rect class="box fade" style="--d:540ms" x="314" y="104" width="130" height="46" rx="6"/>
+        <text class="t-hi fade" style="--d:540ms" x="326" y="124">versioned copy</text>
+        <text class="t-note fade" style="--d:540ms" x="326" y="140">V.01 onward</text>
+
+        <rect class="box box--key fade" style="--d:600ms" x="468" y="104" width="164" height="46" rx="6"/>
+        <text class="t-hi fade" style="--d:600ms" x="480" y="124">lead approval</text>
+        <text class="t-note fade" style="--d:600ms" x="480" y="140">by the lead UX designer</text>
+
+        <rect class="box fade" style="--d:660ms" x="314" y="196" width="130" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:660ms" x="326" y="218">documented</text>
+
+        <rect class="box box--key fade" style="--d:720ms" x="468" y="196" width="164" height="36" rx="6"/>
+        <text class="t-hi fade" style="--d:720ms" x="480" y="218">published to the library</text>
+
+        <path class="ink ink--dim" style="--d:60ms" d="M126 38 H150"/>
+        <path class="ink ink--dim" style="--d:120ms" d="M300 38 H390"/>
+        <path class="ink ink--key" style="--d:180ms" d="M201 56 V104"/>
+        <path class="ink ink--key" style="--d:240ms" d="M290 127 H314"/>
+        <path class="ink ink--key" style="--d:300ms" d="M444 127 H468"/>
+        <path class="ink ink--key" style="--d:360ms" d="M550 150 V172 H379 V196"/>
+        <path class="ink ink--key" style="--d:420ms" d="M444 214 H468"/>
+
+        <text class="t-lab fade" style="--d:760ms" x="330" y="32">yes</text>
+        <text class="t-lab fade" style="--d:760ms" x="208" y="86">no</text>
+      </svg>
+      <figcaption id="dgcap">Two routes in, one out. Anything close to an existing component becomes part of it. Anything genuinely new is audited against the system before the lead approves it, and it only reaches the library once it is documented.</figcaption>
+    </figure>
+  </div>
+</section>
+<section class="cs-sec cs-sec--band" id="s10">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Where it stands</h2>
+    <div class="cs-body">
+      <div class="cs-lede-col reveal"><p class="lede">Version 2 is built and in use. I can show its structure, not a speed-up figure.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Play+ version 2 is developed and in use across four to six products, Console and the studios among them. The <a href="product-studio.html">Product Studio case study</a> shows the violet theme across a whole product.</p>
+<p>What I can point to is structural: no product-specific component variants, one library serving light and dark, and a route that every new component goes through. I don&rsquo;t have a measured before-and-after for design or development time, and I would rather say so than estimate one.</p></div>
+    </div>
+
+  </div>
+</section>
+<section class="cs-end">
+  <div class="container">
+    <h2 class="cs-end__t reveal">Questions about the system?</h2>
+    <p class="cs-end__d reveal" style="--d:80ms">The part I&rsquo;d most like to be pushed on is the semantic layer: where a role stops helping, and a product genuinely needs a component of its own.</p>
+    <div class="btn-row reveal" style="--d:160ms">
+      <a class="btn btn--key" href="mailto:akashrajs456@gmail.com">akashrajs456@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+      <a class="btn" href="index.html#work">&larr; All work</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>&copy; 2026 Akash Raj</span>
+    <span>Designed &amp; built by hand</span>
+    <a href="#top">Back to top &uarr;</a>
+  </div>
+</footer>
+
+<script>
+/* The theming demo: the radios set the product and the mode; the stage's CSS custom properties do the
+   rest. The readout names what Brand/Primary/500 resolves to. Colours come from the Play+ tables. */
+(function(){
+  var stage = document.querySelector('.ds-demo__stage');
+  if (!stage) return;
+  var MAP = {
+    default:    ['Pink',       '#E91E63', '#ED4B82'],
+    console:    ['Pulse blue', '#0084FF', '#339CFF'],
+    studio:     ['Violet',     '#673AB7', '#8560C4'],
+    experience: ['Rose',       '#F9709A', '#FB8CAE']
+  };
+  var mapEl = stage.querySelector('[data-ds="map"]'), hexEl = stage.querySelector('[data-ds="hex"]');
+  function sync(){
+    var p = document.querySelector('input[name="ds-product"]:checked').value;
+    var m = document.querySelector('input[name="ds-mode"]:checked').value;
+    stage.setAttribute('data-product', p);
+    stage.setAttribute('data-mode', m);
+    mapEl.textContent = MAP[p][0] + ' 500, ' + m + ' scale';
+    hexEl.textContent = m === 'dark' ? MAP[p][2] : MAP[p][1];
+  }
+  document.querySelectorAll('.ds-demo input').forEach(function(i){ i.addEventListener('change', sync); });
+  sync();
+})();
+</script>
+<script src="motion.js?v=8"></script>
+</body>
+</html>

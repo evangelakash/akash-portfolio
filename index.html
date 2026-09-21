@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only light">
 <title>Akash Raj · UX Designer</title>
 <meta name="description" content="UX designer building AI-first product experiences at enterprise scale. Agentic workflows, Human-in-the-Loop patterns, and the design system that unifies them.">
 <link rel="canonical" href="https://evangelakash.github.io/akash-portfolio/">
@@ -25,7 +26,7 @@
 <meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
 <link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=17">
 <script>document.documentElement.className+=" js";</script>
 </head>
 <body id="top">
@@ -44,7 +45,7 @@
 <header class="nav">
   <div class="container nav__inner">
     <a class="nav__mark" href="#top">
-      <span class="ph ph--sq" aria-hidden="true"></span>
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="logo__tile" width="64" height="64" rx="15"/><path class="logo__ink" d="M12.5 47 L30 16 V47 M30 16 H36 A8.5 8.5 0 0 1 36 33 H21.6 M34 33 L43.4 45.2"/><circle class="logo__node" cx="45.6" cy="48" r="3.2"/></svg>
       <span class="nav__name">Akash Raj</span>
     </a>
     <nav class="view-toggle" aria-label="Page view">
@@ -321,71 +322,52 @@
       </div>
     </div>
 
-    <article class="card card--feature reveal">
-      <div class="card__media card__media--bare"><picture><source type="image/webp" srcset="img/console-macbook-700.webp 700w, img/console-macbook-1100.webp 1100w, img/console-macbook.webp 1600w" sizes="(min-width:900px) 560px, 92vw"><img width="1600" height="957" style="--ar:1600/957" src="img/console-macbook.png" alt="Enterprise Console after the redesign." loading="lazy" decoding="async" srcset="img/console-macbook-700.png 700w, img/console-macbook-1100.png 1100w, img/console-macbook.png 1600w" sizes="(min-width:900px) 560px, 92vw"></picture></div>
-      <div class="card__body">
-        <div class="card__top"><span class="chip">Featured</span></div>
-        <h3 class="card__title">Enterprise Console</h3>
-        <p class="card__sub">An enterprise platform for building AI agents and composing them into workflows, with the governance none of its competitors had.</p>
-        <ul class="chips">
-          <li class="chip">Agentic UX</li>
-          <li class="chip">Information architecture</li>
-          <li class="chip">Governance</li>
-          <li class="chip">Web + mobile</li>
-        </ul>
-        <p class="card__rel">Team of four · I owned the information architecture</p>
-        <a class="link" href="case-study.html">Read the case study →</a>
-      </div>
-    </article>
+    <div class="grid work-grid">
+      <article class="card card--cover reveal">
+        <a class="card__media card__media--cover" href="case-study.html" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="img/covers/console-cover-700.webp 700w, img/covers/console-cover-1100.webp 1100w, img/covers/console-cover-1600.webp 1600w" sizes="(min-width:1360px) 544px, (min-width:900px) 44vw, 92vw"><img width="1600" height="900" src="img/covers/console-cover.jpg" alt="" loading="lazy" decoding="async"></picture></a>
+        <div class="card__body">
+          <h3 class="card__title">Enterprise Console</h3>
+          <p class="card__sub">An enterprise platform for building AI agents and composing them into workflows, with the governance none of its competitors had.</p>
+          <p class="card__rel">Team of four &middot; I owned the information architecture</p>
+          <a class="link" href="case-study.html">Read the case study &rarr;</a>
+        </div>
+      </article>
 
-    <div class="grid grid--2">
-      <article class="card reveal">
-        <div class="card__media"><picture><source type="image/webp" srcset="img/console-pipeline-700.webp 700w, img/console-pipeline-1100.webp 1100w, img/console-pipeline.webp 1600w" sizes="(min-width:900px) 560px, 92vw"><img width="1600" height="1089" style="--ar:1600/1089" src="img/console-pipeline.png" alt="The pipeline canvas with the agent library." loading="lazy" decoding="async" srcset="img/console-pipeline-700.png 700w, img/console-pipeline-1100.png 1100w, img/console-pipeline.png 1600w" sizes="(min-width:900px) 560px, 92vw"></picture></div>
+      <article class="card card--cover reveal" style="--d:80ms">
+        <a class="card__media card__media--cover" href="apb.html" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="img/covers/apb-cover-700.webp 700w, img/covers/apb-cover-1100.webp 1100w, img/covers/apb-cover-1600.webp 1600w" sizes="(min-width:1360px) 544px, (min-width:900px) 44vw, 92vw"><img width="1600" height="900" src="img/covers/apb-cover.jpg" alt="" loading="lazy" decoding="async"></picture></a>
         <div class="card__body">
           <h3 class="card__title">APB: Agentic Process Builder</h3>
           <p class="card__sub">Agents, workflows and process logic on one canvas. Compose a process out of parts that are already configured, instead of wiring every connection by hand.</p>
-          <ul class="chips">
-            <li class="chip">Human-in-the-Loop</li>
-            <li class="chip">Process canvas</li>
-            <li class="chip">Parallel execution</li>
-          </ul>
-          <p class="card__rel">Inside Enterprise Console · designed end to end, solo</p>
+          <p class="card__rel">Inside Enterprise Console &middot; designed end to end, solo</p>
           <a class="link" href="apb.html">Read the case study &rarr;</a>
         </div>
       </article>
 
-      <article class="card reveal" style="--d:100ms">
+      <article class="card card--cover reveal">
+        <a class="card__media card__media--cover" href="product-studio.html" tabindex="-1" aria-hidden="true"><picture><source type="image/webp" srcset="img/covers/product-studio-cover-700.webp 700w, img/covers/product-studio-cover-1100.webp 1100w, img/covers/product-studio-cover-1600.webp 1600w" sizes="(min-width:1360px) 544px, (min-width:900px) 44vw, 92vw"><img width="1600" height="1002" src="img/covers/product-studio-cover.jpg" alt="" loading="lazy" decoding="async"></picture></a>
         <div class="card__body">
           <h3 class="card__title">Product Studio</h3>
           <p class="card__sub">Raw ideas into structured strategy: personas, SWOT, features, roadmaps, with every AI output editable and explainable.</p>
-          <ul class="chips">
-            <li class="chip">AI research</li>
-            <li class="chip">Explainability</li>
-            <li class="chip">Two designers</li>
-          </ul>
-          <p class="card__rel">Separate application · two designers</p>
-          <p class="link link--soon"><span>Write-up in progress</span> <small>Happy to walk through it</small></p>
+          <p class="card__rel">Separate application &middot; two designers</p>
+          <a class="link" href="product-studio.html">Read the case study &rarr;</a>
+        </div>
+      </article>
+
+      <article class="card card--cover reveal" style="--d:80ms">
+        <a class="card__media card__media--cover" href="design-system.html" tabindex="-1" aria-hidden="true">
+          <video class="cover-video" muted loop playsinline preload="none" data-autoplay poster="img/covers/design-system-poster-1100.webp" width="1920" height="1080">
+            <source src="img/covers/design-system-1080.mp4" type='video/mp4; codecs="hvc1"'>
+            <source src="img/covers/design-system-720.mp4" type="video/mp4">
+          </video>
+        </a>
+        <div class="card__body">
+          <h3 class="card__title">Play+ Design System</h3>
+          <p class="card__sub">One Figma system across four to six products: semantic tokens that let every product wear its own colour, in light and dark.</p>
+          <p class="card__rel">Core team &middot; tokens, components, theming</p>
+          <a class="link" href="design-system.html">Read the case study &rarr;</a>
         </div>
       </article>
     </div>
-
-    <article class="card card--wide reveal">
-      <div class="card__body">
-        <div class="card__top"><span class="chip">System</span></div>
-        <h3 class="card__title">Design System</h3>
-        <p class="card__sub">One centralised Figma system adopted across four to six products, including how AI features get surfaced enterprise-wide.</p>
-        <p class="card__rel">Built and scaled across teams</p>
-        <p class="link link--soon"><span>Write-up in progress</span> <small>Happy to walk through it</small></p>
-      </div>
-      <div class="card__media card__media--index">
-        <ul>
-          <li>Tokens</li>
-          <li>Components</li>
-          <li>AI patterns</li>
-          <li>Documentation</li>
-        </ul>
-      </div>
-    </article>
 
   </div>
 </section>
@@ -520,6 +502,6 @@
   </div>
 </footer>
 
-<script src="motion.js?v=7"></script>
+<script src="motion.js?v=8"></script>
 </body>
 </html>

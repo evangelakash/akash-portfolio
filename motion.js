@@ -255,4 +255,20 @@
     }
   }
 
+
+  /* ---- cover videos ----
+     A cover plays only while it is on screen (preload="none", so nothing downloads before that), pauses
+     when it leaves, and never plays under reduced motion: the poster frame stands in. */
+  var covers = [].slice.call(document.querySelectorAll('video[data-autoplay]'));
+  if (covers.length && !reduced && 'IntersectionObserver' in window) {
+    var vo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var v = e.target;
+        if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+        else v.pause();
+      });
+    }, { rootMargin: '120px 0px', threshold: 0.25 });
+    covers.forEach(function(v){ vo.observe(v); });
+  }
+
 })();
