@@ -486,6 +486,8 @@ document.addEventListener('click', (e) => {
 const FRAMES = {
   console: { url: 'case-study.html', title: 'Enterprise Console' },
   apb: { url: 'apb.html', title: 'APB: Agentic Process Builder' },
+  productstudio: { url: 'product-studio.html', title: 'Product Studio' },
+  designsystem: { url: 'design-system.html', title: 'Play+ Design System' },
 };
 const clickables = [];
 const raycaster = new THREE.Raycaster();
@@ -535,12 +537,15 @@ function holoPower(s) {
 
 /* accessible buttons over the framed projects (world size and position from the Blender layout) */
 const FRAME_BOXES = {
-  console: { c: B(5.25, 17.674, 1.55), w: 1.25, h: 0.95 },
-  apb: { c: B(6.95, 17.674, 1.55), w: 1.25, h: 0.95 },
+  console: { c: B(5.25, 17.674, 1.55), w: 1.25, h: 0.8125 },
+  apb: { c: B(6.95, 17.674, 1.55), w: 1.25, h: 0.8125 },
+  productstudio: { c: B(8.65, 17.674, 1.55), w: 1.25, h: 0.8125 },
+  designsystem: { c: B(10.35, 17.674, 1.55), w: 1.25, h: 0.8125 },
 };
 const _v = new THREE.Vector3();
 function placeFrameButtons(active) {
   const r = canvas.getBoundingClientRect();
+  camera.updateMatrixWorld();              // this runs before the frame renders: project with this frame's camera
   for (const btn of document.querySelectorAll('.h3-frame')) {
     const box = FRAME_BOXES[btn.dataset.frame];
     btn.tabIndex = active ? 0 : -1;

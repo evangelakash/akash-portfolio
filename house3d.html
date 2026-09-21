@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only light">
 <title>Akash Raj &middot; UX Designer</title>
 <meta name="description" content="UX designer building AI-first product experiences at enterprise scale. Agentic workflows, Human-in-the-Loop patterns, and the design system that unifies them.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=17">
 <link rel="stylesheet" href="house3d.css?v=15">
 <script>document.documentElement.className+=" js";</script>
 <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
@@ -19,7 +20,7 @@
 <header class="nav">
   <div class="container nav__inner">
     <a class="nav__mark" href="#top">
-      <span class="ph ph--sq" aria-hidden="true"></span>
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect class="logo__tile" width="64" height="64" rx="15"/><path class="logo__ink" d="M12.5 47 L30 16 V47 M30 16 H36 A8.5 8.5 0 0 1 36 33 H21.6 M34 33 L43.4 45.2"/><circle class="logo__node" cx="45.6" cy="48" r="3.2"/></svg>
       <span class="nav__name">Akash Raj</span>
     </a>
     <nav class="view-toggle" aria-label="Page view">
@@ -65,8 +66,8 @@
       <p data-slot="impact_system" data-style="banner"><b>4&ndash;6</b><span>products on one design system</span></p>
       <p data-slot="label_console" data-style="label"><b>Enterprise Console</b><span>Case study &middot; team of four</span></p>
       <p data-slot="label_apb" data-style="label"><b>APB: Agentic Process Builder</b><span>Case study &middot; designed solo</span></p>
-      <p data-slot="label_productstudio" data-style="label"><b>Product Studio</b><span>Write-up in progress</span></p>
-      <p data-slot="label_designsystem" data-style="label"><b>Design System</b><span>Write-up in progress</span></p>
+      <p data-slot="label_productstudio" data-style="label"><b>Product Studio</b><span>Case study &middot; two designers</span></p>
+      <p data-slot="label_designsystem" data-style="label"><b>Play+ Design System</b><span>Case study &middot; core team</span></p>
       <p data-slot="path_bva" data-style="riser"><time>2020&ndash;2024</time><b>BVA, Graphic Design &amp; Communication</b><span>Acharya School of Design, Bengaluru</span></p>
       <p data-slot="path_cogent" data-style="riser"><time>Mar&ndash;Jul 2024</time><b>Video Graphic Designer, intern</b><span>Cogent Integrated Business Solutions, Detroit (remote)</span></p>
       <p data-slot="path_ascendion" data-style="riser"><time>Sep 2024</time><b>UX Designer</b><span>Ascendion Engineering, Bengaluru</span></p>
@@ -85,13 +86,14 @@
       <p data-slot="tool_framer" data-style="tag"><span>Tool 04</span><b>Framer</b></p>
       <p data-slot="tool_sketch" data-style="tag"><span>Tool 05</span><b>Sketch</b></p>
       <p data-slot="tool_miro" data-style="tag"><span>Tool 06</span><b>Miro</b></p>
-      <p data-slot="poster_apb" data-style="poster"><b>Agentic Process Builder</b><span>Process canvas &middot; human-in-the-loop</span></p>
     </div>
     <section class="h3-copy h3-gallery" aria-label="Selected work">
       <p class="h3-pill"><b>Selected work</b><span>Open a framed project to read its case study</span></p>
       <div class="h3-frames">
         <button type="button" class="h3-frame" data-frame="console" data-case="case-study.html" data-title="Enterprise Console">Enterprise Console <span>Read the case study</span></button>
         <button type="button" class="h3-frame" data-frame="apb" data-case="apb.html" data-title="APB: Agentic Process Builder">APB: Agentic Process Builder <span>Read the case study</span></button>
+        <button type="button" class="h3-frame" data-frame="productstudio" data-case="product-studio.html" data-title="Product Studio">Product Studio <span>Read the case study</span></button>
+        <button type="button" class="h3-frame" data-frame="designsystem" data-case="design-system.html" data-title="Play+ Design System">Play+ Design System <span>Read the case study</span></button>
       </div>
     </section>
     <!-- the hologram draws this; phones also show it as a caption, the projection is too small to read there -->
@@ -139,6 +141,6 @@
   </div>
 </div>
 
-<script type="module" src="house3d.js?v=54"></script>
+<script type="module" src="house3d.js?v=56"></script>
 </body>
 </html>
