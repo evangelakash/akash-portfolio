@@ -252,18 +252,16 @@ function journeyDef(cam, portrait) {
       { p: B(7.8, 11.7, 1.58), t: B(7.8, 17.0, 1.6), lens: 24, plens: 22, at: 0.55 },
     ] },
   ];
-  if (!portrait) {
-    stops.push({ id: 'gallery', hold: 1.4, copy: '.h3-gallery', frames: true,
-      key: { p: B(7.8, 12.75, 1.55), t: B(7.8, 17.6, 1.48), lens: 23 } });
-  } else {
-    stops.push(
-      { id: 'gallery', hold: 1.0, copy: '.h3-gallery', frames: true,
-        key: { p: B(6.1, 12.95, 1.5), t: B(6.1, 17.6, 1.52), lens: 26 } },
-      { travel: 1.0, via: [] },
-      { id: 'gallery2', hold: 0.8, copy: '.h3-gallery', frames: true,
-        key: { p: B(9.5, 12.95, 1.5), t: B(9.5, 17.6, 1.52), lens: 26 } },
-    );
-  }
+  // the gallery, two displays at a time so the covers read (the whole wall at once made each one tiny)
+  stops.push(
+    { id: 'gallery', hold: 1.0, copy: '.h3-gallery', frames: true,
+      key: { p: B(6.1, 14.3, 1.5), t: B(6.1, 17.6, 1.52), lens: 31,
+        pp: B(6.1, 12.95, 1.5), pt: B(6.1, 17.6, 1.52), plens: 26 } },
+    { travel: 1.0, via: [] },
+    { id: 'gallery2', hold: 0.8, copy: '.h3-gallery', frames: true,
+      key: { p: B(9.5, 14.3, 1.5), t: B(9.5, 17.6, 1.52), lens: 31,
+        pp: B(9.5, 12.95, 1.5), pt: B(9.5, 17.6, 1.52), plens: 26 } },
+  );
   stops.push(
     // pan away to the lounge: two sofas face each other, the bar between them lights up
     { travel: 1.6, via: [
@@ -504,6 +502,61 @@ function registerFrames(root) {
     if (mats.some((m) => m.userData.frameId)) clickables.push(o);
   });
 }
+/* The framed projects are digital displays, not prints: each shows its case study's cover as an unlit screen
+   (its own colours, no tone mapping), and the design system's frame plays its cover video while the gallery
+   is in view. Nothing about them is baked, so the covers stay crisp and the video can move. */
+const COVERS = {
+  console: { src: 'console-cover' },
+  apb: { src: 'apb-cover' },
+  productstudio: { src: 'product-studio-cover', aspect: 1600 / 1002 },
+  designsystem: { src: 'design-system-poster', video: 'img/covers/design-system-720.mp4' },
+};
+const SCREEN_ASPECT = 16 / 9;
+let coverVideo = null, coverVideoTex = null, coverVideoMat = null, videoWanted = false;
+function coverTexture(tex, aspect) {
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.flipY = false;                                  // the glTF UVs run top-down
+  tex.anisotropy = maxAniso;
+  if (aspect && aspect < SCREEN_ASPECT) {             // taller than the screen: crop top and bottom evenly
+    tex.repeat.set(1, aspect / SCREEN_ASPECT);
+    tex.offset.set(0, (1 - aspect / SCREEN_ASPECT) / 2);
+  }
+  return tex;
+}
+function makeDisplays(root) {
+  const width = SMALL ? 700 : 1100;
+  root.traverse((o) => {
+    if (!o.isMesh || Array.isArray(o.material)) return;
+    const id = o.material.userData.frameId;
+    const c = id && COVERS[id];
+    if (!c) return;
+    const tex = coverTexture(texLoader.load(`img/covers/${c.src}-${width}.webp`, () => requestRender()), c.aspect);
+    const mat = new THREE.MeshBasicMaterial({ map: tex, toneMapped: false });
+    mat.userData.frameId = id;
+    o.material = mat;
+    if (c.video && !reduced) {
+      coverVideoMat = mat;
+      coverVideo = Object.assign(document.createElement('video'), { muted: true, loop: true, playsInline: true, preload: 'none' });
+      coverVideo.setAttribute('muted', '');
+      coverVideo.setAttribute('playsinline', '');
+      coverVideo.src = c.video;
+      coverVideo.addEventListener('playing', () => {
+        if (!coverVideoTex) coverVideoTex = coverTexture(new THREE.VideoTexture(coverVideo));
+        coverVideoTex.needsUpdate = true;               // upload the current frame now: no black flash on the swap
+        coverVideoMat.map = coverVideoTex;
+        coverVideoMat.needsUpdate = true;
+        requestRender();
+      });
+    }
+  });
+}
+// play the cover video only while the gallery is in view
+function wantVideo(on) {
+  if (!coverVideo || on === videoWanted) return;
+  videoWanted = on;
+  if (on) { const p = coverVideo.play(); if (p && p.catch) p.catch(() => {}); } else coverVideo.pause();
+}
+
 canvas.addEventListener('click', (e) => {
   if (!clickables.length) return;
   const r = canvas.getBoundingClientRect();
@@ -557,7 +610,8 @@ function placeFrameButtons(active) {
       const sx = (_v.x + 1) / 2 * r.width, sy = (1 - _v.y) / 2 * r.height;
       x0 = Math.min(x0, sx); x1 = Math.max(x1, sx); y0 = Math.min(y0, sy); y1 = Math.max(y1, sy);
     }
-    if (behind) { btn.style.setProperty('--x', '-999px'); continue; }
+    // behind the camera or wholly off screen: out of the way, and out of the tab order
+    if (behind || x1 < 0 || x0 > r.width) { btn.style.setProperty('--x', '-999px'); btn.tabIndex = -1; continue; }
     btn.style.setProperty('--x', `${x0.toFixed(1)}px`);
     btn.style.setProperty('--y', `${y0.toFixed(1)}px`);
     btn.style.setProperty('--w', `${(x1 - x0).toFixed(1)}px`);
@@ -601,7 +655,11 @@ function frame() {
   const windy = !!grass && outdoors && !reduced;
   if (grass) grass.update(reduced ? 0 : performance.now() / 1000, camera.position);
   const dt = Math.min(clock.getDelta(), 0.05);
-  const typing = (mixer && !reduced && idle || glowing || windy) && document.visibilityState === 'visible';
+  // the gallery's displays: the video plays (and frames keep coming) only while the gallery is in view
+  const inGallery = g.type === 'hold' ? !!g.stop.frames : !!(g.from.frames || g.to.frames);
+  wantVideo(inGallery && document.visibilityState === 'visible');
+  const screening = inGallery && !!coverVideoTex && !coverVideo.paused;
+  const typing = (mixer && !reduced && idle || glowing || windy || screening) && document.visibilityState === 'visible';
   if (typing && mixer && idle) mixer.update(dt);
   renderer.render(scene, camera);
   const settling = look.distanceTo(lookTarget) > 0.002;
@@ -637,6 +695,7 @@ addEventListener('scroll', requestRender, { passive: true });
   if (loadMsg) loadMsg.textContent = 'Setting up the rooms';
   gltf.scene.traverse((o) => { if (o.isMesh) convert(o, man); });
   registerFrames(gltf.scene);
+  makeDisplays(gltf.scene);
   scene.add(gltf.scene);
   // grass on the lawn: fewer blades on phones
   let lawnMesh = null;
