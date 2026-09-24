@@ -55,7 +55,11 @@
   left: 50%; top: 22vh; width: min(760px, calc(100% - 2 * var(--pad)));
   margin-left: calc(min(760px, calc(100% - 2 * var(--pad))) / -2);
   text-align: center; color: #fff;
-  text-shadow: 0 1px 24px rgba(20, 30, 20, .35);
+  /* the ground now fills the frame, so the white type sits on grass: a soft vignette carries it */
+  padding: 30px 20px 36px;
+  background: radial-gradient(74% 64% at 50% 46%,
+    rgba(16, 26, 16, .34), rgba(16, 26, 16, .16) 56%, rgba(16, 26, 16, 0) 78%);
+  text-shadow: 0 1px 2px rgba(12, 22, 12, .45), 0 2px 26px rgba(12, 22, 12, .4);
 }
 .h3-intro .h3-kicker { font: 500 var(--fs-3)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 14px; }
 .h3-intro h1 { font: 300 clamp(40px, 6.4vw, 88px)/1.02 var(--sans); letter-spacing: -.035em; margin: 0; text-wrap: balance; }

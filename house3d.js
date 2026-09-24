@@ -213,6 +213,43 @@ const B = (x, y, z) => new THREE.Vector3(x, z, -y);       // Blender -> three
 let journey = null;
 let manifest = null;
 const smoothstep = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+/* The modelled lawn is a square, and from above (portrait especially) the camera sees past its far corners
+   to the sky. This carries the ground out to the horizon: the lawn's own colour close in, hazing into the
+   sky as it recedes, so the land reads as open country rather than a tile with edges. */
+function makeGroundSkirt(lawnMesh) {
+  const box = new THREE.Box3().setFromObject(lawnMesh);
+  const c = box.getCenter(new THREE.Vector3());
+  const near = Math.max(box.max.x - box.min.x, box.max.z - box.min.z) / 2;
+  const geo = new THREE.CircleGeometry(340, 72);
+  geo.rotateX(-Math.PI / 2);
+  const mat = new THREE.ShaderMaterial({
+    toneMapped: false, depthWrite: true, fog: false,
+    uniforms: {
+      cNear: { value: new THREE.Color('#5c9d38') },       // the lawn as the renderer leaves it
+      cFar: { value: new THREE.Color('#cfd9d2') },        // haze, a shade of the sky's horizon
+      // the haze starts well past the lawn: the modelled lawn carries none, so any haze beside it is a seam
+      fade: { value: new THREE.Vector2(Math.max(90, near * 2.4), 320) },
+    },
+    vertexShader: `varying vec3 vW;
+      void main(){ vW = (modelMatrix * vec4(position,1.)).xyz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.); }`,
+    fragmentShader: `uniform vec3 cNear; uniform vec3 cFar; uniform vec2 fade; varying vec3 vW;
+      void main(){
+        float d = length(vW.xz - vec2(${c.x.toFixed(3)}, ${c.z.toFixed(3)}));
+        // slow rolling variation so the distance is not a flat slab
+        float n = sin(vW.x * .035) * sin(vW.z * .028) + .6 * sin(vW.x * .011 + 1.7) * sin(vW.z * .013 - .4);
+        vec3 col = cNear * (1. + n * .045);
+        gl_FragColor = vec4(mix(col, cFar, smoothstep(fade.x, fade.y, d)), 1.);
+        #include <colorspace_fragment>
+      }`,
+  });
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(c.x, box.max.y - 0.03, c.z);               // just under the lawn, which keeps its baked light
+  m.renderOrder = -1;
+  m.frustumCulled = false;
+  m.name = 'ground-skirt';
+  return m;
+}
+
 const portraitMix = () => smoothstep(1.0, 0.62, camera.aspect);
 const SENSOR = 36;
 
@@ -705,6 +742,7 @@ addEventListener('scroll', requestRender, { passive: true });
     const q = new URLSearchParams(location.search);          // debug: ?grass=<blades per m²>
     grass = makeGrass({ lawnMesh, perSqm: q.has('grass') ? Number(q.get('grass')) : small ? 75 : 150, width: small ? 1.15 : 1 });
     scene.add(grass.group);
+    scene.add(makeGroundSkirt(lawnMesh));
   }
   holo = makeHologram({ center: B(2.2, 14.9, 1.16), width: 2.0, height: 1.125, facing: new THREE.Vector3(1, 0, 0), barTop: 0.412 });
   scene.add(holo.group);
