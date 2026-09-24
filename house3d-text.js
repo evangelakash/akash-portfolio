@@ -8,6 +8,19 @@ const MID = '#54545A';
 const PAPER = '#EDE7D9';          // sRGB of the paper albedo used in Blender (0.84, 0.80, 0.70 linear)
 const NOTE = '#F0E08C';
 
+/* Tool logos for the pegboard tags. The painter runs synchronously, so the images are decoded up front
+   and kept here by their src. */
+const icons = new Map();
+export async function iconsReady() {
+  const srcs = [...document.querySelectorAll('[data-icon]')].map((el) => el.dataset.icon);
+  await Promise.all([...new Set(srcs)].map((src) => new Promise((res) => {
+    const img = new Image();
+    img.onload = () => { icons.set(src, img); res(); };
+    img.onerror = () => res();
+    img.src = src;
+  })));
+}
+
 export async function fontsReady() {
   const faces = ['300 64px Sora', '400 32px Literata', '400 24px "IBM Plex Mono"', '500 24px "IBM Plex Mono"'];
   await Promise.all(faces.map((f) => document.fonts.load(f).catch(() => null)));
@@ -178,7 +191,7 @@ const STYLES = {
     ctx.fillStyle = '#2B3531'; ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'source-over';
   },
-  // kraft paper tag on the tool wall: punched and ringed, the tool's name set as large as the tag allows
+  // kraft paper tag on the tool wall: punched and ringed, the tool's own logo above its name
   tag(ctx, W, H, el) {
     ctx.fillStyle = '#D6BA8C'; ctx.fillRect(0, 0, W, H);
     for (let i = 0; i < 1600; i++) {                     // paper fibres
@@ -192,18 +205,21 @@ const STYLES = {
     ctx.fillStyle = '#2A1D10';
     ctx.beginPath(); ctx.arc(W / 2, H * 0.1, W * 0.045, 0, Math.PI * 2); ctx.fill();
     ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-    const label = (el.querySelector('span')?.textContent || '').toUpperCase();
     const name = el.querySelector('b')?.textContent || '';
-    ctx.fillStyle = '#5E4428';
-    fit(ctx, label, W * 0.7, '500', W * 0.085, '"IBM Plex Mono"');
-    ctx.fillText(label, W / 2, H * 0.34);
+    const icon = icons.get(el.dataset.icon);
+    if (icon) {                                          // the logo, fitted into the tag's upper half
+      const box = W * 0.44;
+      const k = Math.min(box / icon.width, box / icon.height);
+      const iw = icon.width * k, ih = icon.height * k;
+      ctx.drawImage(icon, (W - iw) / 2, H * 0.42 - ih / 2, iw, ih);
+    }
     ctx.fillStyle = '#1A120A';
-    const px = fit(ctx, name, W * 0.84, '400', W * 0.22, 'Sora');
-    ctx.fillText(name, W / 2, H * 0.58);
+    const px = fit(ctx, name, W * 0.84, '400', W * 0.19, 'Sora');
+    ctx.fillText(name, W / 2, H * 0.72);
     const tw = Math.min(W * 0.8, ctx.measureText(name).width);
     ctx.strokeStyle = '#1A120A'; ctx.lineWidth = Math.max(3, px * 0.06); ctx.lineCap = 'round';
     ctx.beginPath();
-    const y = H * 0.58 + px * 0.28;
+    const y = H * 0.72 + px * 0.28;
     ctx.moveTo(W / 2 - tw / 2, y + px * 0.02);
     ctx.bezierCurveTo(W / 2 - tw / 6, y - px * 0.05, W / 2 + tw / 6, y + px * 0.06, W / 2 + tw / 2, y - px * 0.01);
     ctx.stroke();

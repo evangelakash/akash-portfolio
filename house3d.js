@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { openCase } from './house3d-popup.js?v=4';
-import { fontsReady, slotTexture } from './house3d-text.js?v=4';
+import { fontsReady, iconsReady, slotTexture } from './house3d-text.js?v=5';
 import { makeHologram } from './house3d-holo.js?v=8';
 import { makeGrass } from './house3d-grass.js?v=17';
 
@@ -689,7 +689,7 @@ addEventListener('scroll', requestRender, { passive: true });
   const glb = new Promise((res, rej) => gltfLoader.load(BASE + 'house.glb' + V, res, (e) => {
     if (e.total) { glbPart = e.loaded / e.total; showProgress(); }
   }, rej));
-  const [gltf] = await Promise.all([glb, fontsReady()]);
+  const [gltf] = await Promise.all([glb, fontsReady(), iconsReady()]);
   glbPart = 1;
   showProgress();
   if (loadMsg) loadMsg.textContent = 'Setting up the rooms';
