@@ -272,3 +272,30 @@
   }
 
 })();
+
+/* The 3D house is a 7 MB download on a host that gives about 80 KB/s here. When a visitor reaches for the
+   3D view (hover, or the touch that precedes the tap), it starts arriving into the same cache the 3D page
+   reads, so the wait has already begun by the time the page opens. Nothing is fetched otherwise. */
+(function warmHouse() {
+  const link = document.querySelector('.view-toggle a[href="house3d.html"]');
+  if (!link || !self.caches || !navigator.onLine) return;
+  const conn = navigator.connection;
+  if (conn && (conn.saveData || /^(slow-)?2g$/.test(conn.effectiveType || ''))) return;   // not on their data plan
+  let started = false;
+  const warm = async () => {
+    if (started) return;
+    started = true;
+    try {
+      const man = await fetch('img/house3d/house.json').then((r) => r.json());
+      const parts = man.parts || { ext: 'house.glb' };
+      const store = await caches.open(`akash-portfolio-${man.build}`);
+      for (const file of [parts.ext, parts.int].filter(Boolean)) {   // the outside first: it opens the page
+        const url = `img/house3d/${file}?v=${man.build}`;
+        if (await store.match(url)) continue;
+        const res = await fetch(url);
+        if (res.ok) await store.put(url, res);
+      }
+    } catch (e) { /* a warm-up that fails costs nothing */ }
+  };
+  for (const ev of ['pointerenter', 'touchstart', 'focus']) link.addEventListener(ev, warm, { once: true, passive: true });
+})();

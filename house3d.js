@@ -82,6 +82,18 @@ const camera = new THREE.PerspectiveCamera(40, 1, 0.03, 600);
 /* ------------------------------------------------------------------ loading
    The house file is most of the download, so it counts in bytes; every other file counts once. */
 let glbPart = 0, filePart = 0, shown = 0;
+/* The rooms are the other five sixths of the house and keep arriving after it is on screen. Until they are
+   in, the tour stays shut: the scroll track is one screen tall and the cue says how far along they are,
+   rather than letting a visitor walk into an empty shell. */
+let intPart = 0, roomsIn = false;
+const cueEl = document.querySelector('.h3-cue');
+const cueText = cueEl ? cueEl.textContent : '';
+function showRooms() {
+  if (!cueEl) return;
+  if (roomsIn) { cueEl.textContent = cueText; cueEl.classList.remove('h3-cue--wait'); return; }
+  cueEl.classList.add('h3-cue--wait');
+  cueEl.textContent = `Bringing in the rooms\u2026 ${Math.min(99, Math.round(intPart * 100))}%`;
+}
 function showProgress() {
   const p = Math.min(99, Math.round(100 * (0.85 * glbPart + 0.15 * filePart)));
   if (p <= shown) return;
@@ -392,7 +404,7 @@ function buildJourney(man) {
   journey = { segs, length: s };
   const studioHold = segs.find((g) => g.type === 'hold' && g.stop.id === 'studio');
   skipUntil = studioHold ? studioHold.s1 : Infinity;
-  track.style.height = `${(s + 1) * 100}vh`;
+  track.style.height = roomsIn ? `${(s + 1) * 100}vh` : '100vh';
 }
 
 const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
@@ -461,8 +473,10 @@ if (!reduced && matchMedia('(hover: hover) and (pointer: fine)').matches) {
 
 /* ------------------------------------------------------------------ scroll and copy */
 function progress() {
+  if (!roomsIn) return 0;                       // held at the first view while the rooms arrive
   const r = track.getBoundingClientRect();
   const total = track.offsetHeight - innerHeight;
+  if (total <= 0) return 0;
   return Math.min(1, Math.max(0, -r.top / total));
 }
 function copyOpacity(stop, s) {
@@ -715,6 +729,49 @@ function resize() {
 addEventListener('resize', resize);
 addEventListener('scroll', requestRender, { passive: true });
 
+/* The house is the one big download, and this host is slow and sometimes stalls mid-file. So it is fetched
+   here rather than by the loader: progress is byte-accurate, a stall is retried from the byte it stopped at
+   (Range) instead of from zero, and the finished file goes into the cache the service worker reads, so a
+   second visit paints from disk. */
+async function fetchHouse(url, cacheName, onProgress) {
+  const store = self.caches ? await caches.open(cacheName).catch(() => null) : null;
+  const hit = store && await store.match(url).catch(() => null);
+  if (hit) { onProgress(1); return hit.arrayBuffer(); }
+
+  const chunks = [];
+  let got = 0, total = 0;
+  for (let attempt = 0; ; attempt++) {
+    const ctl = new AbortController();
+    let last = Date.now();
+    const watch = setInterval(() => { if (Date.now() - last > 20000) ctl.abort(); }, 2000);
+    try {
+      const res = await fetch(url, { signal: ctl.signal, headers: got ? { Range: `bytes=${got}-` } : {} });
+      if (!res.ok) throw new Error(`${url.split('/').pop()}: ${res.status}`);
+      if (got && res.status !== 206) { chunks.length = 0; got = 0; }   // the server ignored the range
+      total = total || got + Number(res.headers.get('content-length') || 0);
+      const reader = res.body.getReader();
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value); got += value.length; last = Date.now();
+        if (total) onProgress(Math.min(1, got / total));
+      }
+      clearInterval(watch);
+      if (!total || got >= total) break;
+      if (attempt > 8) throw new Error(`${url.split('/').pop()}: the download kept stopping`);
+    } catch (err) {
+      clearInterval(watch);
+      if (attempt > 8) throw err;
+      await new Promise((r) => setTimeout(r, Math.min(4000, 600 * (attempt + 1))));
+    }
+  }
+  const buf = new Uint8Array(got);
+  let at = 0;
+  for (const c of chunks) { buf.set(c, at); at += c.length; }
+  if (store) store.put(url, new Response(buf.slice(), { headers: { 'Content-Type': 'model/gltf-binary' } })).catch(() => {});
+  return buf.buffer;
+}
+
 /* ------------------------------------------------------------------ boot */
 (async function boot() {
   resize();
@@ -723,16 +780,22 @@ addEventListener('scroll', requestRender, { passive: true });
   V = man.build ? `?v=${man.build}` : '';
   buildJourney(man);
   lastMix = portraitMix();
-  const glb = new Promise((res, rej) => gltfLoader.load(BASE + 'house.glb' + V, res, (e) => {
-    if (e.total) { glbPart = e.loaded / e.total; showProgress(); }
-  }, rej));
-  const [gltf] = await Promise.all([glb, fontsReady(), iconsReady()]);
+  const cache = `akash-portfolio-${man.build}`;
+  const parts = man.parts || { ext: 'house.glb' };
+  const load = (file, onProgress) => fetchHouse(BASE + file + V, cache, onProgress)
+    .then((buf) => new Promise((res, rej) => gltfLoader.parse(buf, BASE, res, rej)));
+  // the outside is a fifth of the house: it opens the page while the rooms are still on the way
+  const extGlb = load(parts.ext, (p) => { glbPart = p; showProgress(); });
+  const slow = Number(new URLSearchParams(location.search).get('slow')) || 0;   // debug: hold the rooms back
+  const intGlb = parts.int
+    ? (slow ? new Promise((r) => setTimeout(r, slow * 1000)) : Promise.resolve())
+      .then(() => load(parts.int, (p) => { intPart = p; showRooms(); }))
+    : null;
+  const [gltf] = await Promise.all([extGlb, fontsReady(), iconsReady()]);
   glbPart = 1;
   showProgress();
   if (loadMsg) loadMsg.textContent = 'Setting up the rooms';
   gltf.scene.traverse((o) => { if (o.isMesh) convert(o, man); });
-  registerFrames(gltf.scene);
-  makeDisplays(gltf.scene);
   scene.add(gltf.scene);
   // grass on the lawn: fewer blades on phones
   let lawnMesh = null;
@@ -744,13 +807,27 @@ addEventListener('scroll', requestRender, { passive: true });
     scene.add(grass.group);
     scene.add(makeGroundSkirt(lawnMesh));
   }
-  holo = makeHologram({ center: B(2.2, 14.9, 1.16), width: 2.0, height: 1.125, facing: new THREE.Vector3(1, 0, 0), barTop: 0.412 });
-  scene.add(holo.group);
-  if (gltf.animations.length) {
-    mixer = new THREE.AnimationMixer(gltf.scene);
-    for (const clip of gltf.animations) mixer.clipAction(clip).play();
-    mixer.update(0);
-  }
+  const addRooms = async () => {
+    const rooms = intGlb ? await intGlb : gltf;                 // one file, older manifest: it is all here
+    if (rooms !== gltf) {
+      rooms.scene.traverse((o) => { if (o.isMesh) convert(o, man); });
+      scene.add(rooms.scene);
+      await Promise.race([renderer.compileAsync(rooms.scene, camera), new Promise((res) => setTimeout(res, 8000))]).catch(() => {});
+    }
+    registerFrames(rooms.scene);
+    makeDisplays(rooms.scene);
+    holo = makeHologram({ center: B(2.2, 14.9, 1.16), width: 2.0, height: 1.125, facing: new THREE.Vector3(1, 0, 0), barTop: 0.412 });
+    scene.add(holo.group);
+    if (rooms.animations.length) {
+      mixer = new THREE.AnimationMixer(rooms.scene);
+      for (const clip of rooms.animations) mixer.clipAction(clip).play();
+      mixer.update(0);
+    }
+    roomsIn = true;
+    buildJourney(manifest);                                     // the track grows: the tour is open
+    showRooms();
+    requestRender();
+  };
   const spriteTex = {};
   for (const t of man.trees || []) {
     let tex = spriteTex[t.sprite];
@@ -770,6 +847,12 @@ addEventListener('scroll', requestRender, { passive: true });
   if (failed) return;
   doc.classList.add('h3-ready');
   if (altLink) altLink.hidden = true;
+  showRooms();
+  addRooms().catch((err) => {
+    console.error(err);
+    if (cueEl) cueEl.textContent = 'The rooms couldn\u2019t load';
+    if (altLink) altLink.hidden = false;
+  });
   const q = new URLSearchParams(location.search);
   if (q.has('p')) {                     // debug: jump to a point on the flight (0..1 of the track)
     const total = track.offsetHeight - innerHeight;

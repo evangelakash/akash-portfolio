@@ -62,6 +62,7 @@
 .h3-intro .h3-kicker { font: 500 var(--fs-3)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 14px; }
 .h3-intro h1 { font: 300 clamp(40px, 6.4vw, 88px)/1.02 var(--sans); letter-spacing: -.035em; margin: 0; text-wrap: balance; }
 .h3-intro .h3-cue { margin-top: 26px; font: 400 var(--fs-3)/1.4 var(--mono); opacity: .9; }
+.h3-intro .h3-cue--wait { opacity: .72; }
 
 /* a paper card, low on the left: his head, hands, laptop and the sunflower stay clear */
 .h3-studio {

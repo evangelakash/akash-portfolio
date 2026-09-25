@@ -1,6 +1,6 @@
 {
  "version": 1,
- "build": 1790045061,
+ "build": 1790341775,
  "lm_range": 4.0,
  "cb_range": 2.0,
  "groups": {
@@ -415,6 +415,10 @@
    "lens": 30.0,
    "sensor": 36.0
   }
+ },
+ "parts": {
+  "ext": "house_ext.glb",
+  "int": "house_int.glb"
  },
  "sun": [
   0.8818,

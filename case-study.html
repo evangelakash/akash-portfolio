@@ -28,6 +28,10 @@
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css?v=18">
 <script>document.documentElement.className+=" js";</script>
+<script>
+/* keeps the heavy files (the 3D house above all) on disk between visits; this host expires them in ten minutes */
+if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
 </head>
 <body id="top">
 
@@ -782,6 +786,6 @@
   </div>
 </footer>
 
-<script src="motion.js?v=7"></script>
+<script src="motion.js?v=10"></script>
 </body>
 </html>
