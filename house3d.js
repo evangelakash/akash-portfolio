@@ -88,11 +88,46 @@ let glbPart = 0, filePart = 0, shown = 0;
 let intPart = 0, roomsIn = false;
 const cueEl = document.querySelector('.h3-cue');
 const cueText = cueEl ? cueEl.textContent : '';
+const ROOM_STAGES = [
+  [0.25, 'Carrying in the furniture'],
+  [0.5, 'Hanging the pictures'],
+  [0.75, 'Watering the plants'],
+  [1.01, 'Switching the screens on'],
+];
 function showRooms() {
   if (!cueEl) return;
   if (roomsIn) { cueEl.textContent = cueText; cueEl.classList.remove('h3-cue--wait'); return; }
   cueEl.classList.add('h3-cue--wait');
-  cueEl.textContent = `Bringing in the rooms\u2026 ${Math.min(99, Math.round(intPart * 100))}%`;
+  const pct = Math.min(99, Math.round(intPart * 100));
+  const stage = ROOM_STAGES.find(([end]) => intPart < end);
+  cueEl.textContent = `${stage ? stage[1] : 'Bringing in the rooms'}\u2026 ${pct}%`;
+}
+/* The loading screen is a house being drawn: each stroke has its own slice of the download (data-at), and
+   the line underneath names the part going up. Both come from the real byte count, so the drawing finishes
+   exactly when the file does. */
+const strokes = [...document.querySelectorAll('.h3-build path')].map((el) => {
+  const [a, b] = (el.dataset.at || '0,1').split(',').map(Number);
+  el.setAttribute('pathLength', '1');
+  return { el, a, b };
+});
+const STAGES = [
+  [0.10, 'Finding the plot'],
+  [0.24, 'Laying the foundation'],
+  [0.38, 'Putting up the walls'],
+  [0.66, 'Raising the roof'],
+  [0.86, 'Hanging the door'],
+  [0.96, 'Glazing the windows'],
+  [1.01, 'Planting the garden'],
+];
+function drawHouse(f) {
+  for (const { el, a, b } of strokes) {
+    const t = Math.min(1, Math.max(0, (f - a) / (b - a)));
+    el.style.strokeDashoffset = 1 - t;
+  }
+  if (loadMsg && !failed) {
+    const stage = STAGES.find(([end]) => f < end);
+    if (stage && loadMsg.textContent !== stage[1]) loadMsg.textContent = stage[1];
+  }
 }
 function showProgress() {
   const p = Math.min(99, Math.round(100 * (0.85 * glbPart + 0.15 * filePart)));
@@ -100,7 +135,10 @@ function showProgress() {
   shown = p;
   if (loadBar) loadBar.style.setProperty('--p', `${p}%`);
   if (loadPct) loadPct.textContent = `${p}%`;
+  drawHouse(p / 100);
 }
+// the hint is for people who are actually waiting, not for a cached second visit
+setTimeout(() => { if (!doc.classList.contains('h3-ready') && loadBar) loadBar.classList.add('is-patient'); }, 2500);
 const manager = new THREE.LoadingManager();
 let busy = false;
 manager.onStart = () => { busy = true; };
@@ -301,16 +339,23 @@ function journeyDef(cam, portrait) {
       { p: B(7.8, 11.7, 1.58), t: B(7.8, 17.0, 1.6), lens: 24, plens: 22, at: 0.55 },
     ] },
   ];
-  // the gallery, two displays at a time so the covers read (the whole wall at once made each one tiny)
-  stops.push(
-    { id: 'gallery', hold: 1.0, copy: '.h3-gallery', frames: true,
-      key: { p: B(6.1, 14.3, 1.5), t: B(6.1, 17.6, 1.52), lens: 31,
-        pp: B(6.1, 12.95, 1.5), pt: B(6.1, 17.6, 1.52), plens: 26 } },
-    { travel: 1.0, via: [] },
-    { id: 'gallery2', hold: 0.8, copy: '.h3-gallery', frames: true,
-      key: { p: B(9.5, 14.3, 1.5), t: B(9.5, 17.6, 1.52), lens: 31,
-        pp: B(9.5, 12.95, 1.5), pt: B(9.5, 17.6, 1.52), plens: 26 } },
-  );
+  // the gallery. A phone gets one display at a time, held in front of each project in turn: two at once on
+  // that width left each cover too small to read. A landscape screen takes a pair at a time.
+  if (portrait) {
+    [5.25, 6.95, 8.65, 10.35].forEach((x, i) => {                 // the four frames, left to right
+      if (i) stops.push({ travel: 0.62, via: [] });
+      stops.push({ id: i ? `gallery${i + 1}` : 'gallery', hold: 0.62, copy: '.h3-gallery', frames: true,
+        key: { p: B(x, 15.05, 1.55), t: B(x, 17.6, 1.55), lens: 38 } });
+    });
+  } else {
+    stops.push(
+      { id: 'gallery', hold: 1.0, copy: '.h3-gallery', frames: true,
+        key: { p: B(6.1, 14.3, 1.5), t: B(6.1, 17.6, 1.52), lens: 31 } },
+      { travel: 1.0, via: [] },
+      { id: 'gallery2', hold: 0.8, copy: '.h3-gallery', frames: true,
+        key: { p: B(9.5, 14.3, 1.5), t: B(9.5, 17.6, 1.52), lens: 31 } },
+    );
+  }
   stops.push(
     // pan away to the lounge: two sofas face each other, the bar between them lights up
     { travel: 1.6, via: [

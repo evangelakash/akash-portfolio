@@ -11,7 +11,7 @@
 <link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css?v=18">
-<link rel="stylesheet" href="house3d.css?v=18">
+<link rel="stylesheet" href="house3d.css?v=20">
 <script>document.documentElement.className+=" js";</script>
 <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.min.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
 <script>
@@ -56,7 +56,31 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
   <div class="h3-stage">
     <canvas id="h3-canvas" aria-label="A 3D walk through Akash's house: his studio, a hallway of results, the project gallery, the living room, a staircase of career milestones, the workshop, and back out to the front." role="img"></canvas>
     <div class="h3-poster" style="background-image:url(img/house3d/poster_aerial.webp)" aria-hidden="true"></div>
-    <p class="h3-load"><span class="h3-load__msg" role="status">Loading the house</span><b class="h3-load__pct" aria-hidden="true"></b><i aria-hidden="true"></i></p>
+    <div class="h3-load">
+      <svg class="h3-build" viewBox="0 0 200 172" aria-hidden="true" focusable="false">
+        <g filter="url(#h3-pencil)">
+          <path data-at="0,.10"  d="M18 143 H182"/>
+          <path data-at=".10,.24" d="M46 143 V72"/>
+          <path data-at=".24,.38" d="M154 143 V72"/>
+          <path data-at=".38,.54" d="M36 78 L100 30"/>
+          <path data-at=".54,.66" d="M100 30 L164 78"/>
+          <path data-at=".66,.78" d="M86 143 V106 H114 V143"/>
+          <path data-at=".78,.86" d="M60 96 H82 V118 H60 Z"/>
+          <path data-at=".86,.90" d="M71 96 V118 M60 107 H82"/>
+          <path data-at=".90,.96" d="M132 56 V34 H144 V47"/>
+          <path data-at=".96,1"   d="M170 143 V126 M170 132 l7 -7 M170 136 l-7 -7"/>
+        </g>
+        <defs>
+          <filter id="h3-pencil" x="-8%" y="-8%" width="116%" height="116%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+      </svg>
+      <p class="h3-load__msg" role="status" aria-live="polite">Finding the plot</p>
+      <p class="h3-load__meta"><b class="h3-load__pct" aria-hidden="true"></b><i aria-hidden="true"></i></p>
+      <p class="h3-load__hint">Building it takes a few seconds the first time. After that it opens straight away.</p>
+    </div>
     <a class="btn btn--sm h3-alt" href="index.html" hidden>Read the text version</a>
     <header class="h3-copy h3-intro" style="--o:1">
       <p class="h3-kicker">UX Designer &middot; Hyderabad</p>
@@ -145,6 +169,6 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
   </div>
 </div>
 
-<script type="module" src="house3d.js?v=64"></script>
+<script type="module" src="house3d.js?v=66"></script>
 </body>
 </html>

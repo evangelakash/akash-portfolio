@@ -23,24 +23,54 @@
 }
 .h3-ready .h3-poster { opacity: 0; pointer-events: none; }
 
+/* Loading: the house draws itself as the file arrives, stroke by stroke, and the line underneath says which
+   part is going up. The drawing is the progress bar, so nothing here is decoration pretending to be work. */
 .h3-load {
-  position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
-  font: 500 var(--fs-1)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
-  color: var(--t-hi); background: rgba(246, 246, 244, .86); padding: 8px 12px; border-radius: var(--r-full);
-  transition: opacity 400ms var(--ease);
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(300px, calc(100% - 40px)); text-align: center; color: var(--t-hi);
+  /* a sheet of paper over the photograph: the drawing has to read on whatever is behind it */
+  padding: 22px 24px 18px; border-radius: 18px;
+  background: rgba(246, 246, 244, .93); border: 1px solid rgba(26, 26, 29, .07);
+  box-shadow: 0 14px 40px rgba(20, 20, 25, .14);
+  transition: opacity 500ms var(--ease);
 }
+@supports (backdrop-filter: blur(6px)) {
+  .h3-load { background: rgba(246, 246, 244, .82); backdrop-filter: blur(7px); }
+}
+/* while it builds, the house is the only thing on screen; the name arrives with the finished view */
+html:not(.h3-ready) .h3-intro { opacity: 0; }
+.h3-intro { transition: opacity 700ms var(--ease); }
 .h3-ready .h3-load { opacity: 0; pointer-events: none; }
-.h3-load b { font-weight: 500; margin-left: 8px; font-variant-numeric: tabular-nums; }
-.h3-load b:empty { display: none; }
-.h3-load i { display: inline-block; width: 64px; height: 2px; margin-left: 10px; vertical-align: middle;
-  background: linear-gradient(90deg, var(--t-hi) var(--p, 0%), rgba(0,0,0,.15) 0); }
+.h3-build { display: block; width: 150px; height: auto; margin: 0 auto 14px; }
+.h3-build path {
+  fill: none; stroke: var(--t-hi); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;            /* pathLength is normalised in the markup */
+  transition: stroke-dashoffset 420ms var(--ease);
+}
+.h3-load__msg {
+  margin: 0; font: 400 var(--fs-4)/1.35 var(--sans); letter-spacing: -.01em;
+}
+.h3-load__meta { margin: 10px 0 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.h3-load__pct { font: 500 var(--fs-1)/1 var(--mono); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+.h3-load__pct:empty { display: none; }
+.h3-load i { display: block; width: 92px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--t-hi) var(--p, 0%), rgba(0, 0, 0, .14) 0); }
+.h3-load__hint {
+  margin: 14px 0 0; font: 400 var(--fs-1)/1.5 var(--mono); color: var(--t-low);
+  opacity: 0; transition: opacity 600ms var(--ease);
+}
+.h3-load.is-patient .h3-load__hint { opacity: 1; }      /* only once the wait is long enough to warrant it */
+@media (prefers-reduced-motion: reduce) {
+  .h3-build path { transition: none; }
+}
 /* the way out: shown when loading is slow or fails */
-.h3-alt { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); z-index: 6; white-space: nowrap; }
+.h3-alt { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 6; white-space: nowrap; }
 .h3-alt[hidden] { display: none; }
 /* it could not load: keep the poster and the message up, drop the progress */
-.h3-failed .h3-load { opacity: 1; max-width: calc(100% - 32px); line-height: 1.4; text-align: center; border-radius: 12px; }
+.h3-failed .h3-load { opacity: 1; }
+.h3-failed .h3-build, .h3-failed .h3-load__hint { display: none; }
 .h3-failed .h3-cue { display: none; }
-.h3-failed .h3-load b, .h3-failed .h3-load i { display: none; }
+.h3-failed .h3-load__meta { display: none; }
 .h3-failed .h3-poster { opacity: 1; }
 
 /* copy layers: positioned inside the stage, opacity driven from JS via --o */
