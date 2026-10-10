@@ -55,7 +55,7 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
       <a href="index.html#work">Work</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
-      <a class="btn btn--sm" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">R&eacute;sum&eacute; &#8599;</a>
+      <a class="btn btn--sm" href="https://www.linkedin.com/in/evangelakash" target="_blank" rel="noopener">LinkedIn &#8599;</a>
     </nav>
       <details class="nav__menu">
         <summary aria-label="Menu"><span></span><span></span></summary>
@@ -135,9 +135,9 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Why one system</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">Every product team was right about its own screens. Together they made products that did not match.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>AAVA grew into a family of products: Enterprise Console, where agents are built, and the studios for product and experience work alongside it. Each team designed for itself, and each did reasonable work.</p>
-<p>Together it did not hold. The same pattern looked different from product to product. The same component was designed twice. Spacing, type and interaction details drifted. Handoff to development took longer than it should have, accessibility depended on which team you asked, and a new designer or developer had to learn every product separately.</p>
-<p>I was part of the core team that built Play+ from January 2025: the system&rsquo;s architecture, its components and tokens, motion and interaction, the documentation and usage guidelines, and the working relationship with the developers who build it.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>AAVA grew into a family of products: Console, where agents are built, and the studios for product and experience work alongside it. Each team designed for itself, and each did reasonable work.</p>
+<p>Together it did not hold. The same pattern looked different from product to product, the same component was designed twice, spacing and type drifted, handoff took longer than it should have, and a new designer had to learn every product separately.</p>
+<p><strong>I was on the core team that built Play+ from January 2025</strong>: the architecture, the components and tokens, motion, the documentation, and the working relationship with the developers who build it.</p></div>
     </div>
 
   </div>
@@ -147,14 +147,14 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">A principle before a component</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">We named what the system should feel like before deciding what it should contain.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>The vision was a single design language that lets every product team design, build and ship consistently, without giving up flexibility. The work ran in four steps, in this order:</p>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The vision was one design language that lets every product team ship consistently without giving up flexibility. The work ran in four steps:</p>
 <ol class="cs-rank cs-rank--steps">
-  <li><span><b>Define the philosophy.</b> Design That Breathes: interfaces that feel adaptive, intuitive, inclusive, distinct and engaging.</span></li>
-  <li><span><b>Set the pillars.</b> Those five words became the test for every design and development decision.</span></li>
-  <li><span><b>Turn pillars into styles.</b> Each pillar expressed visually and in motion: glass, liquid, the Play+ look and feel.</span></li>
-  <li><span><b>Build and systemise.</b> In sprints with the AAVA studio teams, into tokens, components and patterns.</span></li>
+  <li><span><b>Define the philosophy.</b> Design That Breathes: adaptive, intuitive, inclusive, distinct, engaging.</span></li>
+  <li><span><b>Set the pillars.</b> Those five words became the test for every decision.</span></li>
+  <li><span><b>Turn pillars into styles.</b> Each pillar expressed visually and in motion.</span></li>
+  <li><span><b>Build and systemise.</b> In sprints with the studio teams, into tokens, components and patterns.</span></li>
 </ol>
-<p>The foundations that came out of it are colour, typography, spacing, radius, elevation, grid, motion, icons and theming. Each one exists as tokens, not as values typed into a design file.</p></div>
+<p>The foundations that came out of it, colour, typography, spacing, radius, elevation, grid, motion, icons and theming, all exist as tokens rather than values typed into a file.</p></div>
     </div>
 
   </div>
@@ -164,11 +164,11 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Decision: components ask for roles, not colours</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">A button in Play+ does not know it is pink.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>The palette is twelve primary colours, each a full scale from 50 to 900, plus neutrals, black, white, and the feedback colours for success, warning, error and information. Every product or studio is assigned one of the twelve as its brand colour.</p>
-<p>The decision that made the system work was a layer between those palettes and the components. Components reference <strong>semantic tokens</strong>, roles like Brand/Primary/500, and never a palette directly. Each product maps the roles to its own palette: pink by default, Pulse blue for Console, violet for Product Studio, rose for Experience Studio.</p>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The palette is twelve primary colours, each a full scale from 50 to 900, plus neutrals and the feedback colours. Every product is assigned one of the twelve.</p>
+<p><strong>The decision that made the system work was a layer between those palettes and the components.</strong> Components reference semantic tokens, roles like Brand/Primary/500, never a palette directly, and each product maps the roles to its own: pink by default, Pulse blue for Console, violet for Product Studio, rose for Experience Studio.</p>
 <p>That is why no component has a product-specific variant. There is one button. It asks for Brand/Primary, and the product decides what Brand/Primary is.</p>
 <p><b>What it cost</b></p>
-<p>An extra layer to learn. A designer new to the system has to understand that the colour on screen is not the colour the component asks for, and a token named for a role is harder to reason about than a hex value. The payoff is that a new product is a mapping, not a fork.</p></div>
+<p>An extra layer to learn: the colour on screen is not the colour the component asks for, and a role is harder to reason about than a hex value. The payoff is that a new product is a mapping, not a fork.</p></div>
     </div>
 <figure class="ds-demo reveal" aria-labelledby="dsdemo-cap">
   <div class="ds-demo__bar">
@@ -211,7 +211,7 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Decision: dark mode is a mapping, not a second library</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">Light and dark share every component. Only the mapping underneath changes.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Each palette runs as a synchronised pair of scales. The dark scale is the light one in reverse: Pink 50 in light mode is the value Pink 900 takes in dark, and every step between follows. Because components already point at semantic tokens, switching mode swaps the mapping under them and nothing else.</p>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Each palette runs as a synchronised pair of scales: the dark scale is the light one reversed, so Pink 50 in light is what Pink 900 takes in dark. Because components point at semantic tokens, switching mode swaps the mapping under them and nothing else.</p>
 <p>The test was a real screen. Console&rsquo;s agent creation page, one of the densest in the platform, runs in both modes from the same components, with no dark variant of anything.</p></div>
     </div>
 <figure class="csw csw--lead cs-lead cs-lead--after reveal">
@@ -229,9 +229,9 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Decision: one button for every case</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">The most-used component is where a system either holds or splinters.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>The button carries four types (primary, secondary, gradient and tertiary), nine states (default, hover, active, disabled, warning, danger, underline, success and information), a pill or square shape, five sizes from extra small to extra large, and four icon placements: none, left, right, or icon only. The label and the icon are properties, not variants.</p>
+      <div class="cs-prose reveal" style="--d:60ms"><p>The button carries four types, nine states, a pill or square shape, five sizes and four icon placements. The label and the icon are properties, not variants.</p>
 <p>Multiplied out, that is <strong>1,440 combinations behind one component</strong>. A designer sees a handful of dropdowns.</p>
-<p>Its dimensions are tokens as well. Vertical padding is space-3, horizontal padding is space-7, the corner is radius-md, and the height tokens run 32, 40 and 48 pixels for small, medium and large. When a spacing token changes, every button changes with it.</p>
+<p>Its dimensions are tokens too: vertical padding space-3, horizontal space-7, corner radius-md, heights 32, 40 and 48. When a spacing token changes, every button changes with it.</p>
 <p><b>What it cost</b></p>
 <p>A component this large is slow to change. Adding a state means checking it against every type, size, product and mode, which is exactly the kind of change the review process exists to catch.</p></div>
     </div>
@@ -246,8 +246,8 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">The foundations, as tokens</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">A value that gets typed will drift. So nothing is typed.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Every foundation is a named scale, and the scales are small on purpose. Spacing runs from 0 to 64 in twelve tokens. Five radii. Four elevation levels, each an offset, a blur, a spread and a neutral colour. Five breakpoints, with gutters and margins taken from the spacing scale rather than set per layout. Four icon sizes.</p>
-<p>Typography has three families with three jobs: PP Neue Machina for display, Mulish for headings, Inter for body text and captions. The values below are the system&rsquo;s own, drawn here at their real proportions.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Every foundation is a named scale, and the scales are small on purpose. The values below are the system's own, drawn at their real proportions.</p>
+<p>Typography has three families with three jobs: PP Neue Machina for display, Mulish for headings, Inter for body and captions.</p></div>
     </div>
 <div class="ds-spec reveal">
   <section class="ds-spec__card">
@@ -312,8 +312,8 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Glass, with rules</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">The glass look only works if every layer on a screen is the same glass.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Translucent surfaces are the most recognisable thing about Play+, and the easiest to get wrong. Two designers each picking an opacity produce two kinds of glass on one screen, and the depth stops reading as depth.</p>
-<p>So surfaces are tokens too: a ladder of translucent fills for each mode, Surface Dark 1 to 10 and Surface White 1 to 10, stepping in tens of opacity from 10%. Depth and layering come from picking a rung, not from mixing a colour, and because the ladder is semantic, the frosted look moves between themes and products without being redrawn.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Translucent surfaces are the most recognisable thing about Play+, and the easiest to get wrong: two designers each picking an opacity produce two kinds of glass on one screen, and the depth stops reading as depth.</p>
+<p>So surfaces are tokens too: a ladder of translucent fills for each mode, Surface Dark 1 to 10 and Surface White 1 to 10. Depth comes from picking a rung, not mixing a colour, so the frosted look moves between themes and products without being redrawn.</p></div>
     </div>
 <figure class="csw csw--lead cs-lead cs-lead--after reveal">
   <picture><source type="image/webp" srcset="img/ds/ds-glass-700.webp 700w, img/ds/ds-glass-1100.webp 1100w, img/ds/ds-glass-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="570" style="--ar:1600/570" src="img/ds/ds-glass.jpg" alt="Console&rsquo;s home built on glass surfaces, beside two studies of frosted glass panels over light and dark backgrounds." loading="lazy" decoding="async"></picture>
@@ -330,7 +330,7 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">The library</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">Built from the same tokens, the components look like one family without trying.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Beyond the button: alerts in four feedback colours and three sizes, sliders, radio groups, toggles, badges, accordions, hyperlinks, spinners, text fields in every state, and tooltips. Each is themed by the same semantic tokens and documented with its usage, so a component that looks right in Console looks right in every studio without anyone touching it.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Beyond the button: alerts, sliders, radio groups, toggles, badges, accordions, hyperlinks, spinners, text fields in every state, and tooltips. Each is themed by the same tokens and documented with its usage.</p></div>
     </div>
 <div class="cs-duo reveal">
   <figure><picture><source type="image/webp" srcset="img/ds/ds-buttons-alerts-700.webp 700w, img/ds/ds-buttons-alerts-1100.webp 1100w, img/ds/ds-buttons-alerts-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="835" style="--ar:1600/835" src="img/ds/ds-buttons-alerts.jpg" alt="The button matrix across types, states and sizes, and alerts in success, warning, error and information at three sizes." loading="lazy" decoding="async"></picture><figcaption>Buttons and alerts.</figcaption></figure>
@@ -347,7 +347,7 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Governance</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">A shared library stays shared only if adding to it takes more than a whim.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>New components come through one route. First the request is checked against the library: if something similar already exists, the need becomes a variant of it. If not, it is audited against the system&rsquo;s tokens, theming and foundations before it can become a component.</p>
+      <div class="cs-prose reveal" style="--d:60ms"><p>New components come through one route. The request is checked against the library first: if something similar exists, the need becomes a variant of it; if not, it is audited against the system's tokens, theming and foundations.</p>
 <p>Changes are made on a versioned duplicate, V.01 onward, never on the original. The lead UX designer approves, and only after that is the component documented and published to the library.</p>
 <p><b>What it cost</b></p>
 <p>Speed, deliberately. A team that needs a component this sprint could build it faster on its own. The route exists because that is exactly how the drift in the first section happened.</p></div>
@@ -401,8 +401,8 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
     <h2 class="cs-sec__title reveal">Where it stands</h2>
     <div class="cs-body">
       <div class="cs-lede-col reveal"><p class="lede">Version 2 is built and in use. I can show its structure, not a speed-up figure.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Play+ version 2 is developed and in use across four to six products, Console and the studios among them. The <a href="product-studio.html">Product Studio case study</a> shows the violet theme across a whole product.</p>
-<p>What I can point to is structural: no product-specific component variants, one library serving light and dark, and a route that every new component goes through. I don&rsquo;t have a measured before-and-after for design or development time, and I would rather say so than estimate one.</p></div>
+      <div class="cs-prose reveal" style="--d:60ms"><p>Version 2 is in use across four to six products, Console and the studios among them.</p>
+<p>What I can point to is structural: <strong>no product-specific component variants</strong>, one library serving light and dark, and a route every new component goes through. I don't have a measured before-and-after for design or development time, and I would rather say so than estimate one.</p></div>
     </div>
 
   </div>
