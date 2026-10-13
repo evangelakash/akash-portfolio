@@ -277,7 +277,7 @@
    3D view (hover, or the touch that precedes the tap), it starts arriving into the same cache the 3D page
    reads, so the wait has already begun by the time the page opens. Nothing is fetched otherwise. */
 (function warmHouse() {
-  const link = document.querySelector('.view-toggle a[href="house3d.html"]');
+  const link = document.querySelector('.view-toggle a[href="3d.html"]');
   if (!link || !self.caches || !navigator.onLine) return;
   const conn = navigator.connection;
   if (conn && (conn.saveData || /^(slow-)?2g$/.test(conn.effectiveType || ''))) return;   // not on their data plan

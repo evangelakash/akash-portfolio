@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://evangelakash.github.io/akash-portfolio/og-cover.png">
 <link rel="preload" href="fonts/Sora-300-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=18">
+<link rel="stylesheet" href="style.css?v=37">
 <script>document.documentElement.className+=" js";</script>
 <script>
 /* keeps the heavy files (the 3D house above all) on disk between visits; this host expires them in ten minutes */
@@ -74,10 +74,10 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
       <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">The product</span></li>
       <li><a href="#s01" class="is-here"><span class="cs-rail__label">Why a process builder</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Four decisions</span></li>
-      <li><a href="#s03"><span class="cs-rail__label">Decision: one canvas</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s04"><span class="cs-rail__label">Decision: logic, plain controls</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s05"><span class="cs-rail__label">Decision: review as repair</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
-      <li><a href="#s06"><span class="cs-rail__label">Decision: merge or fail</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s03"><span class="cs-rail__label">One canvas</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s04"><span class="cs-rail__label">Logic, plain controls</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s05"><span class="cs-rail__label">Review as repair</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
+      <li><a href="#s06"><span class="cs-rail__label">Merge or fail</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li class="cs-rail__grp" aria-hidden="true"><span class="cs-rail__label">Running it</span></li>
       <li><a href="#s07"><span class="cs-rail__label">Watching a run</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
       <li><a href="#s08"><span class="cs-rail__label">The client came back</span><i class="cs-rail__tick" aria-hidden="true"></i></a></li>
@@ -131,14 +131,28 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
 <section class="cs-sec" id="s01">
   <div class="container">
     <h2 class="cs-sec__title reveal">Why a process builder at all</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">Console could build an agent. It could not build a process.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Console chained agents into pipelines. That answers one question, run this task with AI, and not the one teams arrived with: <strong>automate this whole module.</strong></p>
-<p>A team automating procurement, or claims intake, or a support vertical is not asking for an agent. They want a dozen steps with branches, work that runs in parallel and rejoins, and a person who signs off before anything leaves the building. APB is where that gets built.</p>
-<p><strong>The person who builds a process is almost never the one qualified to judge what it produces.</strong> The flow designer composes: agents, workflows, the logic that branches and rejoins them, and where a human signs off. The reviewer is a subject matter expert who can tell whether a fraud assessment holds up, and may never open the canvas.</p></div>
-    </div>
+    <p class="cs-sec__lede reveal">Console could build an agent. It could not build a process.</p>
+<div class="cs-unit reveal">
+<p>Console chained agents into pipelines, which answers one question: run this task with AI. Teams arrived with a different one.</p>
+</div>
+<div class="cs-unit reveal">
+<span class="cs-unit__label">What they actually asked for</span>
+<p>A team automating procurement or claims intake wants a dozen steps with branches, work that runs in parallel and rejoins, and a person who signs off before anything leaves the building.</p>
+</div>
+<div class="cs-unit reveal">
+<span class="cs-unit__label">Two people, not one</span>
+<p>The flow designer composes on the canvas. The reviewer is a subject matter expert who can tell whether a fraud assessment holds up, and may never open the canvas.</p>
+</div>
+  </div>
+</section>
 
-    <figure class="sketch csw" aria-labelledby="d1cap">
+<section class="cs-sec cs-sec--band" id="s03">
+  <div class="container">
+    <h2 class="cs-sec__title reveal">Decision: one canvas, extended</h2>
+    <p class="cs-sec__lede reveal">A separate process editor would have been two products pretending to be one.</p>
+<div class="cs-unit reveal">
+<p>The obvious path was a new surface with its own vocabulary, on the reasoning that a process is a bigger thing than a pipeline. I extended Console&rsquo;s existing canvas instead.</p>
+<figure class="sketch csw" aria-labelledby="d1cap">
       <svg viewBox="0 0 640 260" role="img" aria-label="A process on one canvas: start, a new agent, an existing agent, a split into four parallel agents and workflows, then a merge and an end.">
         <rect class="box box--ghost fade" x="8" y="95" width="54" height="40" rx="6"/>
         <text class="t-hi fade" x="20" y="120">start</text>
@@ -189,27 +203,29 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
       </svg>
       <figcaption id="d1cap">One canvas. A saved agent, a newly generated one and two workflows sit in the same flow, fanned out by a split and brought back by a merge.</figcaption>
     </figure>
-  </div>
-</section>
-
-<section class="cs-sec cs-sec--band" id="s03">
-  <div class="container">
-    <h2 class="cs-sec__title reveal">Decision: one canvas, extended</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">A separate process editor would have been two products pretending to be one.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>The obvious path was a new surface with its own vocabulary, on the reasoning that a process is a bigger thing than a pipeline. <b>I extended Console&rsquo;s existing canvas instead.</b></p>
-<p>The rail carries three groups: the artefacts you already own, the logic, and the building blocks for start, end and human review. Editing an agent opens Console&rsquo;s own screen and approval flow, rather than a second editor that would drift from the first inside a quarter.</p>
-<p><b>What it cost</b></p>
-<p>The rail is crowded: seven logic types, three artefact types and three building blocks in one column. If the logic set grows, that is what breaks first.</p>
-<p>What it bought: anyone who can build an agent in Console already knows how to build a process. One mental model, one approval path.</p></div>
-    </div>
-<figure class="csw csw--lead cs-lead cs-lead--after reveal">
-  <picture><source type="image/webp" srcset="img/apb/apb-canvas-library-700.webp 700w, img/apb/apb-canvas-library-1100.webp 1100w, img/apb/apb-canvas-library-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-canvas-library.png" alt="The APB canvas inside Console, with the library open: artefacts you own, logic, and building blocks for start, end and human review." loading="lazy" decoding="async"></picture>
-  <figcaption>The canvas with its library open, inside Console&rsquo;s Build section: artefacts you already own, then logic, then building blocks.</figcaption>
+</div>
+<div class="cs-unit reveal">
+<p>Agents, workflows and logic compose on the same canvas, and the rail carries what you already own, then the logic, then start, end and human review.</p>
+<figure class="cs-fig reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-canvas-library-700.webp 700w, img/apb/apb-canvas-library-1100.webp 1100w, img/apb/apb-canvas-library-1600.webp 1600w" sizes="(min-width:1360px) min(1112px, 1600px), min(92vw, 1600px)"><img width="1600" height="1044" src="img/apb/apb-canvas-library.png" alt="The APB canvas inside Console with the library open: artefacts you own, logic, and building blocks." loading="lazy" decoding="async"></picture>
+  <figcaption>One canvas, inside Console&rsquo;s Build section.</figcaption>
 </figure>
-<div class="cs-duo reveal">
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-agent-draft-700.webp 700w, img/apb/apb-agent-draft-1100.webp 1100w, img/apb/apb-agent-draft-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-agent-draft.png" alt="An agent generated on the canvas, open in a side panel as a draft, with Edit and Run." loading="lazy" decoding="async"></picture><figcaption>An agent generated on the canvas opens as a draft: edit it, run it.</figcaption></figure>
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-agent-approved-700.webp 700w, img/apb/apb-agent-approved-1100.webp 1100w, img/apb/apb-agent-approved-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-agent-approved.png" alt="An approved agent in the same side panel, with Clone and Run instead of Edit." loading="lazy" decoding="async"></picture><figcaption>Once it has passed Console&rsquo;s approval, the same panel offers Clone instead of Edit.</figcaption></figure>
+</div>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">One editor, one approval path</span>
+    <p>Editing an agent opens Console&rsquo;s own screen and approval flow, rather than a second editor that would drift from the first inside a quarter. Once it has passed approval, the same panel offers Clone instead of Edit.</p>
+  </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-agent-panel.webp"><img width="393" height="870" src="img/apb/apb-agent-panel.png" alt="A generated agent&rsquo;s panel, open as a draft: overview, knowledge base, guardrails, behaviour, tools, and Edit and Run at the foot." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-note reveal">
+  <b>What it cost</b>
+  <p>The rail is crowded: seven logic types, three artefact types and three building blocks in one column. If the logic set grows, that is what breaks first.</p>
+</div>
+<div class="cs-unit reveal">
+<p>What it bought: anyone who can build an agent in Console already knows how to build a process.</p>
 </div>
   </div>
 </section>
@@ -217,19 +233,38 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
 <section class="cs-sec" id="s04">
   <div class="container">
     <h2 class="cs-sec__title reveal">Decision: real process logic, configured with dropdowns</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">The client asked for process logic. Process logic is not a beginner&rsquo;s tool.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Split, merge, if-else, multi-way switch, pattern matching, predicate routing, parallel execution: a client requirement, and the grammar of BPMN.</p>
-<p>That grammar exists because processes are hard, and the person APB is sold to does not write schemas. So <strong>the rigour stays underneath and the surface stays visual.</strong> The hardest configuration in the product, how four parallel branches recombine, is a dropdown, radio buttons and a drag. No scripting, anywhere.</p>
-<p><b>What it cost</b></p>
-<p>Expressiveness. Four merge strategies exist, combine, prioritise, override and a guided custom mapping, and anyone who needs something outside those four cannot express it.</p></div>
-    </div>
-<div class="cs-pull"><b>The request that made this hard</b>
-<p><strong>The client did not ask for a simpler tool. They asked for a real one a non-technical person could operate.</strong></p>
-<p>Only the second request is difficult.</p></div>
-<div class="cs-duo reveal">
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-split-config-700.webp 700w, img/apb/apb-split-config-1100.webp 1100w, img/apb/apb-split-config-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-split-config.png" alt="A split being configured: the agents it feeds, a distribution strategy, failure behaviour, files, and a plain-language logic field." loading="lazy" decoding="async"></picture><figcaption>A split, configured: the agents it feeds, how work is distributed, what happens on failure, and the logic written as a sentence.</figcaption></figure>
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-split-running-700.webp 700w, img/apb/apb-split-running-1100.webp 1100w, img/apb/apb-split-running-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-split-running.png" alt="The same split while running, with a status for each branch and the details of the ones that failed." loading="lazy" decoding="async"></picture><figcaption>The same split while it runs: every branch reports on its own, so a failure has an address.</figcaption></figure>
+    <p class="cs-sec__lede reveal">The client asked for process logic. Process logic is not a beginner&rsquo;s tool.</p>
+<div class="cs-unit reveal">
+<p>Split, merge, if-else, multi-way switch, pattern matching, predicate routing, parallel execution: a client requirement, and the grammar of BPMN.</p>
+</div>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">The rigour stays underneath</span>
+    <p>The hardest configuration in the product, how four parallel branches recombine, is a dropdown, radio buttons and a drag. No scripting, anywhere.</p>
+  
+        <p class="cs-cap">Which agents it feeds, how work is distributed, what happens on failure.</p>
+      </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-split-panel.webp"><img width="393" height="870" src="img/apb/apb-split-panel.png" alt="The split configuration panel: agents to configure, distribution strategy, failure behaviour and logic." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">And a failure has an address</span>
+    <p>While it runs, every branch reports on its own, so a failure has an address instead of sinking into one combined result.</p>
+  
+        <p class="cs-cap">The same panel, mid-run.</p>
+      </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-split-branches.webp"><img width="393" height="870" src="img/apb/apb-split-branches.png" alt="The same split panel during a run, each branch reporting its own status." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-note reveal">
+  <b>What it cost</b>
+  <p>Expressiveness. Four merge strategies exist, combine, prioritise, override and a guided custom mapping, and anyone who needs something outside those four cannot express it.</p>
+</div>
+<div class="cs-unit reveal">
+<p>The client did not ask for a simpler tool. They asked for a real one a non-technical person could operate, and only the second request is difficult.</p>
 </div>
   </div>
 </section>
@@ -237,28 +272,12 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
 <section class="cs-sec cs-sec--band" id="s05">
   <div class="container">
     <h2 class="cs-sec__title reveal">Decision: review is a repair, not a gate</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">In May, the human in the loop was the person who built the flow, checking their own output.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>It passed testing because the builder already knew what the output was supposed to be, which is exactly what a real reviewer lacks.</p>
-<p><strong>I proposed three changes. All three became requirements.</strong></p>
-
-<h3>Assign someone who can actually judge it</h3>
-<p>A reviewer and a backup, chosen for domain knowledge rather than proximity to the build, with a reminder if the task sits unattended.</p>
-
-<h3>Give them enough to judge with</h3>
-<p>The checkpoint carries what the reviewer judges against: what the step was meant to produce, and what good looks like. Without that an expert is guessing, and a guessing reviewer approves.</p>
-
-<h3>Let them fix the cause, not refuse the symptom</h3>
-<p>This is the one that mattered. A reviewer can usually tell which step produced a bad output, and the old model gave them nowhere to put that. So instead of approve or reject, they pick that step, re-prompt it, and run it again.</p>
-
-<h3>Three attempts, and then a real ending</h3>
-<p>The reviewer gets three. Inside them they approve or reject, because a third bad output is a decision, not a fourth try. Rejecting fails the run, and recovery is deliberately somebody else&rsquo;s job.</p>
-<p>A re-run does <strong>not</strong> re-open checkpoints that were already approved, so nobody signs the same thing twice.</p>
-<p><b>Why the cap</b></p>
-<p>An unbounded retry is a loop with a person inside it. Three is enough to correct a step, and few enough that a broken one reaches someone who can change the flow.</p></div>
-    </div>
-
-    <figure class="sketch csw" aria-labelledby="d2cap">
+    <p class="cs-sec__lede reveal">In May, the human in the loop was the person who built the flow, checking their own output.</p>
+<div class="cs-unit reveal">
+<p>It passed testing because the builder already knew what the output was supposed to be, which is exactly what a real reviewer lacks.</p>
+</div>
+<blockquote class="cs-quote reveal"><p>I proposed three changes. All three became requirements.</p></blockquote>
+<figure class="sketch csw" aria-labelledby="d2cap">
       <svg viewBox="0 0 640 250" role="img" aria-label="The review loop: a checkpoint opens, the reviewer either approves and the run continues, or names the step at fault, re-prompts it and re-runs. After three attempts a rejection fails the run, which the creator or an administrator recovers.">
         <rect class="box fade" x="8" y="22" width="120" height="36" rx="6"/>
         <text class="t-hi fade" x="20" y="44">checkpoint opens</text>
@@ -295,36 +314,62 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
       </svg>
       <figcaption id="d2cap">Rejecting does not end the review. It sends the reviewer back to the step that caused the problem, with three attempts to get it right before the run fails and leaves their hands.</figcaption>
     </figure>
-
-<div class="cs-pull"><b>The thing the old model got wrong</b>
-<p><strong>A reviewer who can only reject is a rubber stamp with extra steps.</strong></p></div>
-
-<figure class="csw csw--lead cs-lead cs-lead--after reveal">
-  <picture><source type="image/webp" srcset="img/apb/apb-hitl-config-700.webp 700w, img/apb/apb-hitl-config-1100.webp 1100w, img/apb/apb-hitl-config-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-hitl-config.png" alt="Configuring a human-in-the-loop checkpoint: name, description, supporting files, a primary and a secondary assignee, a retry count of three, and a reminder after three days." loading="lazy" decoding="async"></picture>
-  <figcaption>A checkpoint, configured: a named reviewer and a backup, the documents they judge against, three attempts, and a reminder if it sits unattended.</figcaption>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <h3>Assign someone who can actually judge it</h3>
+    <p>A reviewer and a backup, chosen for domain knowledge rather than proximity to the build, with a reminder if the task sits unattended.</p>
+  </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-checkpoint.webp"><img width="393" height="870" src="img/apb/apb-checkpoint.png" alt="The checkpoint panel: name, description, supporting files, two assignees, retry count and reminder." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-unit reveal">
+<h3>Give them enough to judge with</h3>
+<p>The checkpoint carries what the reviewer judges against. Without that an expert is guessing, and a guessing reviewer approves.</p>
+<figure class="cs-fig reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-review-read-700.webp 700w, img/apb/apb-review-read.webp 984w" sizes="(min-width:1360px) min(1112px, 984px), min(92vw, 984px)"><img width="984" height="766" src="img/apb/apb-review-read.png" alt="The review screen: the step output beside its supporting documents, editable in place." loading="lazy" decoding="async"></picture>
+  <figcaption>The reviewer reads the output next to its supporting documents, and can correct it in place.</figcaption>
 </figure>
-<ol class="cs-seq reveal" aria-label="The repair loop, step by step">
-  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-edit-700.webp 700w, img/apb/apb-review-edit-1100.webp 1100w, img/apb/apb-review-edit-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-edit.png" alt="The reviewer reading the output with its supporting documents, editing it in place, with Retry, Reject and Approve below." loading="lazy" decoding="async"></picture><figcaption>The reviewer reads the output next to its supporting documents, and can correct it in place.</figcaption></figure></li>
-  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-retry-700.webp 700w, img/apb/apb-review-retry-1100.webp 1100w, img/apb/apb-review-retry-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-retry.png" alt="Retry from a step: the reviewer chooses the agent or workflow that caused the problem and adds context for it." loading="lazy" decoding="async"></picture><figcaption>Or they retry: pick the step that caused the problem and tell it what was wrong.</figcaption></figure></li>
-  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-retried-700.webp 700w, img/apb/apb-review-retried-1100.webp 1100w, img/apb/apb-review-retried-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-retried.png" alt="The retried step has run again and its new output is back with the reviewer." loading="lazy" decoding="async"></picture><figcaption>That step runs again, and its new output comes back to the same reviewer.</figcaption></figure></li>
-  <li><figure><picture><source type="image/webp" srcset="img/apb/apb-review-approved-700.webp 700w, img/apb/apb-review-approved-1100.webp 1100w, img/apb/apb-review-approved-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-review-approved.png" alt="The reviewed output approved, and the run carrying on past the checkpoint." loading="lazy" decoding="async"></picture><figcaption>Approved, and the run carries on from the checkpoint.</figcaption></figure></li>
-</ol>
+</div>
+<div class="cs-unit reveal">
+<h3>Let them fix the cause, not refuse the symptom</h3>
+<p>A reviewer can usually tell which step produced a bad output, and the old model gave them nowhere to put that. So instead of approve or reject, they pick that step and re-prompt it.</p>
+<figure class="cs-fig reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-review-pick-700.webp 700w, img/apb/apb-review-pick.webp 984w" sizes="(min-width:1360px) min(1112px, 984px), min(92vw, 984px)"><img width="984" height="766" src="img/apb/apb-review-pick.png" alt="The retry form: choose the agent or workflow to retry, and write a prompt for that step." loading="lazy" decoding="async"></picture>
+  <figcaption>Retry names a step: pick the one that caused the problem, tell it what was wrong, run it again.</figcaption>
+</figure>
+</div>
+<div class="cs-unit reveal">
+<h3>Three attempts, and then a real ending</h3>
+<p>Inside three the reviewer approves or rejects, because a third bad output is a decision, not a fourth try. Rejecting fails the run, and recovery is deliberately somebody else&rsquo;s job.</p>
+<div class="cs-pair reveal">
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-review-again-700.webp 700w, img/apb/apb-review-again.webp 984w" sizes="(min-width:1360px) min(1112px, 984px), min(92vw, 984px)"><img width="984" height="766" src="img/apb/apb-review-again.png" alt="The re-run output returning to the same reviewer." loading="lazy" decoding="async"></picture>
+    <figcaption>The step runs again, and its output comes back to the same reviewer.</figcaption>
+  </figure>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-review-ok-700.webp 700w, img/apb/apb-review-ok.webp 984w" sizes="(min-width:1360px) min(1112px, 984px), min(92vw, 984px)"><img width="984" height="766" src="img/apb/apb-review-ok.png" alt="The approved state, with the run carrying on from the checkpoint." loading="lazy" decoding="async"></picture>
+    <figcaption>Approved, and the run carries on from the checkpoint.</figcaption>
+  </figure>
+</div>
+</div>
+<div class="cs-unit reveal">
+<p>A re-run does not re-open checkpoints that were already approved, so nobody signs the same thing twice.</p>
+</div>
+<div class="cs-note reveal">
+  <b>Why the cap</b>
+  <p>An unbounded retry is a loop with a person inside it. Three is enough to correct a step, and few enough that a broken one reaches someone who can change the flow.</p>
+</div>
   </div>
 </section>
 
 <section class="cs-sec" id="s06">
   <div class="container">
     <h2 class="cs-sec__title reveal">Decision: a merge either validates or it fails</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">Parallel branches that quietly drop a result are worse than parallel branches that stop.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>When a split fans work out to four agents and a merge brings it back, the merge is where trust is won or lost. So it waits for every required branch and checks each output for completeness and schema validity, and anything corrupt is excluded with its reason shown rather than swallowed.</p>
-<p>When a branch does fail, the designer has already chosen what happens: aggregate what arrived, retry and continue, or fail the aggregation.</p>
-<p><b>What it cost</b></p>
-<p>There is no fast, best-effort merge. The gates apply even when a user would rather have a rough answer now and clean it up later.</p>
-<p>The product is sold on output you can act on without checking the working, and a merge that silently drops a branch would end that in one incident.</p></div>
-    </div>
-
-    <figure class="sketch csw" aria-labelledby="d3cap">
+    <p class="cs-sec__lede reveal">Parallel branches that quietly drop a result are worse than parallel branches that stop.</p>
+<div class="cs-unit reveal">
+<p>When a split fans work out to four agents and a merge brings it back, the merge is where trust is won or lost.</p>
+<figure class="sketch csw" aria-labelledby="d3cap">
       <svg viewBox="0 0 640 260" role="img" aria-label="Four parallel agents feed a gate that waits for all of them, then validation, then aggregation by one of four strategies, then a single output. Failing branches follow one of three policies chosen in advance.">
         <rect class="box fade" x="8" y="20" width="90" height="34" rx="6"/>
         <text class="t-hi fade" x="20" y="41">agent a</text>
@@ -371,9 +416,29 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
       </svg>
       <figcaption id="d3cap">Nothing merges until every required branch has arrived and passed validation. What happens to a failed branch is a decision the designer makes before the run, not something the system improvises during it.</figcaption>
     </figure>
-<div class="cs-duo reveal">
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-merge-config-700.webp 700w, img/apb/apb-merge-config-1100.webp 1100w, img/apb/apb-merge-config-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-merge-config.png" alt="A merge being configured: its parent branches, the aggregation between them, failure behaviour and a logic field." loading="lazy" decoding="async"></picture><figcaption>A merge, configured: the branches it waits for, how their outputs combine, and what a failure does.</figcaption></figure>
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-merge-running-700.webp 700w, img/apb/apb-merge-running-1100.webp 1100w, img/apb/apb-merge-running-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="1044" style="--ar:1600/1044" src="img/apb/apb-merge-running.png" alt="The same merge running: a failed aggregation shown with the failing branch and its reason." loading="lazy" decoding="async"></picture><figcaption>Running: a branch that fails shows up with its reason instead of vanishing into the aggregate.</figcaption></figure>
+</div>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">Every branch, checked</span>
+    <p>A merge waits for every required branch and checks each output for completeness and schema validity. Anything corrupt is excluded with its reason shown rather than swallowed.</p>
+  </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-merge-panel.webp"><img width="393" height="870" src="img/apb/apb-merge-panel.png" alt="The merge configuration panel: branches to wait for, how outputs combine, what a failure does." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">And a failed branch says so</span>
+    <p>When a branch does fail, the designer has already chosen what happens: aggregate what arrived, retry and continue, or fail the aggregation.</p>
+  </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-merge-failed.webp"><img width="393" height="870" src="img/apb/apb-merge-failed.png" alt="The merge panel during a run, showing a failed branch with its reason." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-note reveal">
+  <b>What it cost</b>
+  <p>There is no fast, best-effort merge. The gates apply even when a user would rather have a rough answer now and clean it up later.</p>
+  <p>The product is sold on output you can act on without checking the working, and a merge that silently drops a branch would end that in one incident.</p>
 </div>
   </div>
 </section>
@@ -381,17 +446,34 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
 <section class="cs-sec cs-sec--band" id="s07">
   <div class="container">
     <h2 class="cs-sec__title reveal">Watching a run</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">The output of a long run is an infinite scroll. Something has to be the way in.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>An activity bar lists every agent, workflow and tool with a live status. Status is the obvious half; navigation is the half that matters: <strong>click a step and its output comes to the top of the page</strong>.</p></div>
-    </div>
-<figure class="csw csw--lead cs-lead cs-lead--after reveal">
-  <picture><source type="image/webp" srcset="img/apb/apb-run-output-700.webp 700w, img/apb/apb-run-output-1100.webp 1100w, img/apb/apb-run-output-1600.webp 1600w" sizes="(min-width:1360px) 1112px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-run-output.png" alt="The playground output view: an activity bar listing each agent, workflow and logic step with its status, the execution output in the middle, and process logs on the right." loading="lazy" decoding="async"></picture>
-  <figcaption>The activity bar down the left: every step with its live status. Click one and its output comes to the top of the page.</figcaption>
+    <p class="cs-sec__lede reveal">The output of a long run is an infinite scroll. Something has to be the way in.</p>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">A table of contents for a stream</span>
+    <p>An activity bar lists every agent, workflow and tool with a live status. Click a step and its output comes to the top of the page, which makes the bar a table of contents for a stream.</p>
+  
+        <p class="cs-cap">Where am I, what is happening, show me that one: answered in the same column.</p>
+      </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-activity-bar.webp"><img width="279" height="757" src="img/apb/apb-activity-bar.png" alt="The activity bar down the left of a running process, each step with a live status." loading="lazy" decoding="async"></picture>
+  </figure>
+</div>
+<div class="cs-unit reveal">
+<span class="cs-unit__label">What a run costs</span>
+<p>Status, tokens, cost and duration per node. The figures here are demo values.</p>
+<figure class="cs-fig reveal">
+  <picture><source type="image/webp" srcset="img/apb/apb-monitor-table-700.webp 700w, img/apb/apb-monitor-table.webp 1253w" sizes="(min-width:1360px) min(1112px, 1253px), min(92vw, 1253px)"><img width="1253" height="591" src="img/apb/apb-monitor-table.png" alt="The monitor tab: a table of nodes with status, tokens, cost and duration." loading="lazy" decoding="async"></picture>
+  <figcaption>Monitor: every node with its own status, tokens, cost and duration.</figcaption>
 </figure>
-<div class="cs-duo reveal">
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-run-monitor-700.webp 700w, img/apb/apb-run-monitor-1100.webp 1100w, img/apb/apb-run-monitor-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-run-monitor.png" alt="The monitor tab: nodes with status, tokens, cost and duration, and run totals." loading="lazy" decoding="async"></picture><figcaption>Monitor: status, tokens, cost and duration per node. The figures here are demo values.</figcaption></figure>
-  <figure><picture><source type="image/webp" srcset="img/apb/apb-run-input-700.webp 700w, img/apb/apb-run-input-1100.webp 1100w, img/apb/apb-run-input-1600.webp 1600w" sizes="(min-width:900px) 544px, 92vw"><img width="1600" height="916" style="--ar:1600/916" src="img/apb/apb-run-input.png" alt="The input tab before a run: a blueprint of the process and inputs for each node, with optional files." loading="lazy" decoding="async"></picture><figcaption>Before a run: inputs set node by node, against a blueprint of the process.</figcaption></figure>
+</div>
+<div class="cs-side reveal">
+  <div class="cs-side__text">
+    <span class="cs-unit__label">Before it starts</span>
+    <p>Inputs are set node by node, against a blueprint of the process.</p>
+  </div>
+  <figure>
+    <picture><source type="image/webp" srcset="img/apb/apb-input-form.webp"><img width="511" height="754" src="img/apb/apb-input-form.png" alt="The input tab: a form for setting each node&rsquo;s input before a run." loading="lazy" decoding="async"></picture>
+  </figure>
 </div>
   </div>
 </section>
@@ -399,23 +481,52 @@ if ('serviceWorker' in navigator) addEventListener('load', () => navigator.servi
 <section class="cs-sec" id="s08">
   <div class="container">
     <h2 class="cs-sec__title reveal">The client came back</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">A simple version shipped. What came back was a request for the hard part.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>The first release was a proof of concept without the logic layer. It went to a <strong>financial services client</strong>, and what came back was a list of what they wanted next: branching, parallel execution, routing.</p>
+    <p class="cs-sec__lede reveal">A simple version shipped. What came back was a request for the hard part.</p>
+<div class="cs-unit reveal">
+<p>The first release was a proof of concept without the logic layer. It went to a financial services client, and what came back was a list of what they wanted next: branching, parallel execution, routing.</p>
+</div>
+<div class="cs-unit reveal">
+<span class="cs-unit__label">Where it stands</span>
 <p>That request is why APB is being expanded rather than maintained. This design was built in August and September 2026 and runs in the development environment now.</p>
-<p><strong>I have no adoption figure to give you.</strong> This version is not in front of users yet, and a client asking for precisely the layer being built is the closest thing to validation there is before a launch.</p></div>
-    </div>
+</div>
+<div class="cs-note reveal">
+  <b>No adoption figure</b>
+  <p>This version is not in front of users yet, so there is nothing to report. A client asking for precisely the layer being built is the closest thing to validation there is before a launch.</p>
+</div>
   </div>
 </section>
 
 <section class="cs-sec cs-sec--band" id="s09">
   <div class="container">
     <h2 class="cs-sec__title reveal">What isn&rsquo;t built yet</h2>
-    <div class="cs-body">
-      <div class="cs-lede-col reveal"><p class="lede">The design is ahead of the build, and some of it has not been tested by anybody.</p></div>
-      <div class="cs-prose reveal" style="--d:60ms"><p>Three surfaces are specified and not prototyped: the fan-in result view, the approval history screen, and the routing observability page. Each has acceptance criteria; none has been in front of a user.</p>
-<p>Logic execution and prompt entry are live engineering problems: what a person can describe in a sentence and what the engine can assemble from it are not yet the same set.</p></div>
-    </div>
+    <p class="cs-sec__lede reveal">The design is ahead of the build, and some of it has not been tested by anybody.</p>
+<div class="cs-unit reveal">
+<p>Three surfaces are specified and not prototyped: the fan-in result view, the approval history screen, and the routing observability page. Each has acceptance criteria; none has been in front of a user.</p>
+</div>
+<div class="cs-unit reveal">
+<span class="cs-unit__label">Still open in engineering</span>
+<p>Logic execution and prompt entry: what a person can describe in a sentence and what the engine can assemble from it are not yet the same set.</p>
+</div>
+<div class="cs-note reveal">
+  <b>Push on this one</b>
+  <p>The part I’d most like to be pushed on is the review model, and the three-attempt cap in particular. It was a judgement call, and I can show the working.</p>
+</div>
+  </div>
+</section>
+
+<section class="cs-next reveal" aria-label="Next case study">
+  <div class="container">
+    <a href="product-studio.html">
+      <figure class="cs-next__shot">
+        <picture><source type="image/webp" srcset="img/covers/product-studio-cover-700.webp 700w, img/covers/product-studio-cover-1100.webp 1100w, img/covers/product-studio-cover-1600.webp 1600w" sizes="(min-width:860px) 46vw, 92vw"><img width="1600" height="1002" src="img/covers/product-studio-cover.jpg" alt="" loading="lazy" decoding="async"></picture>
+      </figure>
+      <div>
+        <span class="cs-next__kicker">Next case study</span>
+        <h2 class="cs-next__title">Product Studio</h2>
+        <p class="cs-next__sub">AI that hands you a finished plan is giving a verdict, not a draft. Personas, SWOT, features and roadmaps, every card editable in place.</p>
+        <span class="cs-next__go">Read it &rarr;</span>
+      </div>
+    </a>
   </div>
 </section>
 

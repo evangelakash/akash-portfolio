@@ -206,7 +206,7 @@
 html{ scroll-behavior:smooth; }
 body{
   margin:0; background:var(--m-800); color:var(--t-hi);
-  font-family:var(--serif); font-size:var(--fs-5); line-height:1.7;
+  font-family:var(--sans); font-weight:400; font-size:var(--fs-5); line-height:1.62; letter-spacing:-.006em;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 img{ max-width:100%; display:block; }
@@ -746,7 +746,13 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 }
 /* The rail needs room beside a 1240px container. Below that it sat on top of
    the reading column; the summary map at the top carries navigation instead. */
-@media (max-width:1200px){ .cs-rail{ display:none; } }
+@media (max-width:1099px){ .cs-rail{ display:none; } }
+/* a side nav is only skimmable if you can read it: the labels stay out, the panel stays quiet */
+@media (min-width:1100px){
+  .cs-rail{ background:linear-gradient(to left, rgba(246,246,244,.92), rgba(246,246,244,.55) 88%, transparent); }
+  .cs-rail a{ color:var(--t-mid); }
+  .cs-rail a.is-here{ color:var(--t-hi); }
+}
 @media (max-width:560px){ .cs-meta{ grid-template-columns:1fr; } }
 
 /* ===================================================================
@@ -996,6 +1002,7 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .cs-rail:hover .cs-rail__grp .cs-rail__label,
 .cs-rail:focus-within .cs-rail__grp .cs-rail__label{ opacity:1; max-width:48ch; transform:none; }
 
+
 /* ---- honest state for work that isn't written up yet ----------------
    Reads as a status, not a link. Nothing here should look clickable.   */
 .link--soon{
@@ -1115,7 +1122,9 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
    forces the whole column wider than its container instead of letting the
    figure's own overflow-x:auto scroll it. */
 .cs-body > *{ min-width:0; }
-.sketch{ min-width:0; max-width:100%; }
+/* Every diagram is drawn on a 640 unit grid, so letting the panel fill a
+   1112px column scaled 11px labels up to 19px. Cap it at its own size. */
+.sketch{ min-width:0; max-width:min(100%, 720px); }
 
 /* ===================================================================
    The prompt demo (s15). The section describes a motion in prose, so
@@ -1579,4 +1588,158 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 @media (max-width:640px){ .ds-spec{ grid-template-columns:1fr; } .ds-demo__bar{ padding:var(--s-4); } }
 @media (prefers-reduced-motion: reduce){
   .dsb, .ds-demo__stage, .ds-demo__read, .ds-demo__sw, .ds-seg span{ transition:none; }
+}
+
+
+/* ===================================================================
+   CASE STUDY UNITS
+   A section is a run of small units: a heading or a label, one short
+   paragraph, and the visual that proves it directly underneath. The
+   devices are few on purpose: one body face, one weight for emphasis,
+   grey for anything secondary.
+   =================================================================== */
+
+/* A screenshot stands on its own: a hairline, the app's own corner radius, nothing else.
+   A tinted panel around a panel is a box inside a box. */
+.cs-fig{ margin:var(--s-6) 0 0; }
+.cs-fig img{
+  display:block; width:auto; max-width:100%; height:auto; margin:0;
+  border-radius:10px; border:1px solid var(--m-500);
+}
+.cs-fig figcaption,
+.cs-side figcaption,
+.cs-pair figcaption{
+  margin:var(--s-4) 0 0; font-family:var(--sans); font-size:var(--fs-3); font-weight:400;
+  line-height:1.5; color:var(--t-mid); max-width:56ch;
+}
+
+/* A panel belongs beside the sentence it proves, and it stays whole: one panel,
+   one picture. Picture on the left, words on the right, every time. */
+.cs-side{
+  display:grid; gap:clamp(var(--s-6),2.6vw,var(--s-8)); align-items:start;
+  margin:0 0 clamp(var(--s-8),3.4vw,var(--s-10));
+}
+@media (min-width:900px){
+  .cs-side{ grid-template-columns:minmax(260px,400px) minmax(0,1fr); }
+  .cs-side__text{ order:2; }
+  /* A tall panel has to be readable in one look: keep it inside the viewport
+     so the words beside it are still on screen. */
+  .cs-side img{ max-height:min(calc(100vh - 150px), 780px); }
+}
+/* the heading's own top margin is what used to drop the text below the picture */
+.cs-side__text > *:first-child{ margin-top:0; }
+.cs-side__text h3{ margin:0 0 var(--s-4); }
+.cs-side__text > p{ margin:0; max-width:46ch; }
+.cs-side__text > p + p{ margin-top:var(--s-4); }
+.cs-side figure{ margin:0; }
+/* width:auto keeps a 288px panel at 288px instead of stretching it to the column */
+.cs-side img{
+  display:block; width:auto; max-width:100%; height:auto; margin:0;
+  border-radius:10px; border:1px solid var(--m-500);
+}
+
+/* two shots that only mean something as a pair */
+.cs-pair{ display:grid; gap:clamp(var(--s-5),2.4vw,var(--s-7)); margin:var(--s-6) 0 0; }
+@media (min-width:760px){ .cs-pair{ grid-template-columns:1fr 1fr; align-items:start; } }
+.cs-pair figure{ margin:0; }
+.cs-pair img{ display:block; width:100%; height:auto; border-radius:10px; border:1px solid var(--m-500); }
+
+/* The caption sits with the sentence it extends, in the text column, not stranded
+   under the picture where it reads as a second paragraph about nothing. */
+.cs-cap{
+  margin:var(--s-4) 0 0; font-family:var(--sans); font-size:var(--fs-3); font-weight:400;
+  line-height:1.5; color:var(--t-mid); max-width:46ch;
+}
+
+/* A big picture is its own plate: centred, with its line underneath it. */
+.cs-fig img{ margin-inline:auto; }
+.cs-fig figcaption{ margin-inline:auto; text-align:center; max-width:60ch; }
+.cs-pair img{ margin-inline:auto; }
+
+/* a unit: claim, then its proof. The gap below a paragraph that owns a visual is tighter
+   than the gap between units, so the pairing is visible before it is read. */
+.cs-unit{ margin:0 0 clamp(var(--s-8),3.4vw,var(--s-10)); }
+.cs-unit > p{ margin:0; max-width:60ch; }
+.cs-unit > p + .cs-fig{ margin-top:var(--s-5); }
+.cs-unit__label{
+  display:block; margin:0 0 var(--s-3);
+  font-family:var(--mono); font-size:var(--fs-1); font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--t-low);
+}
+.cs-unit h3{ margin:0 0 var(--s-3); font-size:var(--fs-6); letter-spacing:-.015em; }
+
+/* trade-offs and admissions: a labelled block, not a bolded sentence in the flow */
+.cs-note{
+  margin:clamp(var(--s-7),3vw,var(--s-9)) 0; padding:var(--s-6) var(--s-7);
+  border-left:2px solid var(--m-400); background:var(--m-750); border-radius:0 var(--r-md) var(--r-md) 0;
+}
+.cs-note b{
+  display:block; margin:0 0 var(--s-2);
+  font-family:var(--mono); font-size:var(--fs-1); font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--t-low);
+}
+.cs-note p{ margin:0; color:var(--t-mid); max-width:58ch; }
+.cs-note p + p{ margin-top:var(--s-3); }
+
+/* The reading column used to be a grid child, which is where paragraphs,
+   lists and bold runs got their styling. In the unit system they are siblings
+   in the container, so the same rules hang off the section instead. */
+.cs-unit > p + p{ margin-top:var(--s-4); }
+.cs-unit > h3 + .cs-fig,
+.cs-unit > ul + .cs-fig,
+.cs-unit > ol + .cs-fig{ margin-top:var(--s-5); }
+.cs-unit strong, .cs-note strong{ color:var(--t-hi); font-weight:500; }
+.cs-sec .container > ul:not([class]), .cs-sec .container > ol:not([class]),
+.cs-unit ul:not([class]), .cs-unit ol:not([class]){
+  margin:0 0 clamp(var(--s-8),3.4vw,var(--s-10)); padding-left:var(--s-6); max-width:62ch;
+  color:var(--t-mid); display:flex; flex-direction:column; gap:var(--s-3);
+}
+.cs-sec .container > ul:not([class]) li > b, .cs-unit ul:not([class]) li > b{ color:var(--t-hi); font-weight:500; }
+
+/* the chapter index is desktop furniture; on a phone it is a second menu nobody asked for */
+@media (max-width:1099px){ .cs-map{ display:none; } }
+
+/* what comes next, so the page ends on another case study rather than a full stop */
+.cs-next{ border-top:1px solid var(--m-500); background:var(--m-750); }
+.cs-next a{
+  display:grid; gap:clamp(var(--s-5),3vw,var(--s-8)); align-items:center;
+  padding:clamp(var(--s-8),5vw,var(--s-11)) 0; text-decoration:none; color:inherit;
+}
+@media (min-width:860px){ .cs-next a{ grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); } }
+.cs-next__shot{ margin:0; overflow:hidden; border-radius:var(--r-md); border:1px solid var(--m-500); }
+.cs-next__shot img{ display:block; width:100%; height:auto; transition:transform .8s var(--ease); }
+.cs-next__kicker{
+  display:block; margin:0 0 var(--s-3); font-family:var(--mono); font-size:var(--fs-1);
+  letter-spacing:.12em; text-transform:uppercase; color:var(--t-low);
+}
+.cs-next__title{
+  margin:0; font-size:clamp(var(--fs-8),3.4vw,var(--fs-11)); line-height:1.08;
+  letter-spacing:-.025em; font-weight:500;
+}
+.cs-next__sub{ margin:var(--s-4) 0 0; color:var(--t-mid); max-width:46ch; }
+.cs-next__go{ display:inline-flex; align-items:center; gap:var(--s-2); margin-top:var(--s-6); font-weight:500; }
+@media (hover:hover) and (pointer:fine){
+  .cs-next a:hover .cs-next__shot img{ transform:scale(1.02); }
+  .cs-next a:hover .cs-next__go{ gap:var(--s-3); }
+}
+@media (prefers-reduced-motion: reduce){ .cs-next__shot img{ transition:none; } }
+
+/* the section claim, now above the units rather than in a column beside them */
+.cs-sec__lede{
+  font-family:var(--sans); font-size:clamp(var(--fs-6),2.1vw,var(--fs-8)); font-weight:500;
+  line-height:1.34; letter-spacing:-.015em; color:var(--t-hi);
+  max-width:34ch; margin:0 0 clamp(var(--s-8),3.4vw,var(--s-10)); padding-left:var(--s-5);
+  border-left:3px solid var(--t-hi); text-wrap:balance;
+}
+
+/* A diagram keeps its 640px drawing on a phone, because scaled into a 320px column its labels
+   fall to about 4px. It scrolls instead, and says so rather than looking clipped. */
+@media (max-width:760px){
+  .sketch{ position:relative; }
+  .sketch::after{
+    content:"Scroll the diagram \2192"; display:block; position:sticky; left:0;
+    margin-top:var(--s-3); font-family:var(--mono); font-size:var(--fs-1);
+    letter-spacing:.1em; text-transform:uppercase; color:var(--t-low);
+  }
+  .sketch > svg{ mask-image:linear-gradient(to right, #000 calc(100% - 28px), transparent 100%); }
 }
