@@ -1743,3 +1743,11 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
   }
   .sketch > svg{ mask-image:linear-gradient(to right, #000 calc(100% - 28px), transparent 100%); }
 }
+
+/* the hero's background: a curved wall of wireframe cards (hero-wall.js) */
+.hero__wall{
+  position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; display:block;
+  opacity:0; transition:opacity 1.4s var(--ease);
+}
+.hero__wall.is-on{ opacity:1; }
+@media (prefers-reduced-motion:reduce){ .hero__wall{ transition:none; } }
