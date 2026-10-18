@@ -423,7 +423,9 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .hero__meta b{ font-family:var(--sans); font-size:var(--fs-6); color:var(--t-hi); display:block; font-weight:500; }
 
 /* the layered plate */
-.stack{ position:relative; width:100%; max-width:min(420px, 42vh); aspect-ratio:3/4; margin-inline:auto; }
+/* landscape now: the figure reclines, with room above for the thought bubble. On wide screens it
+   reaches a little into the container's gutter so it keeps its size beside the headline. */
+.stack{ position:relative; width:calc(100% + var(--pad) * .8); max-width:min(560px, 62vh); aspect-ratio:1250/1060; margin-inline:0; }
 .plane{ position:absolute; inset:0; will-change:transform; }
 .stack .scribble{ position:absolute; left:10%; top:22%; width:130px; }
 .scribble b{ display:block; margin-top:var(--s-1); font-family:var(--mono); font-size:var(--fs-1); font-weight:400; color:var(--ink); opacity:.72; }
@@ -606,7 +608,7 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
   .nav__links a:not(.btn){ display:none; }
   .hero{ min-height:0; display:block; padding-block:clamp(var(--s-10),8vw,var(--s-13)) clamp(var(--s-14),12vw,var(--s-17)); }
   .hero__grid{ grid-template-columns:1fr; }
-  .stack{ max-width:330px; }
+  .stack{ width:100%; max-width:440px; margin-inline:auto; }
   .strip__grid{ grid-template-columns:repeat(3,1fr); }
   .card--feature, .card--wide{ grid-template-columns:1fr; }
   .card--feature .card__media{ border-right:0; border-bottom:1px solid var(--m-500); aspect-ratio:16/9; border-radius:var(--r-md) var(--r-md) 0 0; }
@@ -1256,44 +1258,37 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
    the drawing can never pick up a site component such as .tape.
    =================================================================== */
 .scene{ position:absolute; inset:0; width:100%; height:100%; display:block; overflow:visible; }
-.hs-bb{fill:#DCCFAC}.hs-bb-tex{fill:url(#hs-weave);opacity:.3}.hs-bb-sh{fill:#CDBD95}.hs-bb-hi{fill:#E6DCC0}
-.hs-hood{fill:#5B5B63}.hood-sh{fill:#4A4A51}.hs-hood-hi{fill:#6C6C74}.hs-string{fill:#D9D6CE}
-.hs-skin{fill:#D9A882}.hs-skin-sh{fill:#C4906B}.skin-lt{fill:#E8C19F;opacity:.35}.hs-stubble{fill:#2A2A2E;opacity:.24}.hs-beard-sh{fill:#7A5A48;opacity:.3}
-.hs-hair{fill:#26262A}.hs-hair-hi{fill:#4E4E55}.hs-ink{fill:#2A2A2E}.hs-ink-soft{fill:#8A8A90}
-.hs-pants{fill:#8C857A}.hs-pants-sh{fill:#766F65}.hs-shoe{fill:#F7F3EA}.hs-shoe-sh{fill:#E4DDCD}.hs-sole{fill:#D6C8A2}
-.hs-lap-lid{fill:#D2D2CD}.hs-lap-base{fill:#E3E3DE}.hs-logo{fill:#F4F0E6}.hs-screen{fill:#F3E7B5}
-.hs-rug{fill:#EFE8D8}.hs-shadow{fill:#2A2A2E;opacity:.09}.hs-mug{fill:#F7F3EA}
-.hs-note{fill:#F0E08C}.hs-paper{fill:#FBF8F0}
+/* the figure, traced from the reference illustration: flat colour under a single ink */
+.hb-ink{fill:#262626}.hb-cream{fill:#F1E3C3}.hb-skin{fill:#D99B6D}.hb-hairhi{fill:#5A5B60}.hb-hilite{fill:#FBFAF6}
+.hb-hood{fill:#5C5D62}.hb-peach{fill:#E6BE9C}.hb-pants{fill:#B1A697}.hb-sock{fill:#FBF3E8}.hb-lid{fill:#CDCDCD}
+.hb-glint{fill:#FBFAF6}.hb-stroke{fill:none;stroke:#262626;stroke-width:4.4;stroke-linecap:round}
+.hb-mouth{fill:#5E2F26;stroke:#262626;stroke-width:3;stroke-linejoin:round}
+/* the thought bubble */
+.hs-ink{fill:#2A2A2E}.hs-ink-soft{fill:#8A8A90}.hs-note{fill:#F0E08C}.hs-paper{fill:#FBF8F0}
 .hs-eyes-open,.hs-eyes-happy,.hs-mouth-o,.hs-mouth-smile{opacity:0}
 /* ---- character rig ---- */
-.hs-lean{transform-box:view-box;transform-origin:230px 396px;transition:transform .7s cubic-bezier(.34,1.3,.64,1)}
-.hs-breathe{transform-box:view-box;transform-origin:230px 396px;animation:hs-breathe 4.8s ease-in-out infinite}
-.hs-head-tilt{transform-box:view-box;transform-origin:238px 292px;transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
-.hs-head{transform-box:view-box;transform-origin:238px 292px}
+.hs-lean{transform-box:view-box;transform-origin:780px 820px;transition:transform .7s cubic-bezier(.34,1.3,.64,1)}
+.hs-breathe{transform-box:view-box;transform-origin:780px 820px;animation:hs-breathe 4.8s ease-in-out infinite}
+.hs-head-tilt{transform-box:view-box;transform-origin:800px 565px;transition:transform .45s cubic-bezier(.34,1.4,.64,1)}
+.hs-head{transform-box:view-box;transform-origin:800px 565px}
 .hs-brow{transform-box:fill-box;transform-origin:50% 50%;transition:transform .3s ease}
 .hs-eyes-open,.hs-eyes-happy,.hs-mouth-o,.hs-mouth-smile{opacity:0}
 .hs-eyes-down,.hs-eyes-open,.hs-eyes-happy,.hs-mouth-flat,.hs-mouth-o,.hs-mouth-smile{transition:opacity .12s linear}
 .hs-hand-near,.hs-hand-far{transform-box:fill-box;transform-origin:100% 100%}
-.hs-screen-glow{transition:opacity .3s ease}
-.hs-steam path{transform-box:fill-box;transform-origin:50% 100%;animation:hs-steam 3.6s ease-out infinite both}
-.hs-steam path+path{animation-delay:1.8s}
-@keyframes hs-breathe{0%,100%{transform:none}50%{transform:translateY(-.9px) rotate(.35deg)}}
-@keyframes hs-steam{0%{opacity:0;transform:translateY(4px)}35%{opacity:.85}100%{opacity:0;transform:translateY(-8px)}}
-@keyframes hs-tap{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2.2px) rotate(-5deg)}}
+@keyframes hs-breathe{0%,100%{transform:none}50%{transform:translateY(-2.6px) rotate(.3deg)}}
+@keyframes hs-tap{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(-3deg)}}
 @keyframes hs-wobble{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 .stack[data-phase="typing"] .hs-hand-near,.stack[data-phase="run"] .hs-hand-near{animation:hs-tap .26s linear infinite}
 .stack[data-phase="typing"] .hs-hand-far,.stack[data-phase="run"] .hs-hand-far{animation:hs-tap .26s linear -.13s infinite}
 .stack[data-phase="build"] .hs-hand-near{animation:hs-tap .5s linear infinite}
 .stack[data-phase="build"] .hs-hand-far{animation:hs-tap .5s linear -.25s infinite}
-.stack[data-phase="typing"] .hs-lean,.stack[data-phase="build"] .hs-lean,.stack[data-phase="run"] .hs-lean{transform:rotate(-2deg)}
+.stack[data-phase="typing"] .hs-lean,.stack[data-phase="build"] .hs-lean,.stack[data-phase="run"] .hs-lean{transform:rotate(-1deg)}
 .stack[data-phase="thinking"] .hs-head-tilt,.stack[data-phase="ideas"] .hs-head-tilt{transform:rotate(7deg)}
 .stack[data-phase="confused"] .hs-head-tilt{transform:rotate(4deg)}
 .stack[data-phase="confused"] .hs-head{animation:hs-wobble .9s ease-in-out infinite}
 .stack[data-phase="idea"] .hs-head-tilt{transform:rotate(9deg)}
-.stack[data-phase="success"] .hs-lean{transform:rotate(3.5deg)}
+.stack[data-phase="success"] .hs-lean{transform:rotate(1.6deg)}
 .stack[data-phase="success"] .hs-head-tilt{transform:rotate(5deg)}
-.stack[data-phase="run"] .hs-screen-glow{animation:hs-glow .5s ease-in-out infinite}
-@keyframes hs-glow{0%,100%{opacity:1}50%{opacity:.35}}
 
 .stack[data-phase="thinking"] .hs-eyes-down,.stack[data-phase="confused"] .hs-eyes-down,.stack[data-phase="ideas"] .hs-eyes-down,.stack[data-phase="idea"] .hs-eyes-down,.stack[data-phase="success"] .hs-eyes-down{opacity:0}
 .stack[data-phase="thinking"] .hs-eyes-open,.stack[data-phase="confused"] .hs-eyes-open,.stack[data-phase="ideas"] .hs-eyes-open,.stack[data-phase="idea"] .hs-eyes-open{opacity:1}
@@ -1301,73 +1296,102 @@ h1,h2,h3,h4,.ui{ font-family:var(--sans); font-weight:500; letter-spacing:-.02em
 .stack[data-phase="confused"] .hs-mouth-flat,.stack[data-phase="idea"] .hs-mouth-flat,.stack[data-phase="success"] .hs-mouth-flat{opacity:0}
 .stack[data-phase="confused"] .hs-mouth-o{opacity:1}
 .stack[data-phase="idea"] .hs-mouth-smile,.stack[data-phase="success"] .hs-mouth-smile{opacity:1}
-.stack[data-phase="thinking"] .hs-brow,.stack[data-phase="idea"] .hs-brow{transform:translateY(-2px)}
-.stack[data-phase="confused"] .hs-brow{transform:translateY(-2.5px) rotate(-8deg)}
-/* ---- the mind ---- */
-.hs-m{opacity:0;transform:scale(.4);transform-box:fill-box;transform-origin:center;transition:opacity .16s ease,transform .16s ease}
-.hs-mo{opacity:0;transition:opacity .16s ease}
-.hs-pulse{transform:translate(71px,89px)}
-.hs-cloud{transform-origin:88% 96%}.hs-bulb{transform-origin:50% 100%}.hs-arrow{transform-origin:0% 50%}
-.hs-d,.hs-spin,.hs-wig,.hs-jit,.hs-rays,.hs-burst,.hs-tw,.hs-star{transform-box:fill-box;transform-origin:center}
+.stack[data-phase="thinking"] .hs-brow,.stack[data-phase="idea"] .hs-brow{transform:translateY(-5px)}
+.stack[data-phase="confused"] .hs-brow{transform:translateY(-6px) rotate(-8deg)}
+/* ---- the mind: a thought bubble that tells the story ----
+   Drawn in the figure's own style (one ink, round caps, flat fills). Each phase pops its piece in
+   on a spring; leaving a phase fades it out. Typing, then thinking (dots), confused (a knot,
+   question marks, stars round the head), ideas (sticky notes), an idea (bulb), building an agent
+   workflow, running it (a pulse travels the wire and lights each step) and done (a tick). */
+.hm *{ transform-box:fill-box; transform-origin:center; }
+.hm-puff,.hm-bubble{ fill:#FBFAF6; stroke:#262626; stroke-width:5.5; stroke-linejoin:round; }
+.hm-line{ fill:none; stroke:#262626; stroke-width:5.5; stroke-linecap:round; stroke-linejoin:round; }
+.hm-thin{ stroke-width:4.5; }
+.hm-dotfill,.hm-ink,.hm-badge{ fill:#262626; }
+.hm-star{ fill:#F2D96B; stroke:#262626; stroke-width:4; stroke-linejoin:round; }
+.hm-ring{ fill:none; stroke:#8A8A90; stroke-width:3; stroke-dasharray:6 9; }
+.hm-yellow,.hm-paper,.hm-tan{ stroke:#262626; stroke-width:4.5; stroke-linejoin:round; }
+.hm-yellow{ fill:#F2E08A; } .hm-paper{ fill:#FFFFFF; } .hm-tan{ fill:#E2D2AE; }
+.hm-tape{ fill:rgba(214,200,162,.9); }
+.hm-scrib{ fill:none; stroke:#262626; stroke-width:3.6; stroke-linecap:round; opacity:.7; }
+.hm-lamp{ fill:#F6E27A; stroke:#262626; stroke-width:5.5; stroke-linejoin:round; }
+.hm-glow{ fill:#F6E27A; opacity:.3; }
+.hm-tile{ fill:#FFFFFF; stroke:#262626; stroke-width:5; transition:fill .3s ease; }
+.hm-wire{ fill:none; stroke:#262626; stroke-width:4.5; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; }
+.hm-pulse{ fill:#F2C94C; stroke:#262626; stroke-width:4; offset-rotate:0deg; opacity:0; }
+.hm-check{ fill:none; stroke:#FBFAF6; stroke-width:5.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; stroke-dashoffset:1; }
+/* paths that ride a motion path, and the bulb's halo, work in the scene's own units */
+.hm-orb,.hm-pulse{ transform-box:view-box; transform-origin:0 0; }
+.hm-rays,.hm-glow{ transform-box:view-box; transform-origin:800px 262px; }
+.hm-cloud{ transform-origin:82% 94%; }
+.hm-bulb{ transform-origin:50% 100%; }
+.hm-q{ transform-origin:50% 100%; }
 
-.stack[data-phase="thinking"] .hs-t1,.stack[data-phase="confused"] .hs-t1,.stack[data-phase="ideas"] .hs-t1,.stack[data-phase="idea"] .hs-t1,.stack[data-phase="build"] .hs-t1,.stack[data-phase="run"] .hs-t1,.stack[data-phase="success"] .hs-t1{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
-.stack[data-phase="thinking"] .hs-t2,.stack[data-phase="confused"] .hs-t2,.stack[data-phase="ideas"] .hs-t2,.stack[data-phase="idea"] .hs-t2,.stack[data-phase="build"] .hs-t2,.stack[data-phase="run"] .hs-t2,.stack[data-phase="success"] .hs-t2{opacity:1;transform:none;transition:opacity .22s ease 120ms,transform .5s cubic-bezier(.34,1.56,.64,1) 120ms}
-.stack[data-phase="thinking"] .hs-t3,.stack[data-phase="confused"] .hs-t3,.stack[data-phase="ideas"] .hs-t3,.stack[data-phase="idea"] .hs-t3,.stack[data-phase="build"] .hs-t3,.stack[data-phase="run"] .hs-t3,.stack[data-phase="success"] .hs-t3{opacity:1;transform:none;transition:opacity .22s ease 240ms,transform .5s cubic-bezier(.34,1.56,.64,1) 240ms}
-.stack[data-phase="thinking"] .hs-cloud,.stack[data-phase="confused"] .hs-cloud,.stack[data-phase="ideas"] .hs-cloud,.stack[data-phase="idea"] .hs-cloud,.stack[data-phase="build"] .hs-cloud,.stack[data-phase="run"] .hs-cloud,.stack[data-phase="success"] .hs-cloud{opacity:1;transform:none;transition:opacity .22s ease 330ms,transform .5s cubic-bezier(.34,1.56,.64,1) 330ms}
-.stack[data-phase="thinking"] .hs-dots{opacity:1;transform:none;transition:opacity .22s ease 700ms,transform .5s cubic-bezier(.34,1.56,.64,1) 700ms}
-.stack[data-phase="confused"] .hs-spiral{opacity:1;transform:none;transition:opacity .22s ease 120ms,transform .5s cubic-bezier(.34,1.56,.64,1) 120ms}
-.stack[data-phase="confused"] .hs-qm1{opacity:1;transform:none;transition:opacity .22s ease 200ms,transform .5s cubic-bezier(.34,1.56,.64,1) 200ms}
-.stack[data-phase="confused"] .hs-qm2{opacity:1;transform:none;transition:opacity .22s ease 520ms,transform .5s cubic-bezier(.34,1.56,.64,1) 520ms}
-.stack[data-phase="ideas"] .hs-dd1{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
-.stack[data-phase="ideas"] .hs-dd2{opacity:1;transform:none;transition:opacity .22s ease 220ms,transform .5s cubic-bezier(.34,1.56,.64,1) 220ms}
-.stack[data-phase="ideas"] .hs-dd3{opacity:1;transform:none;transition:opacity .22s ease 440ms,transform .5s cubic-bezier(.34,1.56,.64,1) 440ms}
-.stack[data-phase="ideas"] .hs-dd4{opacity:1;transform:none;transition:opacity .22s ease 660ms,transform .5s cubic-bezier(.34,1.56,.64,1) 660ms}
-.stack[data-phase="idea"] .hs-bulb{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
-.stack[data-phase="build"] .hs-a1,.stack[data-phase="run"] .hs-a1,.stack[data-phase="success"] .hs-a1{opacity:1;transform:none;transition:opacity .22s ease 250ms,transform .5s cubic-bezier(.34,1.56,.64,1) 250ms}
-.stack[data-phase="build"] .hs-a2,.stack[data-phase="run"] .hs-a2,.stack[data-phase="success"] .hs-a2{opacity:1;transform:none;transition:opacity .22s ease 650ms,transform .5s cubic-bezier(.34,1.56,.64,1) 650ms}
-.stack[data-phase="build"] .hs-a3,.stack[data-phase="run"] .hs-a3,.stack[data-phase="success"] .hs-a3{opacity:1;transform:none;transition:opacity .22s ease 1050ms,transform .5s cubic-bezier(.34,1.56,.64,1) 1050ms}
-.stack[data-phase="build"] .hs-n1,.stack[data-phase="run"] .hs-n1,.stack[data-phase="success"] .hs-n1{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
-.stack[data-phase="build"] .hs-n2,.stack[data-phase="run"] .hs-n2,.stack[data-phase="success"] .hs-n2{opacity:1;transform:none;transition:opacity .22s ease 400ms,transform .5s cubic-bezier(.34,1.56,.64,1) 400ms}
-.stack[data-phase="build"] .hs-n3,.stack[data-phase="run"] .hs-n3,.stack[data-phase="success"] .hs-n3{opacity:1;transform:none;transition:opacity .22s ease 800ms,transform .5s cubic-bezier(.34,1.56,.64,1) 800ms}
-.stack[data-phase="build"] .hs-n4,.stack[data-phase="run"] .hs-n4,.stack[data-phase="success"] .hs-n4{opacity:1;transform:none;transition:opacity .22s ease 1200ms,transform .5s cubic-bezier(.34,1.56,.64,1) 1200ms}
-.stack[data-phase="success"] .hs-done{opacity:1;transform:none;transition:opacity .22s ease 0ms,transform .5s cubic-bezier(.34,1.56,.64,1) 0ms}
-.stack[data-phase="success"] .hs-spk1{opacity:1;transform:none;transition:opacity .22s ease 150ms,transform .5s cubic-bezier(.34,1.56,.64,1) 150ms}
-.stack[data-phase="success"] .hs-spk2{opacity:1;transform:none;transition:opacity .22s ease 300ms,transform .5s cubic-bezier(.34,1.56,.64,1) 300ms}
-.stack[data-phase="success"] .hs-spk3{opacity:1;transform:none;transition:opacity .22s ease 450ms,transform .5s cubic-bezier(.34,1.56,.64,1) 450ms}
-.stack[data-phase="success"] .hs-spk4{opacity:1;transform:none;transition:opacity .22s ease 600ms,transform .5s cubic-bezier(.34,1.56,.64,1) 600ms}
-.stack[data-phase="idea"] .hs-cloud{opacity:.3}
-.stack[data-phase="confused"] .hs-orbit{opacity:.7;transition:opacity .3s ease 100ms}
-.stack[data-phase="confused"] .hs-star{opacity:1;transition:opacity .25s ease 150ms}
-.stack[data-phase="run"] .hs-pulse{opacity:1;transition:opacity .15s ease}
-.stack[data-phase="run"] .hs-lit1{opacity:1;transition:opacity .2s ease 0ms}
-.stack[data-phase="run"] .hs-lit2{opacity:1;transition:opacity .2s ease 660ms}
-.stack[data-phase="run"] .hs-lit3{opacity:1;transition:opacity .2s ease 1320ms}
-.stack[data-phase="run"] .hs-lit4{opacity:1;transition:opacity .2s ease 1990ms}
-.stack[data-phase="success"] .hs-lit{opacity:1;transition:none}
-.stack[data-phase="thinking"] .hs-d{animation:hs-bob .9s ease-in-out infinite}
-.stack[data-phase="thinking"] .hs-d2{animation-delay:.15s}.stack[data-phase="thinking"] .hs-d3{animation-delay:.3s}
-.stack[data-phase="confused"] .hs-spin{animation:hs-spin 1.6s linear infinite}
-.stack[data-phase="confused"] .hs-wig{animation:hs-wig .7s ease-in-out infinite}.stack[data-phase="confused"] .hs-wig2{animation-delay:-.35s}
-.stack[data-phase="confused"] .hs-star{animation:hs-orbit 1.5s linear infinite}
-.stack[data-phase="confused"] .hs-s2{animation-delay:-.5s}.stack[data-phase="confused"] .hs-s3{animation-delay:-1s}
-.stack[data-phase="ideas"] .hs-jit{animation:hs-jit .5s steps(2) infinite}.stack[data-phase="ideas"] .hs-jit2{animation-delay:-.25s}
-.stack[data-phase="idea"] .hs-rays{animation:hs-rays .7s cubic-bezier(.34,1.56,.64,1) both}
-.stack[data-phase="run"] .hs-pulse{animation:hs-travel 2s cubic-bezier(.45,0,.55,1) forwards}
-.stack[data-phase="success"] .hs-burst{animation:hs-burst .8s ease-out both}
-.stack[data-phase="success"] .hs-tw{animation:hs-tw 1.2s ease-in-out infinite}
-@keyframes hs-bob{0%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}
-@keyframes hs-spin{to{transform:rotate(360deg)}}
-@keyframes hs-wig{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
-@keyframes hs-jit{0%{transform:translate(0,0)}50%{transform:translate(1px,-1px)}}
-@keyframes hs-rays{0%{transform:scale(.5) rotate(-25deg);opacity:0}100%{transform:none;opacity:1}}
-@keyframes hs-burst{0%{transform:scale(.4);opacity:0}60%{opacity:1}100%{transform:scale(1.12);opacity:.85}}
-@keyframes hs-tw{0%,100%{transform:scale(.8)}50%{transform:scale(1.15)}}
-@keyframes hs-orbit{0%{transform:translate(42px,0) scale(1);opacity:1}12.5%{transform:translate(29.7px,7.8px) scale(1.12)}25%{transform:translate(0,11px) scale(1.2)}37.5%{transform:translate(-29.7px,7.8px) scale(1.12)}50%{transform:translate(-42px,0) scale(1)}62.5%{transform:translate(-29.7px,-7.8px) scale(.85);opacity:.55}75%{transform:translate(0,-11px) scale(.72);opacity:.45}87.5%{transform:translate(29.7px,-7.8px) scale(.85);opacity:.55}100%{transform:translate(42px,0) scale(1);opacity:1}}
+/* hidden until its phase; leaving a phase fades out quickly */
+.hm-puff,.hm-cloud,.hm-dots,.hm-knot,.hm-q,.hm-orbit,.hm-note,.hm-bulb,.hm-node,.hm-done{
+  opacity:0; transform:scale(.4); transition:opacity .18s ease, transform .18s ease;
+}
+.hm-spk{ opacity:0; }
+.stack:is([data-phase="thinking"],[data-phase="confused"],[data-phase="ideas"],[data-phase="idea"],[data-phase="build"],[data-phase="run"],[data-phase="success"]) :is(.hm-puff,.hm-cloud){
+  opacity:1; transform:none; transition:opacity .25s ease var(--in), transform .6s cubic-bezier(.34,1.56,.64,1) var(--in);
+}
+.hm-t1{ --in:0ms; } .hm-t2{ --in:90ms; } .hm-t3{ --in:180ms; } .hm-cloud{ --in:270ms; }
+.stack[data-phase="idea"] .hm-cloud{ opacity:.35; transition:opacity .3s ease; }
 
-@keyframes hs-travel{0%{transform:translate(71px,89px)}33%{transform:translate(113px,81px)}66%{transform:translate(155px,95px)}100%{transform:translate(197px,85px)}}
+/* thinking: a typing indicator */
+.stack[data-phase="thinking"] .hm-dots{ opacity:1; transform:none; transition:opacity .25s ease .5s, transform .5s cubic-bezier(.34,1.56,.64,1) .5s; }
+.stack[data-phase="thinking"] .hm-d{ animation:hm-bounce .9s ease-in-out calc(var(--i) * .14s + .55s) infinite; }
+@keyframes hm-bounce{ 0%,55%,100%{ transform:translateY(0); } 25%{ transform:translateY(-15px); } }
+
+/* confused: a knot that won't untie, question marks, stars round the head */
+.stack[data-phase="confused"] .hm-knot{ opacity:1; transform:none; transition:opacity .25s ease .1s, transform .55s cubic-bezier(.34,1.56,.64,1) .1s; }
+.stack[data-phase="confused"] .hm-knot path{ animation:hm-spin 2.2s linear infinite; }
+.stack[data-phase="confused"] .hm-q{ opacity:1; transform:none; transition:opacity .2s ease .25s, transform .55s cubic-bezier(.34,1.8,.64,1) .25s; }
+.stack[data-phase="confused"] g + g > .hm-q{ transition-delay:.6s; }
+.stack[data-phase="confused"] .hm-q path{ animation:hm-wig .8s ease-in-out infinite; transform-origin:50% 100%; }
+.stack[data-phase="confused"] .hm-orbit{ opacity:1; transform:none; transition:opacity .3s ease .15s, transform .5s cubic-bezier(.34,1.56,.64,1) .15s; }
+.stack[data-phase="confused"] .hm-orb{ animation:hm-orbit 2.4s linear infinite; animation-delay:calc(var(--i) * -.8s); }
+@keyframes hm-spin{ to{ transform:rotate(360deg); } }
+@keyframes hm-wig{ 0%,100%{ transform:rotate(-9deg); } 50%{ transform:rotate(9deg); } }
+@keyframes hm-orbit{ from{ offset-distance:0%; } to{ offset-distance:100%; } }
+
+/* ideas: sticky notes landing one after another */
+.stack[data-phase="ideas"] .hm-note{ opacity:1; transform:none; transition:opacity .2s ease calc(var(--i) * .22s), transform .55s cubic-bezier(.34,1.7,.64,1) calc(var(--i) * .22s); }
+.stack[data-phase="idea"] .hm-note{ opacity:.3; transform:none; transition:opacity .3s ease; }
+
+/* idea: a bulb over his head */
+.stack[data-phase="idea"] .hm-bulb{ opacity:1; transform:none; transition:opacity .15s ease, transform .6s cubic-bezier(.34,1.8,.64,1); }
+.stack[data-phase="idea"] .hm-rays{ animation:hm-rays .8s ease-in-out infinite; }
+.stack[data-phase="idea"] .hm-glow{ animation:hm-halo .8s ease-in-out infinite; }
+@keyframes hm-rays{ 0%,100%{ opacity:.35; transform:scale(.94); } 50%{ opacity:1; transform:scale(1.06); } }
+@keyframes hm-halo{ 0%,100%{ opacity:.15; transform:scale(.9); } 50%{ opacity:.45; transform:scale(1.12); } }
+
+/* build: the workflow assembles, its wire drawing through each step */
+.stack:is([data-phase="build"],[data-phase="run"],[data-phase="success"]) .hm-node{
+  opacity:1; transform:none; transition:opacity .2s ease var(--d), transform .5s cubic-bezier(.34,1.56,.64,1) var(--d);
+}
+.hm-n1{ --d:0ms; } .hm-n2{ --d:320ms; } .hm-n3{ --d:640ms; } .hm-n4{ --d:960ms; }
+.stack:is([data-phase="build"],[data-phase="run"],[data-phase="success"]) .hm-wire{ stroke-dashoffset:0; transition:stroke-dashoffset 1.15s ease .15s; }
+
+/* run: a pulse travels the wire and lights each step as it passes */
+.stack[data-phase="run"] .hm-pulse{ opacity:1; animation:hm-travel 1.8s cubic-bezier(.45,0,.55,1) .1s both; }
+@keyframes hm-travel{ from{ offset-distance:0%; } to{ offset-distance:100%; } }
+.stack:is([data-phase="run"],[data-phase="success"]) .hm-tile{ fill:#F6E7A1; }
+.stack[data-phase="run"] .hm-n1 .hm-tile{ transition-delay:.1s; }
+.stack[data-phase="run"] .hm-n2 .hm-tile{ transition-delay:.6s; }
+.stack[data-phase="run"] .hm-n3 .hm-tile{ transition-delay:1.1s; }
+.stack[data-phase="run"] .hm-n4 .hm-tile{ transition-delay:1.6s; }
+
+/* done: a tick draws itself, a few sparks, and the bubble gives a little hop */
+.stack[data-phase="success"] .hm-done{ opacity:1; transform:none; transition:opacity .15s ease, transform .55s cubic-bezier(.34,1.8,.64,1); }
+.stack[data-phase="success"] .hm-check{ stroke-dashoffset:0; transition:stroke-dashoffset .35s ease .3s; }
+.stack[data-phase="success"] .hm-spk{ animation:hm-spark 1.3s ease-out calc(var(--i) * .12s + .25s) 2 both; }
+.stack[data-phase="success"] .hm-cloud{ animation:hm-hop .5s cubic-bezier(.34,1.56,.64,1) .2s; }
+@keyframes hm-spark{ 0%{ opacity:0; transform:scale(.2) rotate(0deg); } 35%{ opacity:1; transform:scale(1.15) rotate(25deg); } 100%{ opacity:0; transform:scale(.85) rotate(50deg); } }
+@keyframes hm-hop{ 50%{ transform:scale(1.04); } }
 @media (prefers-reduced-motion: reduce){
   .stack *{animation:none !important}
-  .stack .hs-m{transform:none !important;transition:opacity .3s ease !important}
+  .stack .hm *{transition:none !important}
   .hs-lean,.hs-head-tilt,.hs-brow{transition:none !important}
 }
 .stack.is-idle .scene *{ animation-play-state:paused !important; }
